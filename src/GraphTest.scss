@@ -1,0 +1,13 @@
+.graph-A-container {
+  border: 1px solid black; 
+  padding: 40px; 
+  margin: auto;
+  height: fit-content;
+  width: fit-content;
+}
+.graph-A-container:hover .polyline-sleep-times {
+  stroke-width: 3px;
+}
+.horizontal-guides {
+  z-index: 0;
+}
