@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import GraphTest from './GraphTest';
+import AddData from './AddData';
 
 function App() {
   return (
     <div className="App">
-      <GraphTest/>
+      <AddData/>
     </div>
   );
 }
