@@ -34,7 +34,7 @@ if (mode === 'productionBritt') {
     host: 'localhost', 
     user: 'root',
     password: '3yeDroplets!',
-    database: 'recipe_app_test'
+    database: 'sleep_app'
   });
   corsOrigin = 'http://localhost:3000';
   netServForMobileReactDev = 'http://192.168.1.88:3000';
@@ -52,6 +52,17 @@ app.use(cors({
   methods:['GET','POST', 'DELETE'],
   credentials: true 
 }));// enable set cookie
+
+app.post(`/sleep/api/get-data`, (req, res) => {
+  console.log('Got a POST request to "/sleep/api/upload-data"');
+  const sql = `
+    SELECT * FROM sleep_data;
+  `;
+  connection.query(sql, (err, result) => {
+    console.log(result);
+    res.send(result);
+  });
+})
 
 app.post(`/sleep/api/upload-data`, (req, res) => {
   console.log('Got a POST request to "/sleep/api/upload-data"');

@@ -3,10 +3,9 @@ import { Button, Container, Form } from 'react-bootstrap';
 import './AddData.scss';
 import axios from 'axios';
 
-const url = 'http://localhost:4000/sleep/api/upload-data'
+const url = 'http://localhost:4000/sleep/api/upload-data';
 
 class AddData extends React.Component {
-
   handleDataSubmit(){
     console.log('datadata')
     axios.post(url, {test: 'testvalue'})
