@@ -48,7 +48,15 @@ class GraphTest extends React.Component {
             <VictoryAxis
               dependentAxis
               // tickFormat specifies how ticks should be displayed
-              tickFormat={(y) => (`${y}PM`)}
+              // tickFormat={(y) => (`${y}PM`)}
+              tickFormat={(y) => {
+                c('y',y)
+                c('y%1', y%1)
+                c('round', Math.round(y%1*10)/10)
+                return(
+                  `${y-y%1}:${Math.round(y%1*10)/10*60}PM`
+                );
+              }}
             />
             <VictoryLine
               style={{
