@@ -10,9 +10,34 @@ const data = [
   {quarter: 4, earnings: 19000}
 ];
 
-
-class GraphTest  extends React.Component {
+class GraphTest extends React.Component {
   render() {
+    if (this.props.napStartTimes){
+      console.log('nap start times in GraphTest render', this.props.napStartTimes);
+    }
+    const {dates, napStartTimes} = this.props;
+    const tickValues = dates.map((x, i) => {
+      return(i+1)
+    });
+    const dateLabels = dates.map((x, i) => {
+      const date = new Date(Date.parse(x));
+      return(
+        `${date.getMonth()+1}/${date.getDate()}`
+      )
+    });
+    
+    const data = [
+      { x: 1, y: 2 },
+      { x: 2, y: 3 },
+      { x: 3, y: 5 },
+      { x: 4, y: 4 },
+      { x: 5, y: 7 }
+    ];
+
+    // const data = napStartTimes.map((x, i) => {
+    //   return({x: i+1, y: )
+    // })
+    console.log('ticks', tickValues);
     return (
       <>
         <VictoryChart
@@ -21,8 +46,10 @@ class GraphTest  extends React.Component {
           <VictoryAxis
             // tickValues specifies both the number of ticks and where
             // they are placed on the axis
-            tickValues={[1, 2, 3, 4, 5]}
-            tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4", "Quarter 5"]}
+            // tickValues={[1, 2, 3, 4, 5]}
+            tickValues={tickValues}
+            // tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4"]}
+            tickFormat={dateLabels}
           />
           <VictoryAxis
             dependentAxis
