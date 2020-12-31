@@ -56,7 +56,7 @@ app.use(cors({
 app.post(`/sleep/api/get-data`, (req, res) => {
   console.log('Got a POST request to "/sleep/api/upload-data"');
   const sql = `
-    SELECT * FROM sleep_data;
+    SELECT * FROM sleep_data ORDER BY date;
   `;
   connection.query(sql, (err, result) => {
     console.log(result);

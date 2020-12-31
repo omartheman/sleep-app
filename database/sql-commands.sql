@@ -1,4 +1,6 @@
 
+SELECT * FROM sleep_data ORDER BY date;
+
 ALTER TABLE sleep_data RENAME COLUMN napEnd TO napEndTime;
 ALTER TABLE sleep_data RENAME COLUMN napStart TO napStartTime;
 

@@ -11,6 +11,7 @@ const urlGetData = 'http://localhost:4000/sleep/api/get-data';
 function App() {
   const [napStartTimes, setNapStartTimes] = useState([]);
   const [dates, setDates] = useState([]);
+  const [napInfo, setNapInfo] = useState([]);
   useEffect(() => {
     axios.post(urlGetData, {username: 'omar'})
     .then(res => {
@@ -18,6 +19,10 @@ function App() {
       res.data.map(x => {
         setNapStartTimes(prev => [...prev, x.napStartTime]);
         setDates(prev => [...prev, x.date]);
+        setNapInfo(prev => [...prev, {
+          date: x.date, 
+          napStartTime: x.napStartTime
+        }])
       })
     })
   }, [])
@@ -30,6 +35,7 @@ function App() {
       <GraphTest
         napStartTimes={napStartTimes}
         dates={dates}
+        napInfo={napInfo}
       />
     </div>
   );
