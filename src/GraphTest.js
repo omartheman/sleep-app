@@ -14,7 +14,7 @@ class GraphTest extends React.Component {
         `${date.getMonth()+1}/${date.getDate()}`
       )
     });
-    let xAxisLabels = [];
+    let xAxisTickValues = [];
     let data;
     if (napInfo.length > 1) {
       data = napInfo.map((e, i) => {
@@ -23,13 +23,13 @@ class GraphTest extends React.Component {
         c('timenum', timeNumber);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         c('date', date);
-        xAxisLabels = [...xAxisLabels, date];
+        xAxisTickValues = [...xAxisTickValues, date];
         return(
           { x: date, y: timeNumber }
         );
       });
     }
-    console.log('ticks', xAxisLabels);
+    console.log('ticks', xAxisTickValues);
     return (
       <>
         <div className="victory-chart-1-container">
@@ -41,7 +41,7 @@ class GraphTest extends React.Component {
               // tickValues specifies both the number of ticks and where
               // they are placed on the axis
               // tickValues={[1, 2, 3, 4, 5]}
-              tickValues={xAxisLabels}
+              tickValues={xAxisTickValues}
               // tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4"]}
               tickFormat={dateLabels}
             />
