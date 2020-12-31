@@ -3,32 +3,18 @@ import './GraphTest.scss';
 import * as V from 'victory';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryLine, VictoryTheme } from 'victory';
 
-// const data = [
-//   {quarter: 1, earnings: 13000},
-//   {quarter: 2, earnings: 16500},
-//   {quarter: 3, earnings: 14250},
-//   {quarter: 4, earnings: 19000}
-// ];
-
-function c (msg, input) {
-  return(
-    console.log(`${msg}: `, input)
-  )
-}
+function c (msg, input) {return(console.log(`${msg}: `, input))};
 
 class GraphTest extends React.Component {
   render() {
     const {dates, napStartTimes, napInfo} = this.props;
-    // const tickValues = dates.map((x, i) => {
-    //   return(i+1)
-    // });
     const dateLabels = dates.map((x, i) => {
       const date = new Date(Date.parse(x));
       return(
         `${date.getMonth()+1}/${date.getDate()}`
       )
     });
-    let tickValues = [];
+    let xAxisLabels = [];
     let data;
     if (napInfo.length > 1) {
       data = napInfo.map((e, i) => {
@@ -37,26 +23,13 @@ class GraphTest extends React.Component {
         c('timenum', timeNumber);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         c('date', date);
-        tickValues = [...tickValues, date];
+        xAxisLabels = [...xAxisLabels, date];
         return(
           { x: date, y: timeNumber }
         );
       });
     }
-    c('data',data)
-    // const data = [
-    //   { x: 1, y: 2 },
-    //   { x: 2, y: 3 },
-    //   { x: 3, y: 5 },
-    //   { x: 4, y: 4 },
-    //   { x: 5, y: 7 }
-    // ];
-
-
-    // const data = napStartTimes.map((x, i) => {
-    //   return({x: i+1, y: )
-    // })
-    console.log('ticks', tickValues);
+    console.log('ticks', xAxisLabels);
     return (
       <>
         <div className="victory-chart-1-container">
@@ -68,7 +41,7 @@ class GraphTest extends React.Component {
               // tickValues specifies both the number of ticks and where
               // they are placed on the axis
               // tickValues={[1, 2, 3, 4, 5]}
-              tickValues={tickValues}
+              tickValues={xAxisLabels}
               // tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4"]}
               tickFormat={dateLabels}
             />
