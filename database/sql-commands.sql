@@ -1,4 +1,28 @@
 
+UPDATE sleep_data
+SET napEndTime = '15:00'
+WHERE id = 2;
+
+UPDATE sleep_data
+SET napEndTime = '16:00'
+WHERE id = 3;
+
+UPDATE sleep_data
+SET napEndTime = '17:00'
+WHERE id = 4;
+
+UPDATE sleep_data
+SET napEndTime = '15:00'
+WHERE id = 5;
+
+UPDATE sleep_data
+SET napEndTime = '15:30'
+WHERE id = 6;
+
+UPDATE sleep_data
+SET napEndTime = '15:10'
+WHERE id = 7;
+
 SELECT * FROM sleep_data ORDER BY date;
 
 ALTER TABLE sleep_data RENAME COLUMN napEnd TO napEndTime;
@@ -10,9 +34,9 @@ VALUES
 ('omar', '2020-12-30', '12:30:00');
 
 INSERT INTO sleep_data 
-(user, date, napStartTime)
+(user, date, napStartTime, napEndTime)
 VALUES 
-('omar', '2021-1-1', '11:08:00');
+('omar', '2021-1-2', '11:08:00', '12:15');
 
 INSERT INTO sleep_data 
 (user, date, napStartTime)

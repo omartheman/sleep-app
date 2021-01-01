@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import GraphTest from './GraphTest';
-import AddData from './AddData';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 
@@ -21,7 +19,8 @@ function App() {
         setDates(prev => [...prev, x.date]);
         setNapInfo(prev => [...prev, {
           date: x.date, 
-          napStartTime: x.napStartTime
+          napStartTime: x.napStartTime,
+          napEndTime: x.napEndTime
         }])
       })
     })
