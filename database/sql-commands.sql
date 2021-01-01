@@ -12,7 +12,7 @@ VALUES
 INSERT INTO sleep_data 
 (user, date, napStartTime)
 VALUES 
-('omar', '2021-1-1', '11:20:00');
+('omar', '2021-1-1', '11:08:00');
 
 INSERT INTO sleep_data 
 (user, date, napStartTime)
