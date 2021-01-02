@@ -56,7 +56,7 @@ const NavbarContainer = (props) => {
         </span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
+      {/* <Navbar.Collapse id="basic-navbar-nav"> */}
         <Nav.Link as={Link} to="/sleep/">Home</Nav.Link>
         <Nav.Link as={Link} to="/sleep/add-data/">Add Data</Nav.Link>
         <Nav.Link className={loggedInUser === null || loggedInUser === '' ? "hidden" : null} as={Link} to="/recipeapp/myrecipes">My Recipes</Nav.Link>
@@ -85,7 +85,7 @@ const NavbarContainer = (props) => {
           </div>
           <Nav.Link  className="navbar-create-acc-button" as={Link} to="/recipeapp/create-account">Create Account</Nav.Link>
         </div>
-      </Navbar.Collapse>
+      {/* </Navbar.Collapse> */}
     </Navbar>
     
     <div className={loginDropdown ? "navbar-login-form login-form-identifier" :"navbar-login-form hidden login-form-identifier"}>

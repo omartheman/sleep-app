@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Container } from 'react-bootstrap';
 import './GraphTest.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import PropTypes from 'prop-types';
 
 class GraphTest extends React.Component {
   render() {
@@ -100,4 +101,8 @@ function duration(start, end) {
   var timeHours = time - time%1;
   var timeMinutes = Math.round(time%1 * 60);
   return(`${timeHours}h, ${timeMinutes}m`)
+}
+
+GraphTest.propTypes = {
+  dates: PropTypes.array
 }

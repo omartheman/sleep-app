@@ -23,8 +23,8 @@ function AddData () {
           onChange={onChange}
           value={value}
           onClickDay={(value, event) => {
-            console.log('New date is: ', value)
-            c('valueonly', value);
+            // console.log('New date is: ', value)
+            // c('valueonly', value);
           }}
         />
         <Form className="add-data-form">
