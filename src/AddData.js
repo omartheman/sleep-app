@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
-import Calendar from 'react-calendar';
+import { Calendar } from 'react-calendar';
 import './AddData.scss';
 import axios from 'axios';
 import 'react-calendar/dist/Calendar.css';
@@ -19,7 +19,6 @@ function AddData () {
       <Container>
         <h1>Add Data</h1>
         <h2>Pick a Date to Add Data</h2> 
-        <h2>Test</h2>
         <Calendar
           onChange={onChange}
           value={value}
