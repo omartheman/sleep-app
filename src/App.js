@@ -115,15 +115,6 @@ function App() {
   ;
   return(
     <Switch>
-      <Route path="/sleep/add-data/:date" render={() => (
-        <>
-          {navbar}
-          <AddData
-            loggedInUser={loggedInUser}
-            onLogout={handleLogout}
-          />
-        </>
-      )} />
       <Route path="/sleep/add-data" render={() => (
         <>
           {navbar}
