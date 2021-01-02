@@ -35,6 +35,7 @@ function AddData () {
         <Calendar
           onChange={onChange}
           value={value}
+          view={'month'}
           onClickDay={(value, event) => {
             // console.log('New date is: ', value)
             // c('valueonly', value);
@@ -43,7 +44,7 @@ function AddData () {
         />
         {date && 
           <>
-            <h2>{dateHeading}</h2>
+            <h2>Adding data for <strong>{dateHeading}</strong>: </h2>
             {(dateClickedYear < curYear || dateClickedYear > curYear) && 
               <Alert variant="warning">You are no longer in the current year of {curYear}</Alert>
             }
