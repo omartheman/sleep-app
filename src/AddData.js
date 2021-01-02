@@ -18,7 +18,8 @@ function AddData () {
     <>
       <Container>
         <h1>Add Data</h1>
-        <h2>Pick a Date to Add Data</h2>
+        <h2>Pick a Date to Add Data</h2> 
+        <h2>Test</h2>
         <Calendar
           onChange={onChange}
           value={value}
