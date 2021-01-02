@@ -1,6 +1,9 @@
+
+const url = 'http://localhost:4000/sleep/api/';
+
 function c (msg, input) {return(console.log(`${msg}: `, input))};
 
-function longDateString(date){
+function getClickedDate(date, type){
   var weekday = new Array(7);
   weekday[0] = "Sunday";
   weekday[1] = "Monday";
@@ -23,9 +26,9 @@ function longDateString(date){
   month[9] = "Oct";
   month[10] = "Nov";
   month[11] = "Dec";
-  return(
-    `${weekday[date.getDay()]}, ${month[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
-  );
+  
+  return type === 'mysql' ? `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+  : `${weekday[date.getDay()]}, ${month[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
 }
 
-export {c, longDateString};
+export {c, getClickedDate, url};

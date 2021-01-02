@@ -44,7 +44,7 @@ if (mode === 'productionBritt') {
 app.use(express.static(__dirname + '../..'));
 app.use(cors({
   origin:[
-    corsOrigin, 
+    corsOrigin,
     netServForMobileReactDev,
     'http://192.168.1.87:3000',
     'http://192.168.1.254'
@@ -52,6 +52,19 @@ app.use(cors({
   methods:['GET','POST', 'DELETE'],
   credentials: true 
 }));// enable set cookie
+
+app.post(`/sleep/api/check-existing-data`, (req, res) => {
+  console.log('Got a POST request to "/sleep/api/check-existing-data"');
+  const sql = `
+    SELECT * FROM sleep_data WHERE date = ?
+  `;
+  connection.query(sql, [req.body.clickedDate], (err, result) => {
+    if (err) throw err; 
+    console.log('result: ', result);
+    res.send(result);
+  })
+  console.log(req.body.clickedDate)
+})
 
 app.post(`/sleep/api/get-data`, (req, res) => {
   console.log('Got a POST request to "/sleep/api/upload-data"');

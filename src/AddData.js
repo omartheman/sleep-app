@@ -4,29 +4,54 @@ import { Calendar } from 'react-calendar';
 import './AddData.scss';
 import axios from 'axios';
 import 'react-calendar/dist/Calendar.css';
-import {c, longDateString} from './global_items';
+import {c, getClickedDate, url} from './global_items';
 
-const url = 'http://localhost:4000/sleep/api/upload-data';
+const urlCheckExistingData = `${url}check-existing-data`;
+
+axios.defaults.headers.common['Cache-Control'] = 'no-cache';
+axios.defaults.withCredentials = true;
 
 function AddData () {
   const [value, onChange] = useState(new Date());
   const [date, setDate] = useState(null);
-  useEffect(() => {
-    c('date', date)
-  })
-  const handleDataSubmit = () => {
-    console.log('datadata')
-    axios.post(url, {test: 'testvalue'})
+  const [existingNapStart, setExistingNapStart] = useState('');
+  const [existingNapEnd, setExistingNapEnd] = useState('');
+  const [existingDataAlert, setExistingDataAlert] = useState(false);
+  const checkExistingData = (clickedDate) => {
+    axios.post(urlCheckExistingData, {clickedDate: getClickedDate(clickedDate, 'mysql')})
+    .then(res => {
+      if (res.data.length > 0){
+        setExistingNapStart(res.data[0].napStartTime);
+        setExistingNapEnd(res.data[0].napEndTime);
+        setExistingDataAlert(true);
+      } else {
+        setExistingNapStart('');
+        setExistingNapEnd('');
+        setExistingDataAlert(false);
+      }
+    })
+    //check axios for existing data 
+  } 
+  const handleFormInput = (e) => {
+    c('e id', e.target.getAttribute('id_val'))
+    c('existnap value', e.target.value)
+    if (e.target.getAttribute('id_val') === 'nap-start-time') {
+      setExistingNapStart(e.target.value);
+    } else if (e.target.getAttribute('id_val') === 'nap-end-time') {
+      setExistingNapEnd(e.target.value);
+    }
+
   }
+  const handleDataSubmit = () => {
+    axios.post(url, {test: 'testvalue'})
+  };
   let dateHeading;
   let dateClickedYear;
   if (date){
-    dateHeading = longDateString(date);
+    dateHeading = getClickedDate(date);
     dateClickedYear = date.getFullYear();
   }
   const curYear = (new Date()).getFullYear();
-  c('year', curYear)
-  c('clickedyear', dateClickedYear)
   return(
     <>
       <Container>
@@ -40,19 +65,36 @@ function AddData () {
             // console.log('New date is: ', value)
             // c('valueonly', value);
             setDate(value);
+            checkExistingData(value);
           }}
         />
         {date && 
           <>
             <h2>Adding data for <strong>{dateHeading}</strong>: </h2>
             {(dateClickedYear < curYear || dateClickedYear > curYear) && 
-              <Alert variant="warning">You are no longer in the current year of {curYear}</Alert>
+              <Alert variant="warning">The day you clicked is not in the current year of {curYear}. If you're lost, click the chevron symbols (« or ») at the top of the calendar to scroll between years.</Alert>
+            }
+            {existingDataAlert && 
+              <Alert variant="success">You have already submitted data for {dateHeading}. Your previous data has been autofilled below. You can resubmit if you would like to add or change data.</Alert>
             }
             <Form className="add-data-form">
               <Form.Label>Nap Start Time</Form.Label>
-              <Form.Control type="time"></Form.Control>
+              <Form.Control 
+                id_val="nap-start-time"
+                type="time" 
+                className={existingNapStart !== '' && "existing-data"}
+                value={existingNapStart} 
+                placeholder={existingNapStart} 
+                onChange={handleFormInput}
+              />
               <Form.Label>Nap End Time</Form.Label>
-              <Form.Control type="time"></Form.Control>
+              <Form.Control 
+                id_val="nap-end-time"
+                className={existingNapEnd !== '' && "existing-data"}
+                type="time" 
+                value={existingNapEnd}
+                onChange={handleFormInput}
+              />
             </Form>
             <Button onClick={handleDataSubmit}>Submit</Button>
           </>
