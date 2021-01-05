@@ -1,3 +1,15 @@
+
+INSERT INTO accounts (username, password, email) 
+VALUES ('omar', 'omar', 'info@omarshishani.com');
+
+CREATE TABLE accounts (
+	id INT(50) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(500),
+	password VARCHAR(500),
+	email VARCHAR(500)
+) DEFAULT CHARSET=utf8;
+
+
 SELECT * FROM sleep_data WHERE user = 'omar' AND date = '2021-1-1';
 
       UPDATE sleep_data

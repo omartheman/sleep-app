@@ -15,6 +15,14 @@ const serverRoute = '/recipeapp/recipeapp-server/';
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(session({
+  secret: '3423sdasdlfj34',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    secure: false
+  }
+}));
 
 let corsOrigin;
 let connection;
@@ -50,6 +58,43 @@ app.use(cors({
   credentials: true 
 }));// enable set cookie
 
+
+app.get(`/sleep/api/logout`, function(req, res){
+  req.session.loggedin = false;
+  res.send('Logged out.')
+})
+
+app.get(`/sleep/api/auth`, function(req, res){
+  if (req.session.loggedin) {
+    res.send(req.session.username);
+  } 
+  res.end();
+}); 
+
+app.post(`/sleep/api/auth`, function(req, res) {
+  console.log('req.body in post: ', req.body)
+  const username = req.body.username;
+  const password = req.body.password;
+  if (username && password) {
+    connection.query(`SELECT * FROM accounts WHERE username = ? AND password = ?;`, [username, password], function(error, results, fields) {
+      if (results.length > 0) {
+        console.log('results in app.post', results);
+        req.session.loggedin = true;
+        req.session.username = username; 
+        req.session.page_views++;
+        console.log('Logged in user from app.post: ', username);
+        // res.redirect(`${serverRoute}/auth`);
+      } else {
+        res.send('Incorrect Username and/or Password!');
+        req.session.page_views = 1; 
+      }
+      res.end();
+    });
+  } else {
+    res.send('Please enter Username and Password!');
+    res.end();
+  }
+});
 
 app.post(`/sleep/api/check-existing-data`, (req, res) => {
   console.log('Got a POST request to "/sleep/api/check-existing-data"');
@@ -115,7 +160,6 @@ app.post(`/sleep/api/upload-data`, (req, res) => {
       if (err) throw err;
       console.log('upload data result: ', result)
     });
-  
     res.send('This is res.send from "/sleep/api/upload-data"')
   })
 })
