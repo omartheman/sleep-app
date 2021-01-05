@@ -97,10 +97,11 @@ app.post(`/sleep/api/auth`, function(req, res) {
 
 app.post(`/sleep/api/check-existing-data`, (req, res) => {
   console.log('Got a POST request to "/sleep/api/check-existing-data"');
+  c('body for check data', req.body);
   const sql = `
-  SELECT * FROM sleep_data WHERE date = ?
+  SELECT * FROM sleep_data WHERE date = ? AND user = ?
   `;
-  connection.query(sql, [req.body.clickedDate], (err, result) => {
+  connection.query(sql, [req.body.clickedDate, req.body.user], (err, result) => {
     if (err) throw err; 
     console.log('result: ', result);
     res.send(result);

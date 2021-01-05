@@ -32,13 +32,16 @@ function AddData (props) {
   const [clickedDate, setClickedDate] = useState(null);
 
   const checkExistingData = (clickedDate) => {
-    axios.post(urlCheckExistingData, {clickedDate: getClickedDate(clickedDate, 'mysql')})
+    axios.post(urlCheckExistingData, {
+      clickedDate: getClickedDate(clickedDate, 'mysql'),
+      user: props.loggedInUser
+    })
     .then(res => {
       setClickedDate(getClickedDate(clickedDate, 'mysql'));
       if (res.data.length > 0){
 
         setExistingNapStart(res.data[0].napStartTime ? res.data[0].napStartTime : '');
-        setExistingNapEnd(res.data[0].napEndTime ? res.data[0].napStartTime : '');
+        setExistingNapEnd(res.data[0].napEndTime ? res.data[0].napEndTime : '');
         setSleepAidItem(res.data[0].sleepAidItem ? res.data[0].sleepAidItem : '');
         setSleepAidMg(res.data[0].setSleepAidMg ? res.data[0].setSleepAidMg : '');
         setEnterBedTime(res.data[0].setEnterBedTime ? res.data[0].setEnterBedTime : '');

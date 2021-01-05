@@ -5,16 +5,19 @@ import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } f
 import PropTypes from 'prop-types';
 import {c} from './global_items';
 
+//make it so graph updates when component loads
+
 class GraphTest extends React.Component {
   render() {
     const {dates, napInfo} = this.props;
-    const dateLabels = dates.map((x, i) => {
+    const dateLabels = dates.filter(x => x).map((x, i) => {
       if (!x) {return};
       const date = new Date(Date.parse(x));
       return(
         `${date.getMonth()+1}/${date.getDate()}`
       )
     });
+    c('datelabelas', dateLabels)
     let xAxisTickValues = [];
     let data;
     if (napInfo.length > 1) {
