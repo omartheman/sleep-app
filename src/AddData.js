@@ -54,33 +54,31 @@ function AddData () {
 
         setExistingDataAlert(true);
       } else {
+        setClickedDate(null);
         const dataFuncs = [setExistingNapStart, setExistingNapEnd, setSleepAidItem, setSleepAidMg, setEnterBedTime, setLightsOffTime, setTimeToFallAsleep, setNumberTimesArousal, setArousalDuration, setMorningWakeTime, setExitBedTime, setMinutesEarlyWoke, setQualityRating];
-
         for (let i = 0; i < dataFuncs.length; i++){
           dataFuncs[i]('');
         }
-        
         setExistingDataAlert(false);
       }
     })
-    //check axios for existing data 
   } 
   const handleDataSubmit = () => {
     axios.post(urlUploadData, {
-      clickedDate: clickedDate,
-      existingNapStart: existingNapStart,
-      existingNapEnd: existingNapEnd,
+      clickedDate: clickedDate === '' ? null : clickedDate,
+      existingNapStart: existingNapStart === '' ? null : existingNapStart,
+      existingNapEnd: existingNapEnd === '' ? null : existingNapEnd,
       sleepAidItem: sleepAidItem,
-      sleepAidMg: sleepAidMg,
+      sleepAidMg: sleepAidMg === '' ? null : sleepAidMg,
       enterBedTime: enterBedTime,
       lightsOffTime: lightsOffTime,
-      timeToFallAsleep: timeToFallAsleep,
-      numberTimesArousal: numberTimesArousal,
-      arousalDuration: arousalDuration,
+      timeToFallAsleep: timeToFallAsleep === '' ? null : timeToFallAsleep,
+      numberTimesArousal: numberTimesArousal === '' ? null : numberTimesArousal,
+      arousalDuration: arousalDuration === '' ? null : arousalDuration,
       morningWakeTime: morningWakeTime,
       exitBedTime: exitBedTime,
-      minutesEarlyWoke: minutesEarlyWoke,
-      qualityRating: qualityRating
+      minutesEarlyWoke: minutesEarlyWoke === '' ? null : minutesEarlyWoke,
+      qualityRating: qualityRating === '' ? null : qualityRating
     })
   };
   let dateHeading;

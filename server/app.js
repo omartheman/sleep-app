@@ -78,10 +78,42 @@ app.post(`/sleep/api/get-data`, (req, res) => {
 app.post(`/sleep/api/upload-data`, (req, res) => {
   console.log('Got a POST request to "/sleep/api/upload-data"');
   c('body', req.body)
-  const sql = `
+  let sql;
+  if ( !req.body.clickedDate ){
+    sql = `
+      INSERT INTO sleep_data 
+      (napStartTime, napEndTime, sleepAidItem, sleepAidMg, enterBedTime, lightsOffTime, timeToFallAsleep, numberTimesArousal, arousalDuration, morningWakeTime, exitBedTime, minutesEarlyWoke, qualityRating)
+      VALUES (
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+      )
+    `;
+  } else {
+    sql = `
     
-  `;
-  connection.query(sql)
+    `;
+  }
+  connection.query(sql, [
+    req.body.napStartTime, 
+    req.body.napEndTime, 
+    req.body.sleepAidItem,
+    req.body.sleepAidMg,
+    req.body.enterBedTime,
+    req.body.lightsOffTime, 
+    req.body.timeToFallAsleep,
+    req.body.numberTimesArousal,
+    req.body.arousalDuration, 
+    req.body.morningWakeTime,
+    req.body.exitBedTime,
+    req.body.minutesEarlyWoke,
+    req.body.qualityRating 
+  ], (err, result) => {
+    if (err) throw err;
+    console.log('upload data result: ', result)
+  });
+  //If date !== null
+  //Check if date clicked has data submitted in React App
+  // If (date)
+
   res.send('This is res.send from "/sleep/api/upload-data"')
 })
 

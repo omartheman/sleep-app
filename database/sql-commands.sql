@@ -1,3 +1,8 @@
+ALTER TABLE sleep_data CHANGE COLUMN 
+  sleepAidItem sleepAidItem VARCHAR(255) AFTER napEndTime;
+
+ALTER TABLE sleep_data CHANGE COLUMN timeToFallAsleep timeToFallAsleep INT(50) AFTER lightsOffTime;
+
 ALTER TABLE sleep_data ADD timeToFallAsleep INT(50);
 
 UPDATE sleep_data
