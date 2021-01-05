@@ -1,3 +1,16 @@
+SELECT * FROM sleep_data WHERE user = 'omar' AND date = '2021-1-1';
+
+      UPDATE sleep_data
+      SET napStartTime = ?, napEndTime = ?, sleepAidItem = ?, sleepAidMg = ?, enterBedTime = ?, lightsOffTime = ?, timeToFallAsleep = ?, numberTimesArousal = ?, arousalDuration = ?, morningWakeTime = ?, exitBedTime = ?, minutesEarlyWoke = ?, qualityRating = ?
+      WHERE user = ? AND date = ?
+
+      INSERT INTO sleep_data 
+      (user, date, napStartTime, napEndTime, sleepAidItem, sleepAidMg, enterBedTime, lightsOffTime, timeToFallAsleep, numberTimesArousal, arousalDuration, morningWakeTime, exitBedTime, minutesEarlyWoke, qualityRating)
+      VALUES (
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+      )
+
+
 ALTER TABLE sleep_data CHANGE COLUMN 
   sleepAidItem sleepAidItem VARCHAR(255) AFTER napEndTime;
 

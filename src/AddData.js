@@ -12,7 +12,7 @@ const urlUploadData = `${url}upload-data`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;
 
-function AddData () {
+function AddData (props) {
   const [value, onChange] = useState(new Date());
   const [date, setDate] = useState(null);
   const [existingDataAlert, setExistingDataAlert] = useState(false);
@@ -29,14 +29,13 @@ function AddData () {
   const [exitBedTime, setExitBedTime] = useState('');
   const [minutesEarlyWoke, setMinutesEarlyWoke] = useState('');
   const [qualityRating, setQualityRating] = useState('');
-
   const [clickedDate, setClickedDate] = useState(null);
 
   const checkExistingData = (clickedDate) => {
     axios.post(urlCheckExistingData, {clickedDate: getClickedDate(clickedDate, 'mysql')})
     .then(res => {
+      setClickedDate(getClickedDate(clickedDate, 'mysql'));
       if (res.data.length > 0){
-        setClickedDate(getClickedDate(clickedDate, 'mysql'));
 
         setExistingNapStart(res.data[0].napStartTime ? res.data[0].napStartTime : '');
         setExistingNapEnd(res.data[0].napEndTime ? res.data[0].napStartTime : '');
@@ -54,7 +53,6 @@ function AddData () {
 
         setExistingDataAlert(true);
       } else {
-        setClickedDate(null);
         const dataFuncs = [setExistingNapStart, setExistingNapEnd, setSleepAidItem, setSleepAidMg, setEnterBedTime, setLightsOffTime, setTimeToFallAsleep, setNumberTimesArousal, setArousalDuration, setMorningWakeTime, setExitBedTime, setMinutesEarlyWoke, setQualityRating];
         for (let i = 0; i < dataFuncs.length; i++){
           dataFuncs[i]('');
@@ -64,10 +62,13 @@ function AddData () {
     })
   } 
   const handleDataSubmit = () => {
+    c('clickedDate', clickedDate)
     axios.post(urlUploadData, {
-      clickedDate: clickedDate === '' ? null : clickedDate,
-      existingNapStart: existingNapStart === '' ? null : existingNapStart,
-      existingNapEnd: existingNapEnd === '' ? null : existingNapEnd,
+      //Ternarys were set to not give a value for SQL when there is none. Helps with creating graphs to skip data.
+      user: props.loggedInUser,
+      date: clickedDate === '' ? null : clickedDate,
+      napStartTime: existingNapStart === '' ? null : existingNapStart,
+      napEndTime: existingNapEnd === '' ? null : existingNapEnd,
       sleepAidItem: sleepAidItem === '' ? null : sleepAidItem,
       sleepAidMg: sleepAidMg === '' ? null : sleepAidMg,
       enterBedTime: enterBedTime === '' ? null : enterBedTime,
