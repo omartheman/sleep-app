@@ -78,45 +78,46 @@ app.post(`/sleep/api/get-data`, (req, res) => {
 app.post(`/sleep/api/upload-data`, (req, res) => {
   console.log('Got a POST request to "/sleep/api/upload-data"');
   c('body', req.body)
+  if (!req.body.user) {return};
   const sql = `
-    SELECT * FROM sleep_data WHERE user = 'omar' AND date = '2021-1-1';
+    SELECT * FROM sleep_data WHERE user = ? AND date = ?;
   `;
-  connection.query(sql, (err, result) =>)
-
-  let sql;
-  let sqlVars;
-  if ( !req.body.date ){
-    //If the user has not yet submitted data for this date.
-    //Check if the user has submitted data for this date
-    //IF a row exists that has USER and DATE
-    sql = `
-      INSERT INTO sleep_data 
-      (user, date, napStartTime, napEndTime, sleepAidItem, sleepAidMg, enterBedTime, lightsOffTime, timeToFallAsleep, numberTimesArousal, arousalDuration, morningWakeTime, exitBedTime, minutesEarlyWoke, qualityRating)
-      VALUES (
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-      )
-    `;
-    sqlVars = [req.body.user, req.body.date, req.body.napStartTime, req.body.napEndTime, req.body.sleepAidItem,req.body.sleepAidMg, req.body.enterBedTime, req.body.lightsOffTime, req.body.timeToFallAsleep, req.body.numberTimesArousal, req.body.arousalDuration, req.body.morningWakeTime, req.body.exitBedTime, req.body.minutesEarlyWoke, req.body.qualityRating 
-    ];
-    c('sql1', sql);
-    c('sqlvars', sqlVars)
-  } else {
-    // STOP HERE
-    sql = `
-      UPDATE sleep_data
-      SET napStartTime = ?, napEndTime = ?, sleepAidItem = ?, sleepAidMg = ?, enterBedTime = ?, lightsOffTime = ?, timeToFallAsleep = ?, numberTimesArousal = ?, arousalDuration = ?, morningWakeTime = ?, exitBedTime = ?, minutesEarlyWoke = ?, qualityRating = ?
-      WHERE user = ? AND date = ?
-    `;
-    sqlVars = [req.body.napStartTime, req.body.napEndTime, req.body.sleepAidItem, req.body.sleepAidMg, req.body.enterBedTime, req.body.lightsOffTime, req.body.timeToFallAsleep, req.body.numberTimesArousal, req.body.arousalDuration, req.body.morningWakeTime, req.body.exitBedTime, req.body.minutesEarlyWoke, req.body.qualityRating, req.body.user, req.body.date];
-    c('sql2', sql);
-    c('sqlvars', sqlVars);
-  }
-  connection.query(sql, sqlVars, (err, result) => {
-    if (err) throw err;
-    console.log('upload data result: ', result)
-  });
-
-  res.send('This is res.send from "/sleep/api/upload-data"')
+  connection.query(sql, [req.body.user, req.body.date], (err, result) => {
+    if (err) throw err; 
+    let sql;
+    let sqlVars;
+    //CHECK IF DATE CONTAINS RECORD
+    if ( !result.length ){
+      //DATE DOES NOT CONTAIN RECORD
+      sql = `
+        INSERT INTO sleep_data 
+        (user, date, napStartTime, napEndTime, sleepAidItem, sleepAidMg, enterBedTime, lightsOffTime, timeToFallAsleep, numberTimesArousal, arousalDuration, morningWakeTime, exitBedTime, minutesEarlyWoke, qualityRating)
+        VALUES (
+          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+        )
+      `;
+      sqlVars = [req.body.user, req.body.date, req.body.napStartTime, req.body.napEndTime, req.body.sleepAidItem,req.body.sleepAidMg, req.body.enterBedTime, req.body.lightsOffTime, req.body.timeToFallAsleep, req.body.numberTimesArousal, req.body.arousalDuration, req.body.morningWakeTime, req.body.exitBedTime, req.body.minutesEarlyWoke, req.body.qualityRating 
+      ];
+      c('sql1', sql);
+      c('sqlvars', sqlVars)
+    } else {
+      // STOP HERE
+      sql = `
+        UPDATE sleep_data
+        SET napStartTime = ?, napEndTime = ?, sleepAidItem = ?, sleepAidMg = ?, enterBedTime = ?, lightsOffTime = ?, timeToFallAsleep = ?, numberTimesArousal = ?, arousalDuration = ?, morningWakeTime = ?, exitBedTime = ?, minutesEarlyWoke = ?, qualityRating = ?
+        WHERE user = ? AND date = ?
+      `;
+      sqlVars = [req.body.napStartTime, req.body.napEndTime, req.body.sleepAidItem, req.body.sleepAidMg, req.body.enterBedTime, req.body.lightsOffTime, req.body.timeToFallAsleep, req.body.numberTimesArousal, req.body.arousalDuration, req.body.morningWakeTime, req.body.exitBedTime, req.body.minutesEarlyWoke, req.body.qualityRating, req.body.user, req.body.date];
+      c('sql2', sql);
+      c('sqlvars', sqlVars);
+    }
+    connection.query(sql, sqlVars, (err, result) => {
+      if (err) throw err;
+      console.log('upload data result: ', result)
+    });
+  
+    res.send('This is res.send from "/sleep/api/upload-data"')
+  })
 })
 
 app.get(`/sleep/api/`, (req, res) => {
