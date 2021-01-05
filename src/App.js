@@ -4,14 +4,13 @@ import {useEffect, useState} from 'react';
 import axios from 'axios';
 import NavbarContainer from './NavbarContainer';
 import AddData from './AddData';
-
 import './App.css';
 import './App.scss';
 import React from 'react';
 import {Switch, Route} from 'react-router';
+import url from './global_items';
 
-const url = 'http://localhost:4000/sleep/api/';
-const urlGetData = 'http://localhost:4000/sleep/api/get-data';
+const urlGetData = `${url}get-data`;
 const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;

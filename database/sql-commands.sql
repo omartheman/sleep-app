@@ -1,3 +1,4 @@
+ALTER TABLE sleep_data ADD timeToFallAsleep INT(50);
 
 UPDATE sleep_data
 SET napEndTime = '15:00'

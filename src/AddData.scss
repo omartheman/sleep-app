@@ -1,7 +1,13 @@
+.add-data-form  .form-label {
+  margin-top: 20px;
+}
 .add-data-form > * {
   display: block;
   text-align: left;
 }
 .add-data-form .existing-data {
   border: 1px solid green;
+}
+.add-data-form-example {
+  font-style: italic;
 }
