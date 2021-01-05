@@ -34,6 +34,8 @@ function getClickedDate(date, type){
   : `${weekday[date.getDay()]}, ${month[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
 }
 
-export {c, getClickedDate, url};
+const varToString = varObj => Object.keys(varObj)[0]; 
+
+export {c, getClickedDate, url, varToString};
 
 export default url;

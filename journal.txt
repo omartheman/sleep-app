@@ -1,6 +1,6 @@
 4 Jan Monday
 
-Add items to database on submit.
+--> Finish upload data on app.js
 
 1 Jan 2021 
 

@@ -4,7 +4,7 @@ import { Calendar } from 'react-calendar';
 import './AddData.scss';
 import axios from 'axios';
 import 'react-calendar/dist/Calendar.css';
-import {c, getClickedDate, url} from './global_items';
+import {c, getClickedDate, url, varToString} from './global_items';
 
 const urlCheckExistingData = `${url}check-existing-data`;
 const urlUploadData = `${url}upload-data`;
@@ -68,15 +68,15 @@ function AddData () {
       clickedDate: clickedDate === '' ? null : clickedDate,
       existingNapStart: existingNapStart === '' ? null : existingNapStart,
       existingNapEnd: existingNapEnd === '' ? null : existingNapEnd,
-      sleepAidItem: sleepAidItem,
+      sleepAidItem: sleepAidItem === '' ? null : sleepAidItem,
       sleepAidMg: sleepAidMg === '' ? null : sleepAidMg,
-      enterBedTime: enterBedTime,
-      lightsOffTime: lightsOffTime,
+      enterBedTime: enterBedTime === '' ? null : enterBedTime,
+      lightsOffTime: lightsOffTime === '' ? null : lightsOffTime,
       timeToFallAsleep: timeToFallAsleep === '' ? null : timeToFallAsleep,
       numberTimesArousal: numberTimesArousal === '' ? null : numberTimesArousal,
       arousalDuration: arousalDuration === '' ? null : arousalDuration,
-      morningWakeTime: morningWakeTime,
-      exitBedTime: exitBedTime,
+      morningWakeTime: morningWakeTime === '' ? null : morningWakeTime,
+      exitBedTime: exitBedTime === '' ? null : exitBedTime,
       minutesEarlyWoke: minutesEarlyWoke === '' ? null : minutesEarlyWoke,
       qualityRating: qualityRating === '' ? null : qualityRating
     })

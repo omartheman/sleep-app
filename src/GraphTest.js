@@ -3,11 +3,13 @@ import { Container } from 'react-bootstrap';
 import './GraphTest.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 import PropTypes from 'prop-types';
+import {c} from './global_items';
 
 class GraphTest extends React.Component {
   render() {
     const {dates, napInfo} = this.props;
     const dateLabels = dates.map((x, i) => {
+      if (!x) {return};
       const date = new Date(Date.parse(x));
       return(
         `${date.getMonth()+1}/${date.getDate()}`
@@ -16,16 +18,22 @@ class GraphTest extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (napInfo.length > 1) {
-      data = napInfo.map((e, i) => {
+      data = napInfo.filter(napObj => napObj.napStartTime).map((e, i) => {
+        if (!e.napStartTime || !e.napEndTime) {
+          c('returning early', e);
+          return
+        };
         const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
-        const time = e.napStartTime.split(':');
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
+        c('returning data')
         return(
           { x: date, y0: dateTime, y: dateTimeEnd }
         );
       });
+      console.log('data', data)
+      c('data',data)
     }
     return (
       <>
