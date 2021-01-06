@@ -9,28 +9,21 @@ const urlGetData = `${url}get-data`;
 
 class TimeToFallAsleepChart extends React.Component {
   state = {
-    dates: [],
     chartInfo: []
   }
   componentDidMount(){
-    const {dates} = this.state;
     axios.post(urlGetData, {user: 'omar'})
     .then(res => {
       console.log(res);
-      if (dates.length === 0){
-        let newDates = [];
-        let newChartInfo = [];
-        res.data.map(x => {
-          newDates = [...newDates, x.date];
-          newChartInfo = [...newChartInfo, {
-            date: x.date,
-            timeToFallAsleep: x.timeToFallAsleep
-          }];
-          return null;
-        })
-        this.setState({chartInfo: newChartInfo});
-        this.setState({dates: newDates});
-      } 
+      let newChartInfo = [];
+      res.data.map(x => {
+        newChartInfo = [...newChartInfo, {
+          date: x.date,
+          timeToFallAsleep: x.timeToFallAsleep
+        }];
+        return null;
+      })
+      this.setState({chartInfo: newChartInfo});
     })
   }
   render() {

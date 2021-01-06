@@ -11,14 +11,12 @@ const urlGetData = `${url}get-data`;
 
 class NapTimesChart extends React.Component {
   componentDidMount(){
-    const {setDates, setNapInfo, dates} = this.props;
+    const {setNapInfo} = this.props;
     axios.post(urlGetData, {user: 'omar'})
     .then(res => {
       console.log(res);
-        let newDates = [];
         let newNapInfo = [];
         res.data.map(x => {
-          newDates = [...newDates, x.date];
           newNapInfo = [...newNapInfo, {
             date: x.date, 
             napStartTime: x.napStartTime,
@@ -26,7 +24,6 @@ class NapTimesChart extends React.Component {
           }]
           return null;
         })
-        setDates(newDates);
         setNapInfo(newNapInfo);
     })
   }

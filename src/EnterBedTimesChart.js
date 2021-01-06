@@ -11,38 +11,21 @@ const urlGetData = `${url}get-data`;
 
 class EnterBedTimesChart extends React.Component {
   state = {
-    dates: [],
     chartInfo: []
   }
-  componentDidUpdate(){
-    c('state', this.state)
-  }
   componentDidMount(){
-    c('props', this.props);
-    const {dates, chartInfo} = this.state;
     axios.post(urlGetData, {user: 'omar'})
     .then(res => {
       console.log(res);
-      c('component mounted')
-      if (dates.length === 0){
-        //check what DATA IS COMING IN
-        c('if running')
-        c('res.data', res.data)
-        let newDates = [];
-        let newChartInfo = [];
-        res.data.map(x => {
-          newDates = [...newDates, x.date];
-          newChartInfo = [...newChartInfo, {
-            date: x.date,
-            enterBedTime: x.enterBedTime
-          }];
-          c('newchartinfo', newChartInfo)
-          return null;
-        })
-        c('chartInfooutsidemap', newChartInfo)
-        this.setState({chartInfo: newChartInfo});
-        this.setState({dates: newDates});
-      } 
+      let newChartInfo = [];
+      res.data.map(x => {
+        newChartInfo = [...newChartInfo, {
+          date: x.date,
+          enterBedTime: x.enterBedTime
+        }];
+        return null;
+      })
+      this.setState({chartInfo: newChartInfo});
     })
   }
   render() {
