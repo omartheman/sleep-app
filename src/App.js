@@ -1,5 +1,5 @@
 import './App.css';
-import GraphTest from './GraphTest';
+import NapTimesChart from './NapTimesChart';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import NavbarContainer from './NavbarContainer';
@@ -9,6 +9,7 @@ import './App.scss';
 import React from 'react';
 import {Switch, Route} from 'react-router';
 import {url, c} from './global_items';
+import EnterBedTimesChart from './EnterBedTimesChart';
 
 const urlGetData = `${url}get-data`;
 const urlAuth = `${url}auth`;
@@ -132,11 +133,13 @@ function App() {
             loggedInUser={loggedInUser}
             onLogout={this.handleLogout}
           /> */}
-          <GraphTest
+          <EnterBedTimesChart />
+          <NapTimesChart
             dates={dates}
             napInfo={napInfo}
             setDates={setDates}
             setNapInfo={setNapInfo}
+            loggedInUser={loggedInUser}
           />
         </>
       )} />

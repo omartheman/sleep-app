@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import './GraphTest.scss';
+import './EnterBedTimesChart.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -9,43 +9,58 @@ import {url, c} from './global_items';
 const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
 
-class GraphTest extends React.Component {
+class EnterBedTimesChart extends React.Component {
+  state = {
+    dates: [],
+    chartInfo: []
+  }
+  componentDidUpdate(){
+    c('state', this.state)
+  }
   componentDidMount(){
     c('props', this.props);
-    const {setDates, setNapInfo, dates} = this.props;
-    axios.post(urlGetData, {username: 'omar'})
+    const {dates, chartInfo} = this.state;
+    axios.post(urlGetData, {user: 'omar'})
     .then(res => {
       console.log(res);
       c('component mounted')
       if (dates.length === 0){
+        //check what DATA IS COMING IN
         c('if running')
+        c('res.data', res.data)
+        let newDates = [];
+        let newChartInfo = [];
         res.data.map(x => {
-          setDates(prev => [...prev, x.date]);
-          setNapInfo(prev => [...prev, {
-            date: x.date, 
-            napStartTime: x.napStartTime,
-            napEndTime: x.napEndTime
-          }]);
+          newDates = [...newDates, x.date];
+          newChartInfo = [...newChartInfo, {
+            date: x.date,
+            enterBedTime: x.enterBedTime
+          }];
+          c('newchartinfo', newChartInfo)
           return null;
         })
-      } else {
-        c('else')
-        setDates([]);
-        setNapInfo([]);
-        res.data.map(x => {
-          setDates(prev => [...prev, x.date]);
-          setNapInfo(prev => [...prev, {
-            date: x.date, 
-            napStartTime: x.napStartTime,
-            napEndTime: x.napEndTime
-          }]);
-          return null;
-        })
-      }
+        c('chartInfooutsidemap', newChartInfo)
+        this.setState({chartInfo: newChartInfo});
+        this.setState({dates: newDates});
+      } 
+      // else {
+      //   this.setState({dates: [], chartInfo: []});
+      //   setDates([]);
+      //   setNapInfo([]);
+      //   res.data.map(x => {
+      //     setDates(prev => [...prev, x.date]);
+      //     setNapInfo(prev => [...prev, {
+      //       date: x.date, 
+      //       napStartTime: x.napStartTime,
+      //       napEndTime: x.napEndTime
+      //     }]);
+      //     return null;
+      //   })
+      // }
     })
   }
   render() {
-    const {dates, napInfo} = this.props;
+    const {dates, chartInfo} = this.state;
     const dateLabels = dates.filter(x => x).map((x, i) => {
       const date = new Date(Date.parse(x));
       return(
@@ -55,8 +70,8 @@ class GraphTest extends React.Component {
     c('datelabelas', dateLabels)
     let xAxisTickValues = [];
     let data;
-    if (napInfo.length > 1) {
-      data = napInfo.filter(napObj => napObj.napStartTime).map((e, i) => {
+    if (chartInfo.length > 1) {
+      data = chartInfo.filter(napObj => napObj.napStartTime).map((e, i) => {
         const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
@@ -121,7 +136,7 @@ class GraphTest extends React.Component {
   }
 }
 
-export default GraphTest; 
+export default EnterBedTimesChart; 
 
 function formatAMPM(date) {
   var hours = date.getHours();
@@ -145,6 +160,6 @@ function duration(start, end) {
   return(`${timeHours}h, ${timeMinutes}m`)
 }
 
-GraphTest.propTypes = {
+EnterBedTimesChart.propTypes = {
   dates: PropTypes.array
 }
