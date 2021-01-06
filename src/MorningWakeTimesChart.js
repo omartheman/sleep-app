@@ -7,7 +7,6 @@ import axios from 'axios';
 import {url, c} from './global_items';
 
 const urlGetData = `${url}get-data`;
-//make it so graph updates when component loads
 
 class MorningWakeTimesChart extends React.Component {
   state = {
@@ -43,20 +42,6 @@ class MorningWakeTimesChart extends React.Component {
         this.setState({chartInfo: newChartInfo});
         this.setState({dates: newDates});
       } 
-      // else {
-      //   this.setState({dates: [], chartInfo: []});
-      //   setDates([]);
-      //   setNapInfo([]);
-      //   res.data.map(x => {
-      //     setDates(prev => [...prev, x.date]);
-      //     setNapInfo(prev => [...prev, {
-      //       date: x.date, 
-      //       napStartTime: x.napStartTime,
-      //       napEndTime: x.napEndTime
-      //     }]);
-      //     return null;
-      //   })
-      // }
     })
   }
   render() {

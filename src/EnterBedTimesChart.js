@@ -43,20 +43,6 @@ class EnterBedTimesChart extends React.Component {
         this.setState({chartInfo: newChartInfo});
         this.setState({dates: newDates});
       } 
-      // else {
-      //   this.setState({dates: [], chartInfo: []});
-      //   setDates([]);
-      //   setNapInfo([]);
-      //   res.data.map(x => {
-      //     setDates(prev => [...prev, x.date]);
-      //     setNapInfo(prev => [...prev, {
-      //       date: x.date, 
-      //       napStartTime: x.napStartTime,
-      //       napEndTime: x.napEndTime
-      //     }]);
-      //     return null;
-      //   })
-      // }
     })
   }
   render() {
