@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import './EnterBedTimesChart.scss';
-import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLine } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {url, c} from './global_items';
@@ -114,7 +114,7 @@ class EnterBedTimesChart extends React.Component {
                 //   );
                 // }}
               />
-              <VictoryBar
+              <VictoryLine
                 data={data}
                 cornerRadius={{topLeft: 3, topRight: 3, bottomLeft: 3, bottomRight: 3}}
                 style={{ data: {fill: '#964c9d'} }}

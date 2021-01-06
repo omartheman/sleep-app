@@ -16,30 +16,19 @@ class NapTimesChart extends React.Component {
     axios.post(urlGetData, {user: 'omar'})
     .then(res => {
       console.log(res);
-      if (dates.length === 0){
+        let newDates = [];
+        let newNapInfo = [];
         res.data.map(x => {
-          setDates(prev => [...prev, x.date]);
-          setNapInfo(prev => [...prev, {
+          newDates = [...newDates, x.date];
+          newNapInfo = [...newNapInfo, {
             date: x.date, 
             napStartTime: x.napStartTime,
             napEndTime: x.napEndTime
-          }]);
+          }]
           return null;
         })
-      } else {
-        c('else')
-        setDates([]);
-        setNapInfo([]);
-        res.data.map(x => {
-          setDates(prev => [...prev, x.date]);
-          setNapInfo(prev => [...prev, {
-            date: x.date, 
-            napStartTime: x.napStartTime,
-            napEndTime: x.napEndTime
-          }]);
-          return null;
-        })
-      }
+        setDates(newDates);
+        setNapInfo(newNapInfo);
     })
   }
   render() {
