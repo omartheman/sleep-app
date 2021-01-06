@@ -11,7 +11,6 @@ const urlGetData = `${url}get-data`;
 
 class NapTimesChart extends React.Component {
   componentDidMount(){
-    c('props', this.props);
     const {setDates, setNapInfo, dates} = this.props;
     axios.post(urlGetData, {user: 'omar'})
     .then(res => {
@@ -54,51 +53,49 @@ class NapTimesChart extends React.Component {
     }
     return (
       <>
-        <Container>
-          <div className="victory-chart-1-container">
-            <h2>Nap Times</h2>
-            <VictoryChart
-              theme={VictoryTheme.material}
-              padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
-              scale={{y:'time'}}
-              domainPadding={{ x: 20, y: 20 }}
-            >
-              <VictoryAxis
-                // tickValues specifies both the number of ticks and where
-                // they are placed on the axis
-                // tickValues={[1, 2, 3, 4, 5]}
-                tickValues={xAxisTickValues}
-                // tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4"]}
-                tickFormat={dateLabels}
+        <div className="victory-chart-1-container">
+          <h2>Nap Times</h2>
+          <VictoryChart
+            theme={VictoryTheme.material}
+            padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
+            scale={{y:'time'}}
+            domainPadding={{ x: 20, y: 20 }}
+          >
+            <VictoryAxis
+              // tickValues specifies both the number of ticks and where
+              // they are placed on the axis
+              // tickValues={[1, 2, 3, 4, 5]}
+              tickValues={xAxisTickValues}
+              // tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4"]}
+              tickFormat={dateLabels}
+              />
+            <VictoryAxis
+              style={{grid:{stroke:'black', strokeDasharray: '7'}}}
+              dependentAxis
+              tickFormat={(y) => formatAMPM(y)}
+              // tickFormat specifies how ticks should be displayed
+              // tickFormat={(y) => {
+              //   return(
+              //     `${y-y%1}:${Math.round(y%1*10)/10*60}PM`
+              //   );
+              // }}
+            />
+            <VictoryBar
+              data={data}
+              cornerRadius={{topLeft: 3, topRight: 3, bottomLeft: 3, bottomRight: 3}}
+              style={{ data: {fill: '#964c9d'} }}
+              labels={({ datum }) => {
+                return(duration(new Date(datum._y0), new Date(datum._y)))}
+              }
+              labelComponent={
+                <VictoryTooltip
+                  flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
+                  // centerOffset={{ y: 45 }}
                 />
-              <VictoryAxis
-                style={{grid:{stroke:'black', strokeDasharray: '7'}}}
-                dependentAxis
-                tickFormat={(y) => formatAMPM(y)}
-                // tickFormat specifies how ticks should be displayed
-                // tickFormat={(y) => {
-                //   return(
-                //     `${y-y%1}:${Math.round(y%1*10)/10*60}PM`
-                //   );
-                // }}
-              />
-              <VictoryBar
-                data={data}
-                cornerRadius={{topLeft: 3, topRight: 3, bottomLeft: 3, bottomRight: 3}}
-                style={{ data: {fill: '#964c9d'} }}
-                labels={({ datum }) => {
-                  return(duration(new Date(datum._y0), new Date(datum._y)))}
-                }
-                labelComponent={
-                  <VictoryTooltip
-                    flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
-                    // centerOffset={{ y: 45 }}
-                  />
-                }
-              />
-            </VictoryChart>
-          </div>
-        </Container>
+              }
+            />
+          </VictoryChart>
+        </div>
       </>
     )
   }

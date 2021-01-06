@@ -56,10 +56,8 @@ class EnterBedTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      c('enter data write')
       data = chartInfo.filter(napObj => napObj.enterBedTime).map((e, i) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
-        c('enterbedtime', e.enterBedTime)
         const dateTime = new Date(`January 1, 2000 ${e.enterBedTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
@@ -68,44 +66,41 @@ class EnterBedTimesChart extends React.Component {
           { x: date, y: dateTime }
         );
       });
-      c('data in enterbedtimes',data)
     }
     return (
       <>
-        <Container>
-          <div className="victory-chart-1-container">
-            <h2>Time I Got in Bed</h2>
-            <VictoryChart
-              theme={VictoryTheme.material}
-              padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
-              scale={{y:'time'}}
-              domainPadding={{ x: 20, y: 20 }}
-            >
-              <VictoryAxis
-                // tickValues specifies both the number of ticks and where
-                // they are placed on the axis
-                // tickValues={[1, 2, 3, 4, 5]}
-                tickValues={xAxisTickValues}
-                // tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4"]}
-                tickFormat={dateLabels}
-                />
-              <VictoryAxis
-                style={{grid:{stroke:'black', strokeDasharray: '7'}}}
-                dependentAxis
-                tickFormat={(y) => formatAMPM(y)}
-                // tickFormat specifies how ticks should be displayed
-                // tickFormat={(y) => {
-                //   return(
-                //     `${y-y%1}:${Math.round(y%1*10)/10*60}PM`
-                //   );
-                // }}
+        <div className="victory-chart-1-container">
+          <h2>Time I Got in Bed</h2>
+          <VictoryChart
+            theme={VictoryTheme.material}
+            padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
+            scale={{y:'time'}}
+            domainPadding={{ x: 20, y: 20 }}
+          >
+            <VictoryAxis
+              // tickValues specifies both the number of ticks and where
+              // they are placed on the axis
+              // tickValues={[1, 2, 3, 4, 5]}
+              tickValues={xAxisTickValues}
+              // tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4"]}
+              tickFormat={dateLabels}
               />
-              <VictoryLine
-                data={data}
-              />
-            </VictoryChart>
-          </div>
-        </Container>
+            <VictoryAxis
+              style={{grid:{stroke:'black', strokeDasharray: '7'}}}
+              dependentAxis
+              tickFormat={(y) => formatAMPM(y)}
+              // tickFormat specifies how ticks should be displayed
+              // tickFormat={(y) => {
+              //   return(
+              //     `${y-y%1}:${Math.round(y%1*10)/10*60}PM`
+              //   );
+              // }}
+            />
+            <VictoryLine
+              data={data}
+            />
+          </VictoryChart>
+        </div>
       </>
     )
   }

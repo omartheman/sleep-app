@@ -1,14 +1,13 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import './MorningWakeTimesChart.scss';
-import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {url, c} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
-class MorningWakeTimesChart extends React.Component {
+class LightsOffTimesChart extends React.Component {
   state = {
     dates: [],
     chartInfo: []
@@ -25,7 +24,7 @@ class MorningWakeTimesChart extends React.Component {
           newDates = [...newDates, x.date];
           newChartInfo = [...newChartInfo, {
             date: x.date,
-            morningWakeTime: x.morningWakeTime
+            exitBedTime: x.exitBedTime
           }];
           return null;
         })
@@ -45,9 +44,9 @@ class MorningWakeTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.morningWakeTime).map((e, i) => {
+      data = chartInfo.filter(napObj => napObj.exitBedTime).map((e, i) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
-        const dateTime = new Date(`January 1, 2000 ${e.morningWakeTime}`);
+        const dateTime = new Date(`January 1, 2000 ${e.exitBedTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
         return(
@@ -57,34 +56,34 @@ class MorningWakeTimesChart extends React.Component {
     }
     return (
       <>
-        <div className="victory-chart-1-container">
-          <h2>Wake Up Times</h2>
-          <VictoryChart
-            theme={VictoryTheme.material}
-            padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
-            scale={{y:'time'}}
-            domainPadding={{ x: 20, y: 20 }}
-          >
-            <VictoryAxis
-              tickValues={xAxisTickValues}
-              tickFormat={dateLabels}
+          <div className="victory-chart-1-container">
+            <h2>Time Out of Bed</h2>
+            <VictoryChart
+              theme={VictoryTheme.material}
+              padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
+              scale={{y:'time'}}
+              domainPadding={{ x: 20, y: 20 }}
+            >
+              <VictoryAxis
+                tickValues={xAxisTickValues}
+                tickFormat={dateLabels}
+                />
+              <VictoryAxis
+                style={{grid:{stroke:'black', strokeDasharray: '7'}}}
+                dependentAxis
+                tickFormat={(y) => formatAMPM(y)}
               />
-            <VictoryAxis
-              style={{grid:{stroke:'black', strokeDasharray: '7'}}}
-              dependentAxis
-              tickFormat={(y) => formatAMPM(y)}
-            />
-            <VictoryLine
-              data={data}
-            />
-          </VictoryChart>
-        </div>
+              <VictoryLine
+                data={data}
+              />
+            </VictoryChart>
+          </div>
       </>
     )
   }
 }
 
-export default MorningWakeTimesChart; 
+export default LightsOffTimesChart; 
 
 function formatAMPM(date) {
   var hours = date.getHours();
@@ -97,6 +96,6 @@ function formatAMPM(date) {
   return strTime;
 }
 
-MorningWakeTimesChart.propTypes = {
+LightsOffTimesChart.propTypes = {
   dates: PropTypes.array
 }

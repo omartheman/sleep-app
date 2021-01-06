@@ -11,6 +11,10 @@ import {Switch, Route} from 'react-router';
 import {url, c} from './global_items';
 import EnterBedTimesChart from './EnterBedTimesChart';
 import MorningWakeTimesChart from './MorningWakeTimesChart';
+import LightsOffTimesChart from './LightsOffTimesChart';
+import ExitBedTimesChart from './ExitBedTimesChart';
+import { Container } from 'react-bootstrap';
+import TimeToFallAsleepChart from './TimeToFallAsleepChart';
 
 const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
@@ -117,15 +121,20 @@ function App() {
             loggedInUser={loggedInUser}
             onLogout={this.handleLogout}
           /> */}
-          <MorningWakeTimesChart />
-          <EnterBedTimesChart />
-          <NapTimesChart
-            dates={dates}
-            napInfo={napInfo}
-            setDates={setDates}
-            setNapInfo={setNapInfo}
-            loggedInUser={loggedInUser}
-          />
+          <Container>
+            <TimeToFallAsleepChart />
+            <ExitBedTimesChart />
+            <LightsOffTimesChart />
+            <MorningWakeTimesChart />
+            <EnterBedTimesChart />
+            <NapTimesChart
+              dates={dates}
+              napInfo={napInfo}
+              setDates={setDates}
+              setNapInfo={setNapInfo}
+              loggedInUser={loggedInUser}
+            />
+          </Container>
         </>
       )} />
       <Route path="/recipeapp/create-account-success" render={() => (
