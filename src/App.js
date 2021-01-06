@@ -22,9 +22,6 @@ axios.defaults.withCredentials = true;
 
 
 function App() {
-  const [dates, setDates] = useState([]);
-  const [napInfo, setNapInfo] = useState([]);
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -128,9 +125,6 @@ function App() {
             <MorningWakeTimesChart />
             <EnterBedTimesChart />
             <NapTimesChart
-              napInfo={napInfo}
-              setDates={setDates}
-              setNapInfo={setNapInfo}
               loggedInUser={loggedInUser}
             />
           </Container>

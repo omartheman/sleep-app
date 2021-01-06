@@ -7,11 +7,12 @@ import axios from 'axios';
 import {url, c} from './global_items';
 
 const urlGetData = `${url}get-data`;
-//make it so graph updates when component loads
 
 class NapTimesChart extends React.Component {
+  state = {
+    chartInfo: []
+  };
   componentDidMount(){
-    const {setNapInfo} = this.props;
     axios.post(urlGetData, {user: 'omar'})
     .then(res => {
       console.log(res);
@@ -24,16 +25,16 @@ class NapTimesChart extends React.Component {
           }]
           return null;
         })
-        setNapInfo(newNapInfo);
+        this.setState({chartInfo: newNapInfo});
     })
   }
   render() {
-    const {napInfo} = this.props;
+    const {chartInfo} = this.state;
     let dateLabels = [];
     let xAxisTickValues = [];
     let data;
-    if (napInfo.length > 1) {
-      data = napInfo.filter(napObj => napObj.napStartTime).map((e, i) => {
+    if (chartInfo.length > 1) {
+      data = chartInfo.filter(napObj => napObj.napStartTime).map((e, i) => {
         const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
