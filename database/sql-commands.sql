@@ -1,3 +1,4 @@
+DELETE FROM sleep_data WHERE id BETWEEN 9 AND 26;
 
 INSERT INTO accounts (username, password, email) 
 VALUES ('omar', 'omar', 'info@omarshishani.com');

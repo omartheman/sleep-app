@@ -8,7 +8,7 @@ import './App.css';
 import './App.scss';
 import React from 'react';
 import {Switch, Route} from 'react-router';
-import url from './global_items';
+import {url, c} from './global_items';
 
 const urlGetData = `${url}get-data`;
 const urlAuth = `${url}auth`;
@@ -17,29 +17,30 @@ axios.defaults.withCredentials = true;
 
 
 function App() {
-  const [napStartTimes, setNapStartTimes] = useState([]);
   const [dates, setDates] = useState([]);
   const [napInfo, setNapInfo] = useState([]);
-  useEffect(() => {
-    axios.post(urlGetData, {username: 'omar'})
-    .then(res => {
-      console.log(res);
-      res.data.map(x => {
-        setNapStartTimes(prev => [...prev, x.napStartTime]);
-        setDates(prev => [...prev, x.date]);
-        setNapInfo(prev => [...prev, {
-          date: x.date, 
-          napStartTime: x.napStartTime,
-          napEndTime: x.napEndTime
-        }])
-      })
-    })
-  }, [])
+  // useEffect(() => {
+  //   axios.post(urlGetData, {username: 'omar'})
+  //   .then(res => {
+  //     console.log(res);
+  //     c('component mounted')
+  //     res.data.map(x => {
+  //       setDates(prev => [...prev, x.date]);
+  //       setNapInfo(prev => [...prev, {
+  //         date: x.date, 
+  //         napStartTime: x.napStartTime,
+  //         napEndTime: x.napEndTime
+  //       }]);
+  //       return null;
+  //     })
+  //   })
+  // }, []);
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [loggedInUserError, setLoggedinUserError] = useState(null);
-  const [intervalId, setIntervalId] = useState(null);
+  // const [intervalId, setIntervalId] = useState(null);
   useEffect(() => {
     axios.get(urlAuth) 
     .then(res => { 
@@ -48,6 +49,7 @@ function App() {
     // const intervalId = setInterval(checkLoggedIn, 2000);
     // setIntervalId(intervalId);
   }, [])
+  
   const checkLoggedIn = () => {
     axios.get(urlAuth) 
     .then(res => { 
@@ -133,6 +135,8 @@ function App() {
           <GraphTest
             dates={dates}
             napInfo={napInfo}
+            setDates={setDates}
+            setNapInfo={setNapInfo}
           />
         </>
       )} />

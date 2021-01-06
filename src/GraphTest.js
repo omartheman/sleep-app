@@ -1,17 +1,52 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import './GraphTest.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 import PropTypes from 'prop-types';
-import {c} from './global_items';
+import axios from 'axios';
+import {url, c} from './global_items';
 
+const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
 
 class GraphTest extends React.Component {
+  componentDidMount(){
+    c('props', this.props);
+    const {setDates, setNapInfo, dates} = this.props;
+    axios.post(urlGetData, {username: 'omar'})
+    .then(res => {
+      console.log(res);
+      c('component mounted')
+      if (dates.length === 0){
+        c('if running')
+        res.data.map(x => {
+          setDates(prev => [...prev, x.date]);
+          setNapInfo(prev => [...prev, {
+            date: x.date, 
+            napStartTime: x.napStartTime,
+            napEndTime: x.napEndTime
+          }]);
+          return null;
+        })
+      } else {
+        c('else')
+        setDates([]);
+        setNapInfo([]);
+        res.data.map(x => {
+          setDates(prev => [...prev, x.date]);
+          setNapInfo(prev => [...prev, {
+            date: x.date, 
+            napStartTime: x.napStartTime,
+            napEndTime: x.napEndTime
+          }]);
+          return null;
+        })
+      }
+    })
+  }
   render() {
     const {dates, napInfo} = this.props;
     const dateLabels = dates.filter(x => x).map((x, i) => {
-      if (!x) {return};
       const date = new Date(Date.parse(x));
       return(
         `${date.getMonth()+1}/${date.getDate()}`
@@ -22,10 +57,6 @@ class GraphTest extends React.Component {
     let data;
     if (napInfo.length > 1) {
       data = napInfo.filter(napObj => napObj.napStartTime).map((e, i) => {
-        if (!e.napStartTime || !e.napEndTime) {
-          c('returning early', e);
-          return
-        };
         const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert, Button, Container, Form } from 'react-bootstrap';
 import { Calendar } from 'react-calendar';
 import './AddData.scss';
 import axios from 'axios';
 import 'react-calendar/dist/Calendar.css';
-import {c, getClickedDate, url, varToString} from './global_items';
+import {c, getClickedDate, url} from './global_items';
 
 const urlCheckExistingData = `${url}check-existing-data`;
 const urlUploadData = `${url}upload-data`;
@@ -31,13 +31,22 @@ function AddData (props) {
   const [qualityRating, setQualityRating] = useState('');
   const [clickedDate, setClickedDate] = useState(null);
 
+  useEffect(() => {
+    let d = new Date();
+    setDate(d);
+    checkExistingData(d);
+  }, []);
+
   const checkExistingData = (clickedDate) => {
+    c('running checkexisitn', clickedDate)
     axios.post(urlCheckExistingData, {
       clickedDate: getClickedDate(clickedDate, 'mysql'),
       user: props.loggedInUser
     })
     .then(res => {
       setClickedDate(getClickedDate(clickedDate, 'mysql'));
+      c('axios postin')
+      c('res',res)
       if (res.data.length > 0){
 
         setExistingNapStart(res.data[0].napStartTime ? res.data[0].napStartTime : '');
@@ -136,12 +145,13 @@ function AddData (props) {
             // console.log('New date is: ', value)
             // c('valueonly', value);
             setDate(value);
+            c('date value', value)
             checkExistingData(value);
           }}
         />
         {date && 
           <>
-            <h2>Adding data for <strong>{dateHeading}</strong>: </h2>
+            <h2>Adding data for {getClickedDate(date) === getClickedDate((new Date())) && 'today: '}<strong>{dateHeading}</strong>: </h2>
             {(dateClickedYear < curYear || dateClickedYear > curYear) && 
               <Alert variant="warning">The day you clicked is not in the current year of {curYear}. If you're lost, click the chevron symbols (« or ») at the top of the calendar to scroll between years.</Alert>
             }
