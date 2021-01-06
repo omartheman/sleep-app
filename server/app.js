@@ -146,7 +146,7 @@ app.post(`/sleep/api/upload-data`, (req, res) => {
       c('sql1', sql);
       c('sqlvars', sqlVars)
     } else {
-      // STOP HERE
+      // DATE DOES CONTAIN RECORD
       sql = `
         UPDATE sleep_data
         SET napStartTime = ?, napEndTime = ?, sleepAidItem = ?, sleepAidMg = ?, enterBedTime = ?, lightsOffTime = ?, timeToFallAsleep = ?, numberTimesArousal = ?, arousalDuration = ?, morningWakeTime = ?, exitBedTime = ?, minutesEarlyWoke = ?, qualityRating = ?

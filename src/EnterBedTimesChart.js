@@ -67,22 +67,22 @@ class EnterBedTimesChart extends React.Component {
         `${date.getMonth()+1}/${date.getDate()}`
       )
     });
-    c('datelabelas', dateLabels)
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.napStartTime).map((e, i) => {
-        const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
+      c('enter data write')
+      data = chartInfo.filter(napObj => napObj.enterBedTime).map((e, i) => {
+        //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
+        c('enterbedtime', e.enterBedTime)
+        const dateTime = new Date(`January 1, 2000 ${e.enterBedTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
-        c('returning data')
         return(
-          { x: date, y0: dateTime, y: dateTimeEnd }
+          { x: date, y: dateTime }
         );
       });
-      console.log('data', data)
-      c('data',data)
+      c('data in enterbedtimes',data)
     }
     return (
       <>
@@ -116,8 +116,6 @@ class EnterBedTimesChart extends React.Component {
               />
               <VictoryLine
                 data={data}
-                cornerRadius={{topLeft: 3, topRight: 3, bottomLeft: 3, bottomRight: 3}}
-                style={{ data: {fill: '#964c9d'} }}
                 labels={({ datum }) => {
                   return(duration(new Date(datum._y0), new Date(datum._y)))}
                 }

@@ -52,16 +52,16 @@ function AddData (props) {
         setExistingNapStart(res.data[0].napStartTime ? res.data[0].napStartTime : '');
         setExistingNapEnd(res.data[0].napEndTime ? res.data[0].napEndTime : '');
         setSleepAidItem(res.data[0].sleepAidItem ? res.data[0].sleepAidItem : '');
-        setSleepAidMg(res.data[0].setSleepAidMg ? res.data[0].setSleepAidMg : '');
-        setEnterBedTime(res.data[0].setEnterBedTime ? res.data[0].setEnterBedTime : '');
-        setLightsOffTime(res.data[0].setLightsOffTime ? res.data[0].setLightsOffTime : '');
-        setTimeToFallAsleep(res.data[0].setTimeToFallAsleep ? res.data[0].setTimeToFallAsleep : '');
-        setNumberTimesArousal(res.data[0].setNumberTimesArousal ? res.data[0].setNumberTimesArousal : '');
-        setArousalDuration(res.data[0].setArousalDuration ? res.data[0].setArousalDuration : '');
-        setMorningWakeTime(res.data[0].setMorningWakeTime ? res.data[0].setMorningWakeTime : '');
-        setExitBedTime(res.data[0].setExitBedTime ? res.data[0].setExitBedTime : '');
-        setMinutesEarlyWoke(res.data[0].setMinutesEarlyWoke ? res.data[0].setMinutesEarlyWoke : '');
-        setQualityRating(res.data[0].setQualityRating ? res.data[0].setQualityRating : '');
+        setSleepAidMg(res.data[0].sleepAidMg ? res.data[0].sleepAidMg : '');
+        setEnterBedTime(res.data[0].enterBedTime ? res.data[0].enterBedTime : '');
+        setLightsOffTime(res.data[0].lightsOffTime ? res.data[0].lightsOffTime : '');
+        setTimeToFallAsleep(res.data[0].timeToFallAsleep ? res.data[0].timeToFallAsleep : '');
+        setNumberTimesArousal(res.data[0].numberTimesArousal ? res.data[0].numberTimesArousal : '');
+        setArousalDuration(res.data[0].arousalDuration ? res.data[0].arousalDuration : '');
+        setMorningWakeTime(res.data[0].morningWakeTime ? res.data[0].morningWakeTime : '');
+        setExitBedTime(res.data[0].exitBedTime ? res.data[0].exitBedTime : '');
+        setMinutesEarlyWoke(res.data[0].minutesEarlyWoke ? res.data[0].minutesEarlyWoke : '');
+        setQualityRating(res.data[0].qualityRating ? res.data[0].qualityRating : '');
 
         setExistingDataAlert(true);
       } else {

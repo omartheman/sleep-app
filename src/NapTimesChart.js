@@ -39,7 +39,6 @@ class NapTimesChart extends React.Component {
         `${date.getMonth()+1}/${date.getDate()}`
       )
     });
-    c('datelabelas', dateLabels)
     let xAxisTickValues = [];
     let data;
     if (napInfo.length > 1) {
@@ -48,13 +47,10 @@ class NapTimesChart extends React.Component {
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
-        c('returning data')
         return(
           { x: date, y0: dateTime, y: dateTimeEnd }
         );
       });
-      console.log('data', data)
-      c('data',data)
     }
     return (
       <>
