@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import './EnterBedTimesChart.scss';
+import './MorningWakeTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -9,7 +9,7 @@ import {url, c} from './global_items';
 const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
 
-class EnterBedTimesChart extends React.Component {
+class MorningWakeTimesChart extends React.Component {
   state = {
     dates: [],
     chartInfo: []
@@ -125,7 +125,7 @@ class EnterBedTimesChart extends React.Component {
   }
 }
 
-export default EnterBedTimesChart; 
+export default MorningWakeTimesChart; 
 
 function formatAMPM(date) {
   var hours = date.getHours();
@@ -138,6 +138,6 @@ function formatAMPM(date) {
   return strTime;
 }
 
-EnterBedTimesChart.propTypes = {
+MorningWakeTimesChart.propTypes = {
   dates: PropTypes.array
 }

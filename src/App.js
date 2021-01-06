@@ -10,8 +10,8 @@ import React from 'react';
 import {Switch, Route} from 'react-router';
 import {url, c} from './global_items';
 import EnterBedTimesChart from './EnterBedTimesChart';
+import MorningWakeTimesChart from './MorningWakeTimesChart';
 
-const urlGetData = `${url}get-data`;
 const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;
@@ -20,22 +20,6 @@ axios.defaults.withCredentials = true;
 function App() {
   const [dates, setDates] = useState([]);
   const [napInfo, setNapInfo] = useState([]);
-  // useEffect(() => {
-  //   axios.post(urlGetData, {username: 'omar'})
-  //   .then(res => {
-  //     console.log(res);
-  //     c('component mounted')
-  //     res.data.map(x => {
-  //       setDates(prev => [...prev, x.date]);
-  //       setNapInfo(prev => [...prev, {
-  //         date: x.date, 
-  //         napStartTime: x.napStartTime,
-  //         napEndTime: x.napEndTime
-  //       }]);
-  //       return null;
-  //     })
-  //   })
-  // }, []);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -133,6 +117,7 @@ function App() {
             loggedInUser={loggedInUser}
             onLogout={this.handleLogout}
           /> */}
+          <MorningWakeTimesChart />
           <EnterBedTimesChart />
           <NapTimesChart
             dates={dates}
