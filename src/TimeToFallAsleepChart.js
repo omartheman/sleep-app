@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {url, c} from './global_items';
@@ -32,25 +32,28 @@ class TimeToFallAsleepChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      c('chartinfo timetosleep', chartInfo)
-      data = chartInfo.filter(napObj => napObj.timeToFallAsleep).map((e, i) => {
+      data = chartInfo.filter(napObj => napObj.timeToFallAsleep).map((e, i, arr) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
+        const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
+        const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
+        const dateDiff = lastDate - firstDate;
+        if (dateDiff < 15) {
+          dateLabels = [...dateLabels, dateLabel];
+        } else {
+          if (date % 2 === 0){
+            dateLabels = [...dateLabels, null]
+          } else {
+            dateLabels = [...dateLabels, dateLabel];
+          }
+        }
         return(
-          { x: date, y: e.timeToFallAsleep }
+          { x: date, y: e.timeToFallAsleep}
         );
       });
-      // dateLabels = e.date.filter(x => x).map((x, i) => {
-      //   c('datelabels tosleep', date)
-      //   return(
-      //     `${date.getMonth()+1}/${date.getDate()}`
-      //   )
-      // });
-      c('data in timetosleep', data)
     }
     return (
       <>
@@ -61,10 +64,12 @@ class TimeToFallAsleepChart extends React.Component {
               padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
               scale={{y:'number'}}
               domainPadding={{ x: 20, y: 20 }}
+              
             >
               <VictoryAxis
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
+                tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
                 />
               <VictoryAxis
                 style={{grid:{stroke:'black', strokeDasharray: '7'}}}
@@ -73,6 +78,29 @@ class TimeToFallAsleepChart extends React.Component {
               />
               <VictoryBar
                 data={data}
+                barWidth={() => {
+                  let firstDate;
+                  let lastDate;
+                  let dateDiff;
+                  if (data) {
+                    firstDate = data[0].x; 
+                    lastDate = data[data.length - 1].x; 
+                    dateDiff = lastDate - firstDate;
+                  }
+                  return(
+                    dateDiff < 10 ? 18
+                    : dateDiff < 20 ? 8
+                    : 4 
+                  );
+                }}
+                labels={({ datum }) => {
+                  return(`${datum.y} min`)
+                }}
+                labelComponent={
+                  <VictoryTooltip
+                    flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
+                  />
+                }
               />
             </VictoryChart>
           </div>
@@ -85,4 +113,14 @@ export default TimeToFallAsleepChart;
 
 TimeToFallAsleepChart.propTypes = {
   dates: PropTypes.array
+}
+           
+function duration(start) {
+  c('start',start)
+  var h1 = start.getHours() - 16;
+  var m1 = start.getMinutes();
+  var time = (h1 + m1/60);
+  var timeHours = time - time%1;
+  var timeMinutes = Math.round(time%1 * 60);
+  return(`${timeHours}h, ${timeMinutes}m`)
 }

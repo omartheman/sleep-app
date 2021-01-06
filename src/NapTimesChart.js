@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import './NapTimesChart.scss';
-import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {url, c} from './global_items';
@@ -34,14 +34,25 @@ class NapTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.napStartTime).map((e, i) => {
+      data = chartInfo.filter(napObj => napObj.napStartTime).map((e, i, arr) => {
         const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
+        const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
+        const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
+        const dateDiff = lastDate - firstDate;
+        if (dateDiff < 15) {
+          dateLabels = [...dateLabels, dateLabel];
+        } else {
+          if (date % 2 === 0){
+            dateLabels = [...dateLabels, null]
+          } else {
+            dateLabels = [...dateLabels, dateLabel];
+          }
+        }
         return(
           { x: date, y0: dateTime, y: dateTimeEnd }
         );
@@ -58,26 +69,32 @@ class NapTimesChart extends React.Component {
             domainPadding={{ x: 20, y: 20 }}
           >
             <VictoryAxis
-              // tickValues specifies both the number of ticks and where
-              // they are placed on the axis
-              // tickValues={[1, 2, 3, 4, 5]}
               tickValues={xAxisTickValues}
-              // tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4"]}
               tickFormat={dateLabels}
+              tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
               />
             <VictoryAxis
               style={{grid:{stroke:'black', strokeDasharray: '7'}}}
               dependentAxis
               tickFormat={(y) => formatAMPM(y)}
-              // tickFormat specifies how ticks should be displayed
-              // tickFormat={(y) => {
-              //   return(
-              //     `${y-y%1}:${Math.round(y%1*10)/10*60}PM`
-              //   );
-              // }}
             />
             <VictoryBar
               data={data}
+              barWidth={() => {
+                let firstDate;
+                let lastDate;
+                let dateDiff;
+                if (data) {
+                  firstDate = data[0].barWidthDate; 
+                  lastDate = data[data.length - 1].barWidthDate; 
+                  dateDiff = lastDate - firstDate;
+                }
+                return(
+                  dateDiff < 10 ? 18
+                  : dateDiff < 20 ? 8
+                  : 4 
+                );
+              }}
               cornerRadius={{topLeft: 3, topRight: 3, bottomLeft: 3, bottomRight: 3}}
               style={{ data: {fill: '#964c9d'} }}
               labels={({ datum }) => {

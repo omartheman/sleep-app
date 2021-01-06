@@ -20,7 +20,6 @@ const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;
 
-
 function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
