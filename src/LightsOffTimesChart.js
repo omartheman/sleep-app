@@ -34,13 +34,8 @@ class LightsOffTimesChart extends React.Component {
     })
   }
   render() {
-    const {dates, chartInfo} = this.state;
-    const dateLabels = dates.filter(x => x).map((x, i) => {
-      const date = new Date(Date.parse(x));
-      return(
-        `${date.getMonth()+1}/${date.getDate()}`
-      )
-    });
+    const {chartInfo} = this.state;
+    let dateLabels = [];
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
@@ -49,6 +44,9 @@ class LightsOffTimesChart extends React.Component {
         const dateTime = new Date(`January 1, 2000 ${e.lightsOffTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
+        const dateLabelPrimer = new Date(Date.parse(e.date));
+        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
+        dateLabels = [...dateLabels, dateLabel];
         return(
           { x: date, y: dateTime }
         );

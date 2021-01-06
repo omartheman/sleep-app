@@ -34,28 +34,29 @@ class TimeToFallAsleepChart extends React.Component {
     })
   }
   render() {
-    const {dates, chartInfo} = this.state;
-    const dateLabels = dates.filter(x => x).map((x, i) => {
-      const date = new Date(Date.parse(x));
-      c('datelabels tosleep', date)
-      return(
-        `${date.getMonth()+1}/${date.getDate()}`
-      )
-    });
+    const {chartInfo} = this.state;
+    let dateLabels = [];
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
       c('chartinfo timetosleep', chartInfo)
       data = chartInfo.filter(napObj => napObj.timeToFallAsleep).map((e, i) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
-        const dateTime = new Date(`January 1, 2000 ${e.timeToFallAsleep}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
-        c('date timetosleep', xAxisTickValues)
+        const dateLabelPrimer = new Date(Date.parse(e.date));
+        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
+        dateLabels = [...dateLabels, dateLabel];
         return(
           { x: date, y: e.timeToFallAsleep }
         );
       });
+      // dateLabels = e.date.filter(x => x).map((x, i) => {
+      //   c('datelabels tosleep', date)
+      //   return(
+      //     `${date.getMonth()+1}/${date.getDate()}`
+      //   )
+      // });
       c('data in timetosleep', data)
     }
     return (

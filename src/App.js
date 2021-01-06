@@ -128,7 +128,6 @@ function App() {
             <MorningWakeTimesChart />
             <EnterBedTimesChart />
             <NapTimesChart
-              dates={dates}
               napInfo={napInfo}
               setDates={setDates}
               setNapInfo={setNapInfo}
