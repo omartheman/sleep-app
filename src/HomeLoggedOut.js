@@ -1,6 +1,7 @@
 import { Container } from 'react-bootstrap';
 import './HomeLoggedOut.scss';
 import svgLandingPageSection1 from './landing-background-opt.svg';
+import backgroundTop from './landing-background-opt.svg';
 
 function HomeLoggedOut() {
   return(
@@ -10,9 +11,9 @@ function HomeLoggedOut() {
           <h1>Welcome to Sleep App</h1>
           <div>Improve your sleep.</div>
           <div>Change your life.</div>
-          <img className="home-logged-out-svg-section-1" src={svgLandingPageSection1} />
         </div>
         <div className="home-logged-out-section-2">
+          <h2>How It Works</h2>
         </div>
       </Container>
     </>

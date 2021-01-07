@@ -6,10 +6,10 @@
 }
 .home-logged-out-section-1 {
   align-items: center;
+  justify-content: center;  
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: calc(100vh - 100px);
   div {
     font-size: 30px;
@@ -34,16 +34,10 @@
     padding-top: 20px;
   }
 }
-.home-logged-out-svg-section-1 {
-  // height: 100vh;
-  @media (min-aspect-ratio: 16 / 9) {
-      width: 100%;
-      height: auto;
-  }
-  @media (max-aspect-ratio: 19 / 9) {
-      width: auto;
-      height: 100%;
-  }
-  position: fixed;
-  z-index: -1;
+body{
+  background-image: url(./landing-background-opt.svg);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
 }
