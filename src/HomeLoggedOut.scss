@@ -34,10 +34,20 @@
     padding-top: 20px;
   }
 }
-body{
+.home-logged-out-section-1-background {
+  position: fixed;
   background-image: url(./landing-background-opt.svg);
   height: 100%;
+  width: 100vw;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; 
+  z-index: -1;
 }
+// body{
+//   background-image: url(./landing-background-opt.svg);
+//   height: 100%;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover; 
+// }

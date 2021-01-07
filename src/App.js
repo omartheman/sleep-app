@@ -17,6 +17,8 @@ import { Container } from 'react-bootstrap';
 import TimeToFallAsleepChart from './TimeToFallAsleepChart';
 import HomeLoggedOut from './HomeLoggedOut';
 
+import backgroundTop from './landing-background-opt.svg';
+
 const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;
@@ -104,6 +106,10 @@ function App() {
     <Switch>
       <Route path="/sleep/home-logged-out" render={() => (
         <>
+          
+          <div className="home-logged-out-section-1-background"
+          style={{backgroundImage: `url(${backgroundTop})`}}
+          ></div>
           {navbar}
           <HomeLoggedOut />
         </>
