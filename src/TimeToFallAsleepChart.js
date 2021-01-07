@@ -115,12 +115,3 @@ TimeToFallAsleepChart.propTypes = {
   dates: PropTypes.array
 }
            
-function duration(start) {
-  c('start',start)
-  var h1 = start.getHours() - 16;
-  var m1 = start.getMinutes();
-  var time = (h1 + m1/60);
-  var timeHours = time - time%1;
-  var timeMinutes = Math.round(time%1 * 60);
-  return(`${timeHours}h, ${timeMinutes}m`)
-}

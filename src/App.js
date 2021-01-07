@@ -15,6 +15,7 @@ import LightsOffTimesChart from './LightsOffTimesChart';
 import ExitBedTimesChart from './ExitBedTimesChart';
 import { Container } from 'react-bootstrap';
 import TimeToFallAsleepChart from './TimeToFallAsleepChart';
+import HomeLoggedOut from './HomeLoggedOut';
 
 const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
@@ -101,6 +102,12 @@ function App() {
   ;
   return(
     <Switch>
+      <Route path="/sleep/home-logged-out" render={() => (
+        <>
+          {navbar}
+          <HomeLoggedOut />
+        </>
+      )} />
       <Route path="/sleep/add-data" render={() => (
         <>
           {navbar}

@@ -1,0 +1,49 @@
+
+.home-logged-out-container {
+  h1 {
+    text-align: center;
+  }
+}
+.home-logged-out-section-1 {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 100px);
+  div {
+    font-size: 30px;
+    font-weight: 600;
+  }
+  div:first-of-type {
+    padding-top: 20px;
+  }
+}
+.home-logged-out-section-2 {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 100px);
+  div {
+    font-size: 30px;
+    font-weight: 600;
+  }
+  div:first-of-type {
+    padding-top: 20px;
+  }
+}
+.home-logged-out-svg-section-1 {
+  // height: 100vh;
+  @media (min-aspect-ratio: 16 / 9) {
+      width: 100%;
+      height: auto;
+  }
+  @media (max-aspect-ratio: 19 / 9) {
+      width: auto;
+      height: 100%;
+  }
+  position: fixed;
+  z-index: -1;
+}

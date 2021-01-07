@@ -16,7 +16,7 @@ function getClickedDate(date, type){
   weekday[5] = "Friday";
   weekday[6] = "Saturday";
   
-  var month = new Array();
+  var month = [];
   month[0] = "Jan";
   month[1] = "Feb";
   month[2] = "Mar";

@@ -58,6 +58,8 @@ const NavbarContainer = (props) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       {/* <Navbar.Collapse id="basic-navbar-nav"> */}
         <Nav.Link as={Link} to="/sleep/">Home</Nav.Link>
+        <Nav.Link as={Link} to="/sleep/home-logged-out">HomeLoggedOut</Nav.Link>
+
         <Nav.Link as={Link} to="/sleep/add-data/">Add Data</Nav.Link>
         <Nav.Link className={loggedInUser === null || loggedInUser === '' ? "hidden" : null} as={Link} to="/recipeapp/myrecipes">Conditional Link</Nav.Link>
         <NavDropdown 
