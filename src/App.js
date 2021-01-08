@@ -144,9 +144,7 @@ function App() {
             <LightsOffTimesChart />
             <MorningWakeTimesChart />
             <EnterBedTimesChart />
-            <NapTimesChart
-              loggedInUser={loggedInUser}
-            />
+            <NapTimesChart />
           </Container>
         </>
       )} />
