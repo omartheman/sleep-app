@@ -105,7 +105,7 @@ class CreateAccount extends React.Component{
     console.log('this.state', this.state)
     return(
       <>
-        {this.state.redirect ? <Redirect to="/recipeapp/create-account-success" /> : null}
+        {this.state.redirect ? <Redirect to="/sleep/create-account-success" /> : null}
         <Container className="create-account-form-container">
           <h1>Create Account</h1>
           <Form action="auth" onSubmit={this.handleCreateAccSubmit}>

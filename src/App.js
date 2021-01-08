@@ -17,6 +17,7 @@ import { Container } from 'react-bootstrap';
 import TimeToFallAsleepChart from './TimeToFallAsleepChart';
 import HomeLoggedOut from './HomeLoggedOut';
 import CreateAccount from './CreateAccount';
+import CreateAccountSuccess from './CreateAccountSuccess';
 
 import backgroundTop from './landing-background-opt.svg';
 
@@ -105,6 +106,14 @@ function App() {
   ;
   return(
     <Switch>
+      <Route path="/sleep/create-account-success" render={() => (
+        <>
+          {navbar}
+          <CreateAccountSuccess 
+            loggedInUser={loggedInUser}
+          />
+        </>
+      )} />
       <Route path="/sleep/create-account" render={() => (
         <>
           {navbar}
@@ -123,10 +132,7 @@ function App() {
       <Route path="/sleep/add-data" render={() => (
         <>
           {navbar}
-          <AddData
-            loggedInUser={loggedInUser}
-            onLogout={handleLogout}
-          />
+          <AddData />
         </>
       )} />
       <Route path="/sleep" render={() => (
