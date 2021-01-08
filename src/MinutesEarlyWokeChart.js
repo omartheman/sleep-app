@@ -31,7 +31,7 @@ class MinutesEarlyWokeChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.minutesEarlyWoke).map((e, i, arr) => {
+      data = chartInfo.filter(napObj => napObj.minutesEarlyWoke || napObj.minutesEarlyWoke === 0).map((e, i, arr) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
@@ -43,6 +43,14 @@ class MinutesEarlyWokeChart extends React.Component {
         if (dateDiff < 15) {
           dateLabels = [...dateLabels, dateLabel];
         } else {
+          //CHECK IF THERE IS AN ODD NUMBER OF DATA. IF YES, MAKE FIRST DATE VISIBLE
+          if (arr.length % 2 !== 0){
+            if (date % 2 === 0){
+              dateLabels = [...dateLabels, dateLabel];
+            } else {
+              dateLabels = [...dateLabels, null]
+            }
+          }
           if (date % 2 === 0){
             dateLabels = [...dateLabels, null]
           } else {
@@ -94,7 +102,7 @@ class MinutesEarlyWokeChart extends React.Component {
                   );
                 }}
                 labels={({ datum }) => {
-                  c('minearl', datum.y)
+                  c('minearl', datum)
                   return(`${datum.y} min`)
                 }}
                 labelComponent={
