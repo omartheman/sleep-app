@@ -16,6 +16,7 @@ import ExitBedTimesChart from './ExitBedTimesChart';
 import { Container } from 'react-bootstrap';
 import TimeToFallAsleepChart from './TimeToFallAsleepChart';
 import HomeLoggedOut from './HomeLoggedOut';
+import ShootingStarTest from './ShootingStarTest';
 
 import backgroundTop from './landing-background-opt.svg';
 
@@ -104,6 +105,11 @@ function App() {
   ;
   return(
     <Switch>
+      <Route path="/sleep/shooting-star-test" render={() => (
+        <>
+          <ShootingStarTest/>
+        </>
+      )} />
       <Route path="/sleep/home-logged-out" render={() => (
         <>
           
