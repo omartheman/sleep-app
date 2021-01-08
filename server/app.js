@@ -59,10 +59,45 @@ app.use(cors({
 }));// enable set cookie
 
 
+app.post(`/sleep/api/check-existing-usernames`, (req, res) => {
+  console.log('Got a POST request to /check-existing-usernames.')
+  console.log(req.body.username)
+  const sql = `SELECT * FROM accounts WHERE username = ?;`;
+  connection.query(sql, [req.body.username], (err, result) => {
+    if (err) throw err;
+    console.log('matched usernames: ',result);
+    res.send(result);
+  });
+});
+
+app.post(`/sleep/api/create-account`, (req, res) => {
+  console.log('Create account post working.')
+  res.send('Got a POST request to create account.');
+  var sql = `INSERT INTO accounts (firstName, lastName, email, username, password)
+    VALUES(
+      ?,
+      ?,
+      ?,
+      ?,
+      ?
+  );`;
+  connection.query(sql, [
+    req.body.firstName, 
+    req.body.lastName,
+    req.body.email,
+    req.body.username,
+    req.body.password
+  ], function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    console.log(result.affectedRows + " record(s) updated");
+  });
+});
+
 app.get(`/sleep/api/logout`, function(req, res){
   req.session.loggedin = false;
   res.send('Logged out.')
-})
+});
 
 app.get(`/sleep/api/auth`, function(req, res){
   if (req.session.loggedin) {

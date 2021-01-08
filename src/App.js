@@ -16,7 +16,7 @@ import ExitBedTimesChart from './ExitBedTimesChart';
 import { Container } from 'react-bootstrap';
 import TimeToFallAsleepChart from './TimeToFallAsleepChart';
 import HomeLoggedOut from './HomeLoggedOut';
-import ShootingStarTest from './ShootingStarTest';
+import CreateAccount from './CreateAccount';
 
 import backgroundTop from './landing-background-opt.svg';
 
@@ -105,14 +105,14 @@ function App() {
   ;
   return(
     <Switch>
-      <Route path="/sleep/shooting-star-test" render={() => (
+      <Route path="/sleep/create-account" render={() => (
         <>
-          <ShootingStarTest/>
+          {navbar}
+          <CreateAccount />
         </>
       )} />
       <Route path="/sleep/home-logged-out" render={() => (
         <>
-          
           <div className="home-logged-out-section-1-background"
           style={{backgroundImage: `url(${backgroundTop})`}}
           ></div>
@@ -132,10 +132,6 @@ function App() {
       <Route path="/sleep" render={() => (
         <>
           {navbar}
-          {/* <Home
-            loggedInUser={loggedInUser}
-            onLogout={this.handleLogout}
-          /> */}
           <Container>
             <TimeToFallAsleepChart />
             <ExitBedTimesChart />

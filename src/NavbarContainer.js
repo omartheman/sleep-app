@@ -85,7 +85,7 @@ const NavbarContainer = (props) => {
                 s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z"/>
             </svg>
           </div>
-          <Nav.Link  className="navbar-create-acc-button" as={Link} to="/recipeapp/create-account">Create Account</Nav.Link>
+          <Nav.Link  className="navbar-create-acc-button" as={Link} to="/sleep/create-account">Create Account</Nav.Link>
         </div>
       {/* </Navbar.Collapse> */}
     </Navbar>
