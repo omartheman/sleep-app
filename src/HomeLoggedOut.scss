@@ -1,32 +1,17 @@
-
+$homeSectionHeight: 120vh;
 .home-logged-out-container {
   h1 {
     text-align: center;
   }
 }
-.home-logged-out-section-1 {
-  align-items: center;
-  justify-content: center;  
-  color: white;
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh);
-  margin-bottom: 300px;
-  div {
-    font-size: 30px;
-    font-weight: 600;
-  }
-  div:first-of-type {
-    padding-top: 20px;
-  }
-}
-.home-logged-out-section-2 {
+.home-logged-out-section {
   color: white;
   display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  height: calc(100vh);
+  height: $homeSectionHeight;
+  text-shadow: 2px 2px 2px #000, -2px -2px 2px #000, 2px -2px 2px #000, -2px 2px 2px #000;
   div {
     font-size: 30px;
     font-weight: 600;
@@ -38,6 +23,25 @@
   h2 {
     font-size: 2.5rem;
   }
+}
+.home-logged-out-section-1 {
+  height: 100vh;
+  margin-bottom: 300px;
+}
+.home-logged-out-section-2 {
+  height: $homeSectionHeight;
+}
+.home-logged-out-section-3 {
+  flex-direction: row;
+}
+.home-logged-out-section-background {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  height: $homeSectionHeight;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
 }
 .home-logged-out-section-1-background {
   background-image: url(./landing-background-opt.svg);
@@ -58,32 +62,37 @@
   z-index: -1;
   stroke-dasharray: 900;
 }
+.home-logged-out-section-text {
+  border-radius: 10px;
+  padding: 20px;
+}
 .home-logged-out-section-2-background {
-  background-image: url(./images/sleeping-girl.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; 
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  z-index: -1;
+  background-image: url(./images/sleeping-girl-dark.jpg);
+}
+.home-logged-out-section-3-background {
+  background-image: url(./images/earth-night.jpg);
+}
+.home-logged-out-section-3-button-container {
+  display: flex;
+    justify-content: space-evenly;
+  button {
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+  }
+  width: 40%;
 }
 .home-logged-out-section-2-graphs {
-  
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  img {
+    padding: 20px;
+    height: 300px; 
+  }
 }
 @keyframes shooting_star {
-  from {
-    // top: 500px;
-    // left: -10px;
-    // transform: translate3d(0px, 10px, 0px);
-  }
   to {
-    
     transform: translate(-15000px, 15000px);
-  // stroke-dasharray : 0;
-  // stroke-dasharray: 300;
-  // transform: translate3d(500px, 10px, 0px);
-    // top: -10px; 
-    // left: 700px;
   }
 }
