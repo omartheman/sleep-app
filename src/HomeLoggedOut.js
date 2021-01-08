@@ -1,11 +1,8 @@
 import { Button, Container } from 'react-bootstrap';
 import './HomeLoggedOut.scss';
-import svgLandingPageSection1 from './landing-background-opt.svg';
-import backgroundTop from './landing-background-opt.svg';
-import sleepingGirlImg from './images/sleeping-girl.jpg';
-import shootingStar from './images/shooting-star-opt.svg';
 import graphScreenshot1 from './images/time-out-of-bed-screenshot-square.png';
 import graphScreenshot2 from './images/time-to-fall-asleep-screenshot-square.png';
+import { Link } from 'react-router-dom';
 
 function HomeLoggedOut() {
   return(
@@ -56,7 +53,7 @@ function HomeLoggedOut() {
           <h2>Better life.</h2>
           <h2>Starting tonight.</h2>
           <div className="home-logged-out-section-3-button-container">
-            <Button>Create<br/>Account</Button>
+            <Button as={Link} to={'/sleep/create-account'}>Create<br/>Account</Button>
             <Button>Log In</Button>
           </div>
         </div>
