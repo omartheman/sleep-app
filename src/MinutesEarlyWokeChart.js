@@ -6,7 +6,7 @@ import {url, c} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
-class TimeToFallAsleepChart extends React.Component {
+class MinutesEarlyWokeChart extends React.Component {
   state = {
     chartInfo: []
   }
@@ -18,7 +18,7 @@ class TimeToFallAsleepChart extends React.Component {
       res.data.map(x => {
         newChartInfo = [...newChartInfo, {
           date: x.date,
-          timeToFallAsleep: x.timeToFallAsleep
+          minutesEarlyWoke: x.minutesEarlyWoke
         }];
         return null;
       })
@@ -31,7 +31,7 @@ class TimeToFallAsleepChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.timeToFallAsleep).map((e, i, arr) => {
+      data = chartInfo.filter(napObj => napObj.minutesEarlyWoke).map((e, i, arr) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
@@ -49,15 +49,16 @@ class TimeToFallAsleepChart extends React.Component {
             dateLabels = [...dateLabels, dateLabel];
           }
         }
+        c('e.minearly', e.minutesEarlyWoke)
         return(
-          { x: date, y: e.timeToFallAsleep}
+          { x: date, y: e.minutesEarlyWoke}
         );
       });
     }
     return (
       <>
           <div className="victory-chart-1-container">
-            <h2>How Long To Fall Asleep</h2>
+            <h2>Minutes Early Awake</h2>
             <VictoryChart
               theme={VictoryTheme.material}
               padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
@@ -93,6 +94,7 @@ class TimeToFallAsleepChart extends React.Component {
                   );
                 }}
                 labels={({ datum }) => {
+                  c('minearl', datum.y)
                   return(`${datum.y} min`)
                 }}
                 labelComponent={
@@ -108,9 +110,9 @@ class TimeToFallAsleepChart extends React.Component {
   }
 }
 
-export default TimeToFallAsleepChart; 
+export default MinutesEarlyWokeChart; 
 
-TimeToFallAsleepChart.propTypes = {
+MinutesEarlyWokeChart.propTypes = {
   dates: PropTypes.array
 }
            

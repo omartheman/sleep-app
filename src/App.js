@@ -18,8 +18,8 @@ import TimeToFallAsleepChart from './TimeToFallAsleepChart';
 import HomeLoggedOut from './HomeLoggedOut';
 import CreateAccount from './CreateAccount';
 import CreateAccountSuccess from './CreateAccountSuccess';
-
 import backgroundTop from './landing-background-opt.svg';
+import MinutesEarlyWokeChart from './MinutesEarlyWokeChart';
 
 const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
@@ -132,13 +132,16 @@ function App() {
       <Route path="/sleep/add-data" render={() => (
         <>
           {navbar}
-          <AddData />
+          <AddData 
+            loggedInUser={loggedInUser}
+          />
         </>
       )} />
       <Route path="/sleep" render={() => (
         <>
           {navbar}
           <Container>
+            <MinutesEarlyWokeChart />
             <TimeToFallAsleepChart />
             <ExitBedTimesChart />
             <LightsOffTimesChart />

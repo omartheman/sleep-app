@@ -38,15 +38,12 @@ function AddData (props) {
   }, []);
 
   const checkExistingData = (clickedDate) => {
-    c('running checkexisitn', clickedDate)
     axios.post(urlCheckExistingData, {
       clickedDate: getClickedDate(clickedDate, 'mysql'),
       user: props.loggedInUser
     })
     .then(res => {
       setClickedDate(getClickedDate(clickedDate, 'mysql'));
-      c('axios postin')
-      c('res',res)
       if (res.data.length > 0){
 
         setExistingNapStart(res.data[0].napStartTime ? res.data[0].napStartTime : '');
@@ -75,6 +72,26 @@ function AddData (props) {
   } 
   const handleDataSubmit = () => {
     c('clickedDate', clickedDate)
+    c('upload data', 
+      {
+        //Ternarys were set to not give a value for SQL when there is none. Helps with creating graphs to skip data.
+        user: props.loggedInUser,
+        date: clickedDate === '' ? null : clickedDate,
+        napStartTime: existingNapStart === '' ? null : existingNapStart,
+        napEndTime: existingNapEnd === '' ? null : existingNapEnd,
+        sleepAidItem: sleepAidItem === '' ? null : sleepAidItem,
+        sleepAidMg: sleepAidMg === '' ? null : sleepAidMg,
+        enterBedTime: enterBedTime === '' ? null : enterBedTime,
+        lightsOffTime: lightsOffTime === '' ? null : lightsOffTime,
+        timeToFallAsleep: timeToFallAsleep === '' ? null : timeToFallAsleep,
+        numberTimesArousal: numberTimesArousal === '' ? null : numberTimesArousal,
+        arousalDuration: arousalDuration === '' ? null : arousalDuration,
+        morningWakeTime: morningWakeTime === '' ? null : morningWakeTime,
+        exitBedTime: exitBedTime === '' ? null : exitBedTime,
+        minutesEarlyWoke: minutesEarlyWoke === '' ? null : minutesEarlyWoke,
+        qualityRating: qualityRating === '' ? null : qualityRating
+      }
+    )
     axios.post(urlUploadData, {
       //Ternarys were set to not give a value for SQL when there is none. Helps with creating graphs to skip data.
       user: props.loggedInUser,
@@ -116,6 +133,7 @@ function AddData (props) {
     } else if (e.target.getAttribute('id_val') === 'lights-off-time'){
       setLightsOffTime(e.target.value);
     } else if (e.target.getAttribute('id_val') === 'time-to-fall-asleep'){
+      c('timetosleep', typeof e.target.value)
       setTimeToFallAsleep(e.target.value);
     } else if (e.target.getAttribute('id_val') === 'number-times-arousal'){
       setNumberTimesArousal(e.target.value);
@@ -126,6 +144,7 @@ function AddData (props) {
     } else if (e.target.getAttribute('id_val') === 'exit-bed-time'){
       setExitBedTime(e.target.value);
     } else if (e.target.getAttribute('id_val') === 'minutes-early-woke'){
+      c('minutesEarlyWoke', typeof e.target.value)
       setMinutesEarlyWoke(e.target.value);
     } else if (e.target.getAttribute('id_val') === 'quality-rating'){
       setQualityRating(e.target.value);

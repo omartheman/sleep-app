@@ -25,6 +25,9 @@ SELECT * FROM sleep_data WHERE user = 'omar' AND date = '2021-1-1';
 
 
 ALTER TABLE sleep_data CHANGE COLUMN 
+  minutesEarlyWoke minutesEarlyWoke int(50);
+
+ALTER TABLE sleep_data CHANGE COLUMN 
   sleepAidItem sleepAidItem VARCHAR(255) AFTER napEndTime;
 
 ALTER TABLE sleep_data CHANGE COLUMN timeToFallAsleep timeToFallAsleep INT(50) AFTER lightsOffTime;
