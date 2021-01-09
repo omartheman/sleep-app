@@ -35,9 +35,14 @@ function AddData (props) {
     let d = new Date();
     setDate(d);
     checkExistingData(d);
-  }, []);
+  }, [props]);
 
   const checkExistingData = (clickedDate) => {
+    c('checking existing data')
+    c('user',props.loggedInUser)
+    c('props', props)
+    if (!props.loggedInUser){return};
+    c('didnt return')
     axios.post(urlCheckExistingData, {
       clickedDate: getClickedDate(clickedDate, 'mysql'),
       user: props.loggedInUser
@@ -71,27 +76,6 @@ function AddData (props) {
     })
   } 
   const handleDataSubmit = () => {
-    c('clickedDate', clickedDate)
-    c('upload data', 
-      {
-        //Ternarys were set to not give a value for SQL when there is none. Helps with creating graphs to skip data.
-        user: props.loggedInUser,
-        date: clickedDate === '' ? null : clickedDate,
-        napStartTime: existingNapStart === '' ? null : existingNapStart,
-        napEndTime: existingNapEnd === '' ? null : existingNapEnd,
-        sleepAidItem: sleepAidItem === '' ? null : sleepAidItem,
-        sleepAidMg: sleepAidMg === '' ? null : sleepAidMg,
-        enterBedTime: enterBedTime === '' ? null : enterBedTime,
-        lightsOffTime: lightsOffTime === '' ? null : lightsOffTime,
-        timeToFallAsleep: timeToFallAsleep === '' ? null : timeToFallAsleep,
-        numberTimesArousal: numberTimesArousal === '' ? null : numberTimesArousal,
-        arousalDuration: arousalDuration === '' ? null : arousalDuration,
-        morningWakeTime: morningWakeTime === '' ? null : morningWakeTime,
-        exitBedTime: exitBedTime === '' ? null : exitBedTime,
-        minutesEarlyWoke: minutesEarlyWoke === '' ? null : minutesEarlyWoke,
-        qualityRating: qualityRating === '' ? null : qualityRating
-      }
-    )
     axios.post(urlUploadData, {
       //Ternarys were set to not give a value for SQL when there is none. Helps with creating graphs to skip data.
       user: props.loggedInUser,

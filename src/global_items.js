@@ -1,7 +1,6 @@
-const url = 
-'http://localhost:4000/sleep/api/';
+const url = 'http://localhost:4000/sleep/api/';
 /*
-'https://omarshishani.com/sleep/api/';
+const url = 'https://omarshishani.com/sleep/api/';
 */
 
 function c (msg, input) {return(console.log(`${msg}: `, input))};

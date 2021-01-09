@@ -1,8 +1,6 @@
-const mode =
-
-"developmentOmar";
+const mode = "developmentOmar";
 /*
-"productionNatalie";
+const mode = "productionNatalie";
 */
 
 const express = require('express');
@@ -204,10 +202,15 @@ app.get(`/sleep/api/`, (req, res) => {
   console.log('Its working!Omar')
 })
 // ===============================================================
+// LINK REACT ROUTER AND EXPRESS APP
+// Handles any requests that don't match the ones above
+app.get('/sleep*', (req, res) =>{
+  res.sendFile(path.join(__dirname + '/../sleep/index.html'));
+});
 
 const path = require('path');
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, '../recipeapp')));
+app.use(express.static(path.join(__dirname, '../sleep')));
 
 const port = process.env.PORT || 4000 || 27016 || 27015 || 27017;
 
