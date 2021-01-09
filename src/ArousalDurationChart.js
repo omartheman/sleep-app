@@ -29,10 +29,11 @@ class ArousalDurationChart extends React.Component {
     const {chartInfo} = this.state;
     let dateLabels = [];
     let xAxisTickValues = [];
-    let data;
+    let data = [];
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.arousalDuration || napObj.arousalDuration === 0).map((e, i, arr) => {
+      data =  chartInfo.filter(napObj => napObj.arousalDuration).map((e, i, arr) => {
         const durations = e.arousalDuration.match(/\d+/g).map(x => Number(x));
+        c('durations',durations)
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
@@ -49,11 +50,75 @@ class ArousalDurationChart extends React.Component {
             dateLabels = [...dateLabels, dateLabel];
           }
         }
-        return(
-          { x: date, y: e.arousalDuration, dateLabel: dateLabel}
-        );
+        let durationData = [];
+        for (let i = 0; i < durations.length; i++) {
+          durationData = [...durationData, 
+            { x: date, y: durations[i], dateLabel: dateLabel}
+          ];
+        }
+        return(durationData);
       });
     }
+    //SORT DATA INTO AROUSAL1 AROUSAL2 AROUSAL3... 
+    //FIRST FILL AROUSALS WITH CORRECT # EMPTY ARRAYS
+    //then do a forEach, and you need  
+    const arousal1 = [];
+    const arousal2 = [];
+    const arousal3 = [];
+    const arousal4 = [];
+    const arousals = [];
+    const bars = [];
+    for (let i = 0; i < data.length; i++){
+      arousals.push([]);
+    }
+    data.forEach((x, i) => {
+      c('x', x)
+      for (let i = 0; i < data.length; i++){
+        if (x[i]){
+          arousals[i].push(x[i]);
+        }
+      }
+    })
+    let firstDate;
+    let lastDate;
+    if (arousals[0]) {
+      firstDate = arousals[0][0].x;
+      lastDate = arousals[0][arousals[0].length - 1].x;
+    }
+    c('arousals', arousals)
+
+    const createBars = () => {
+      for (let i = 0; i < data.length; i++){
+        c('for', i)
+        bars.push(
+          <VictoryBar
+            data={arousals[i]}
+            barWidth={() => {
+              let dateDiff;
+              if (data) {
+                dateDiff = lastDate - firstDate;
+              }
+              return(
+                dateDiff < 10 ? 18
+                : dateDiff < 20 ? 8
+                : 4 
+              );
+            }}
+            labels={({ datum }) => {
+              return(`${datum.dateLabel} \n${datum.y} min`);
+            }}
+            labelComponent={
+              <VictoryTooltip
+                flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
+              />
+            }
+          />
+        )
+      }
+    }
+    createBars();
+
+    data.forEach((x, i) => c(`data foreach ${i}`, x))
     return (
       <>
           <div className="victory-chart-1-container">
@@ -76,32 +141,7 @@ class ArousalDurationChart extends React.Component {
                 tickFormat={(y) => `${y} min` }
               />
               <VictoryStack>
-                <VictoryBar
-                  data={data}
-                  barWidth={() => {
-                    let firstDate;
-                    let lastDate;
-                    let dateDiff;
-                    if (data) {
-                      firstDate = data[0].x; 
-                      lastDate = data[data.length - 1].x; 
-                      dateDiff = lastDate - firstDate;
-                    }
-                    return(
-                      dateDiff < 10 ? 18
-                      : dateDiff < 20 ? 8
-                      : 4 
-                    );
-                  }}
-                  labels={({ datum }) => {
-                    return(`${datum.dateLabel} \n${datum.y} min`);
-                  }}
-                  labelComponent={
-                    <VictoryTooltip
-                      flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
-                    />
-                  }
-                />
+                {[...bars]}
               </VictoryStack>
             </VictoryChart>
           </div>
