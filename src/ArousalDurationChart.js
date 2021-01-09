@@ -62,18 +62,18 @@ class ArousalDurationChart extends React.Component {
     //SORT DATA INTO AROUSAL1 AROUSAL2 AROUSAL3... 
     //FIRST FILL AROUSALS WITH CORRECT # EMPTY ARRAYS
     //then do a forEach, and you need  
-    const arousal1 = [];
-    const arousal2 = [];
-    const arousal3 = [];
-    const arousal4 = [];
+    c('data',data)
+
+    const maxNumberArousals = Math.max(...data.map(x => x.length));
     const arousals = [];
     const bars = [];
-    for (let i = 0; i < data.length; i++){
+    //find the date with the most arousals, and push this many arrays to 'arousals'
+    //data.length only gives how many dates. 
+    for (let i = 0; i < maxNumberArousals; i++){
       arousals.push([]);
     }
     data.forEach((x, i) => {
-      c('x', x)
-      for (let i = 0; i < data.length; i++){
+      for (let i = 0; i < maxNumberArousals; i++){
         if (x[i]){
           arousals[i].push(x[i]);
         }
@@ -88,7 +88,7 @@ class ArousalDurationChart extends React.Component {
     c('arousals', arousals)
 
     const createBars = () => {
-      for (let i = 0; i < data.length; i++){
+      for (let i = 0; i < maxNumberArousals; i++){
         c('for', i)
         bars.push(
           <VictoryBar

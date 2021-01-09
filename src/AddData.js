@@ -243,7 +243,7 @@ function AddData (props) {
                 value={numberTimesArousal}
                 onChange={handleFormInput}
               />
-              <Form.Label>6. My arousals lasted ___ minutes. (List each arousal seperately.) (Example: <span className="add-data-form-example">25 min, 40 min, 10 min</span>)</Form.Label>
+              <Form.Label>6. My arousals lasted ___ minutes. (List each arousal seperately. You can simply list the arousals as numbers seperated by spaces) (Example for arousals of 25min, 40min, and 10min: <span className="add-data-form-example">25 40 10</span>)</Form.Label>
               <Form.Control 
                 id_val="arousal-duration"
                 className={arousalDuration !== '' && "existing-data"}
