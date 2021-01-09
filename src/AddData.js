@@ -247,7 +247,7 @@ function AddData (props) {
               <Form.Control 
                 id_val="arousal-duration"
                 className={arousalDuration !== '' && "existing-data"}
-                type="number" 
+                type="text" 
                 value={arousalDuration}
                 onChange={handleFormInput}
               />

@@ -1,12 +1,12 @@
 import React from 'react';
-import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip, VictoryStack } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {url, c} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
-class TimeToFallAsleepChart extends React.Component {
+class ArousalDurationChart extends React.Component {
   state = {
     chartInfo: []
   }
@@ -18,7 +18,7 @@ class TimeToFallAsleepChart extends React.Component {
       res.data.map(x => {
         newChartInfo = [...newChartInfo, {
           date: x.date,
-          timeToFallAsleep: x.timeToFallAsleep
+          arousalDuration: x.arousalDuration
         }];
         return null;
       })
@@ -31,7 +31,8 @@ class TimeToFallAsleepChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.timeToFallAsleep).map((e, i, arr) => {
+      data = chartInfo.filter(napObj => napObj.arousalDuration || napObj.arousalDuration === 0).map((e, i, arr) => {
+        const durations = e.arousalDuration.match(/\d+/g).map(x => Number(x));
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
@@ -49,14 +50,14 @@ class TimeToFallAsleepChart extends React.Component {
           }
         }
         return(
-          { x: date, y: e.timeToFallAsleep, dateLabel: dateLabel}
+          { x: date, y: e.arousalDuration, dateLabel: dateLabel}
         );
       });
     }
     return (
       <>
           <div className="victory-chart-1-container">
-            <h2>How Long To Fall Asleep</h2>
+            <h2>Arousal Durations</h2>
             <VictoryChart
               theme={VictoryTheme.material}
               padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
@@ -74,32 +75,34 @@ class TimeToFallAsleepChart extends React.Component {
                 dependentAxis
                 tickFormat={(y) => `${y} min` }
               />
-              <VictoryBar
-                data={data}
-                barWidth={() => {
-                  let firstDate;
-                  let lastDate;
-                  let dateDiff;
-                  if (data) {
-                    firstDate = data[0].x; 
-                    lastDate = data[data.length - 1].x; 
-                    dateDiff = lastDate - firstDate;
+              <VictoryStack>
+                <VictoryBar
+                  data={data}
+                  barWidth={() => {
+                    let firstDate;
+                    let lastDate;
+                    let dateDiff;
+                    if (data) {
+                      firstDate = data[0].x; 
+                      lastDate = data[data.length - 1].x; 
+                      dateDiff = lastDate - firstDate;
+                    }
+                    return(
+                      dateDiff < 10 ? 18
+                      : dateDiff < 20 ? 8
+                      : 4 
+                    );
+                  }}
+                  labels={({ datum }) => {
+                    return(`${datum.dateLabel} \n${datum.y} min`);
+                  }}
+                  labelComponent={
+                    <VictoryTooltip
+                      flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
+                    />
                   }
-                  return(
-                    dateDiff < 10 ? 18
-                    : dateDiff < 20 ? 8
-                    : 4 
-                  );
-                }}
-                labels={({ datum }) => {
-                  return(`${datum.dateLabel} \n${datum.y} min`);
-                }}
-                labelComponent={
-                  <VictoryTooltip
-                    flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
-                  />
-                }
-              />
+                />
+              </VictoryStack>
             </VictoryChart>
           </div>
       </>
@@ -107,9 +110,9 @@ class TimeToFallAsleepChart extends React.Component {
   }
 }
 
-export default TimeToFallAsleepChart; 
+export default ArousalDurationChart; 
 
-TimeToFallAsleepChart.propTypes = {
+ArousalDurationChart.propTypes = {
   dates: PropTypes.array
 }
            

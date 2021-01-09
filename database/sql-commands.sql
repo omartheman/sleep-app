@@ -23,6 +23,8 @@ SELECT * FROM sleep_data WHERE user = 'omar' AND date = '2021-1-1';
         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
       )
 
+ALTER TABLE sleep_data CHANGE COLUMN 
+  arousalDuration arousalDuration VARCHAR(500);
 
 ALTER TABLE sleep_data CHANGE COLUMN 
   minutesEarlyWoke minutesEarlyWoke int(50);

@@ -43,14 +43,6 @@ class MinutesEarlyWokeChart extends React.Component {
         if (dateDiff < 15) {
           dateLabels = [...dateLabels, dateLabel];
         } else {
-          //CHECK IF THERE IS AN ODD NUMBER OF DATA. IF YES, MAKE FIRST DATE VISIBLE
-          if (arr.length % 2 !== 0){
-            if (date % 2 === 0){
-              dateLabels = [...dateLabels, dateLabel];
-            } else {
-              dateLabels = [...dateLabels, null]
-            }
-          }
           if (date % 2 === 0){
             dateLabels = [...dateLabels, null]
           } else {
@@ -59,7 +51,7 @@ class MinutesEarlyWokeChart extends React.Component {
         }
         c('e.minearly', e.minutesEarlyWoke)
         return(
-          { x: date, y: e.minutesEarlyWoke}
+          { x: date, y: e.minutesEarlyWoke, dateLabel: dateLabel}
         );
       });
     }
@@ -102,8 +94,7 @@ class MinutesEarlyWokeChart extends React.Component {
                   );
                 }}
                 labels={({ datum }) => {
-                  c('minearl', datum)
-                  return(`${datum.y} min`)
+                  return(`${datum.dateLabel} \n${datum.y} min`);
                 }}
                 labelComponent={
                   <VictoryTooltip

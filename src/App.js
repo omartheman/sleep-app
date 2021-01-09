@@ -20,6 +20,7 @@ import CreateAccount from './CreateAccount';
 import CreateAccountSuccess from './CreateAccountSuccess';
 import backgroundTop from './landing-background-opt.svg';
 import MinutesEarlyWokeChart from './MinutesEarlyWokeChart';
+import ArousalDurationChart from './ArousalDurationChart';
 
 const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
@@ -141,6 +142,7 @@ function App() {
         <>
           {navbar}
           <Container>
+            <ArousalDurationChart />
             <MinutesEarlyWokeChart />
             <TimeToFallAsleepChart />
             <ExitBedTimesChart />
