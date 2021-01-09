@@ -6,7 +6,7 @@ import {url, c} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
-class QualityRatingChart extends React.Component {
+class SleepAidItemChart extends React.Component {
   state = {
     chartInfo: []
   }
@@ -18,7 +18,7 @@ class QualityRatingChart extends React.Component {
       res.data.map(x => {
         newChartInfo = [...newChartInfo, {
           date: x.date,
-          qualityRating: x.qualityRating
+          sleepAidItem: x.sleepAidItem
         }];
         return null;
       })
@@ -31,7 +31,7 @@ class QualityRatingChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.qualityRating || napObj.qualityRating === 0).map((e, i, arr) => {
+      data = chartInfo.filter(napObj => napObj.sleepAidItem || napObj.sleepAidItem === 0).map((e, i, arr) => {
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
@@ -48,19 +48,22 @@ class QualityRatingChart extends React.Component {
             dateLabels = [...dateLabels, dateLabel];
           }
         }
-        c('e.minearly', e.qualityRating)
+        c('e.minearly', e.sleepAidItem)
+        const sleepAidMg = e.sleepAidItem.match(/\d+/g);
+        const sleepAidItem = e.sleepAidItem.match(/(?<=\s+)[A-Za-z]+/g)[0];
+        c('sleepaiditem', sleepAidItem)
         var weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const longDateLabel = `${weekday[dateLabelPrimer.getDay()]}, ${month[dateLabelPrimer.getMonth()]} ${dateLabelPrimer.getDate()}`;
         return(
-          { x: date, y: e.qualityRating, dateLabel: longDateLabel}
+          { x: date, y: sleepAidMg, dateLabel: longDateLabel, sleepAidItem: sleepAidItem}
         );
       });
     }
     return (
       <>
           <div className="victory-chart-1-container">
-            <h2>Sleep Quality Rating</h2>
+            <h2>Sleep Aid Item</h2>
             <VictoryChart
               theme={VictoryTheme.material}
               padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
@@ -76,7 +79,7 @@ class QualityRatingChart extends React.Component {
               <VictoryAxis
                 style={{grid:{stroke:'black', strokeDasharray: '7'}}}
                 dependentAxis
-                tickFormat={(y) => `${y}` }
+                tickFormat={(y) => `${y} mg/oz` }
               />
               <VictoryBar
                 data={data}
@@ -96,7 +99,13 @@ class QualityRatingChart extends React.Component {
                   );
                 }}
                 labels={({ datum }) => {
-                  return(`${datum.dateLabel} \n${datum.y} out of 5`);
+                  if (datum.sleepAidItem){
+                    return(datum.sleepAidItem.toLowerCase() === 'alcohol' ?
+                      `${datum.dateLabel}\n${datum.y}oz ${datum.sleepAidItem}`
+                      :
+                      `${datum.dateLabel} \n${datum.y}mg ${datum.sleepAidItem}`
+                      );
+                  }
                 }}
                 labelComponent={
                   <VictoryTooltip
@@ -111,9 +120,9 @@ class QualityRatingChart extends React.Component {
   }
 }
 
-export default QualityRatingChart; 
+export default SleepAidItemChart; 
 
-QualityRatingChart.propTypes = {
+SleepAidItemChart.propTypes = {
   dates: PropTypes.array
 }
            

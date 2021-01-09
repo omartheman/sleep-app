@@ -22,6 +22,7 @@ import backgroundTop from './landing-background-opt.svg';
 import MinutesEarlyWokeChart from './MinutesEarlyWokeChart';
 import ArousalDurationChart from './ArousalDurationChart';
 import QualityRatingChart from './QualityRatingChart';
+import SleepAidItemChart from './SleepAidItemChart';
 
 const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
@@ -139,10 +140,11 @@ function App() {
           />
         </>
       </Route>
-      <Route path="/sleep" render={() => (
+      <Route path="/sleep">
         <>
           {navbar}
           <Container>
+            <SleepAidItemChart />
             <QualityRatingChart />
             <ArousalDurationChart />
             <MinutesEarlyWokeChart />
@@ -154,7 +156,7 @@ function App() {
             <NapTimesChart />
           </Container>
         </>
-      )} />
+      </Route>
       <Route path="/recipeapp/create-account-success" render={() => (
         <>
           {navbar}
