@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Alert, Button, Container, Form } from 'react-bootstrap';
+import { Alert, Button, Container, Form, Spinner } from 'react-bootstrap';
 import { Calendar } from 'react-calendar';
 import './AddData.scss';
 import axios from 'axios';
@@ -30,6 +30,7 @@ function AddData (props) {
   const [minutesEarlyWoke, setMinutesEarlyWoke] = useState('');
   const [qualityRating, setQualityRating] = useState('');
   const [clickedDate, setClickedDate] = useState(null);
+  const [checkExistingDataCompleted, setCheckExistingDataCompleted] = useState(false);
 
   useEffect(() => {
     let d = new Date();
@@ -38,6 +39,7 @@ function AddData (props) {
   }, [props]);
 
   const checkExistingData = (clickedDate) => {
+    setCheckExistingDataCompleted(false);
     c('checking existing data')
     c('user',props.loggedInUser)
     c('props', props)
@@ -73,6 +75,7 @@ function AddData (props) {
         }
         setExistingDataAlert(false);
       }
+      setCheckExistingDataCompleted(true);
     })
   } 
   const handleDataSubmit = () => {
@@ -155,126 +158,132 @@ function AddData (props) {
         {date && 
           <>
             <h2>Adding data for {getClickedDate(date) === getClickedDate((new Date())) && 'today: '}<strong>{dateHeading}</strong>: </h2>
-            {(dateClickedYear < curYear || dateClickedYear > curYear) && 
-              <Alert variant="warning">The day you clicked is not in the current year of {curYear}. If you're lost, click the chevron symbols (« or ») at the top of the calendar to scroll between years.</Alert>
+            {checkExistingDataCompleted ?
+              <>
+                {(dateClickedYear < curYear || dateClickedYear > curYear) && 
+                  <Alert variant="warning">The day you clicked is not in the current year of {curYear}. If you're lost, click the chevron symbols (« or ») at the top of the calendar to scroll between years.</Alert>
+                }
+                {existingDataAlert && 
+                  <Alert variant="success">You have already submitted data for {dateHeading}. Your previous data has been autofilled below. You can resubmit if you would like to add or change data.</Alert>
+                }
+                <Form className="add-data-form">
+                  <Form.Label>1a. Yesterday I started my first nap at ___. (Example: <span className="add-data-form-example">2:30 PM</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="nap-start-time"
+                    type="time" 
+                    className={existingNapStart !== '' && "existing-data"}
+                    value={existingNapStart} 
+                    placeholder={existingNapStart} 
+                    onChange={handleFormInput}
+                    />
+                  <Form.Label>1a. Yesterday I ended my last nap at ___. (Example: <span className="add-data-form-example">3:15 PM</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="nap-end-time"
+                    className={existingNapEnd !== '' && "existing-data"}
+                    type="time" 
+                    value={existingNapEnd}
+                    onChange={handleFormInput}
+                    />
+                  <Form.Label>2a. Last night I took ___ as a sleep aid. (Example: <span className="add-data-form-example">Ambien</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="sleep-aid-item"
+                    className={sleepAidItem !== '' && "existing-data"}
+                    type="text" 
+                    value={sleepAidItem}
+                    onChange={handleFormInput}
+                    />
+                  <Form.Label>2b. The amount of sleep aid I took last night was ___ mg/ounces (mg for medication / ounces for alcohol). (Example: <span className="add-data-form-example">5</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="sleep-aid-mg"
+                    className={sleepAidMg !== '' && "existing-data"}
+                    type="number" 
+                    value={sleepAidMg}
+                    onChange={handleFormInput}
+                    />
+                  <Form.Label>3a. Last night I got into bed at ___.  (Example: <span className="add-data-form-example">11:00 PM</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="enter-bed-time"
+                    className={enterBedTime !== '' && "existing-data"}
+                    type="time" 
+                    value={enterBedTime}
+                    onChange={handleFormInput}
+                    />
+                  <Form.Label>3b. Last night I turned off the lights and tried to fall asleep at ___. (Example: <span className="add-data-form-example">11:40 PM</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="lights-off-time"
+                    className={lightsOffTime !== '' && "existing-data"}
+                    type="time" 
+                    value={lightsOffTime}
+                    onChange={handleFormInput}
+                  />
+                  <Form.Label>4. After I turned off the lights, it took me about ___ minutes to fall asleep. (Example: <span className="add-data-form-example">75 min</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="time-to-fall-asleep"
+                    className={timeToFallAsleep !== '' && "existing-data"}
+                    type="number" 
+                    value={timeToFallAsleep}
+                    onChange={handleFormInput}
+                  />
+                  <Form.Label>5. I woke up from sleep ___ times. (Do not count when you finally woke up here.) (Example: <span className="add-data-form-example">3 times</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="number-times-arousal"
+                    className={numberTimesArousal !== '' && "existing-data"}
+                    type="number" 
+                    value={numberTimesArousal}
+                    onChange={handleFormInput}
+                    />
+                  <Form.Label>6. My arousals lasted ___ minutes. (List each arousal seperately. You can simply list the arousals as numbers seperated by spaces) (Example for arousals of 25min, 40min, and 10min: <span className="add-data-form-example">25 40 10</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="arousal-duration"
+                    className={arousalDuration !== '' && "existing-data"}
+                    type="text" 
+                    value={arousalDuration}
+                    onChange={handleFormInput}
+                    />
+                  <Form.Label>7. Today I woke up at ___. (Note: this is when you finally woke up.) (Example: <span className="add-data-form-example">6:30 AM</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="morning-wake-time"
+                    className={morningWakeTime !== '' && "existing-data"}
+                    type="time" 
+                    value={morningWakeTime}
+                    onChange={handleFormInput}
+                  />
+                  <Form.Label>8. Today I got out of bed for the day at ___. (Example: <span className="add-data-form-example">06:45 AM</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="exit-bed-time"
+                    className={exitBedTime !== '' && "existing-data"}
+                    type="time" 
+                    value={exitBedTime}
+                    onChange={handleFormInput}
+                    />
+                  <Form.Label>9. Today I woke up ___ minutes earlier than I wanted to. (Example: <span className="add-data-form-example">0</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="minutes-early-woke"
+                    className={minutesEarlyWoke !== '' && "existing-data"}
+                    type="number" 
+                    value={minutesEarlyWoke}
+                    onChange={handleFormInput}
+                  />
+                  <Form.Label>
+                    10.  I would rate the quality of last night's sleep as 1 = very poor, 2 = poor, 3 = fair, 4 = good, or 5 = excellent. (Example: <span className="add-data-form-example">3</span>)</Form.Label>
+                  <Form.Control 
+                    id_val="quality-rating"
+                    className={qualityRating !== '' && "existing-data"}
+                    type="number" 
+                    value={qualityRating}
+                    onChange={handleFormInput}
+                  />
+                </Form>
+                <Button onClick={handleDataSubmit}>Submit</Button>
+              </>
+            : 
+              <Spinner variant="success" animation="border" role="status" id="spinner-centered" className="spinner-centered"><span className="sr-only">Loading...</span></Spinner>
             }
-            {existingDataAlert && 
-              <Alert variant="success">You have already submitted data for {dateHeading}. Your previous data has been autofilled below. You can resubmit if you would like to add or change data.</Alert>
-            }
-            <Form className="add-data-form">
-              <Form.Label>1a. Yesterday I started my first nap at ___. (Example: <span className="add-data-form-example">2:30 PM</span>)</Form.Label>
-              <Form.Control 
-                id_val="nap-start-time"
-                type="time" 
-                className={existingNapStart !== '' && "existing-data"}
-                value={existingNapStart} 
-                placeholder={existingNapStart} 
-                onChange={handleFormInput}
-              />
-              <Form.Label>1a. Yesterday I ended my last nap at ___. (Example: <span className="add-data-form-example">3:15 PM</span>)</Form.Label>
-              <Form.Control 
-                id_val="nap-end-time"
-                className={existingNapEnd !== '' && "existing-data"}
-                type="time" 
-                value={existingNapEnd}
-                onChange={handleFormInput}
-              />
-              <Form.Label>2a. Last night I took ___ as a sleep aid. (Example: <span className="add-data-form-example">Ambien</span>)</Form.Label>
-              <Form.Control 
-                id_val="sleep-aid-item"
-                className={sleepAidItem !== '' && "existing-data"}
-                type="text" 
-                value={sleepAidItem}
-                onChange={handleFormInput}
-              />
-              <Form.Label>2b. The amount of sleep aid I took last night was ___ mg/ounces (mg for medication / ounces for alcohol). (Example: <span className="add-data-form-example">5</span>)</Form.Label>
-              <Form.Control 
-                id_val="sleep-aid-mg"
-                className={sleepAidMg !== '' && "existing-data"}
-                type="number" 
-                value={sleepAidMg}
-                onChange={handleFormInput}
-              />
-              <Form.Label>3a. Last night I got into bed at ___.  (Example: <span className="add-data-form-example">11:00 PM</span>)</Form.Label>
-              <Form.Control 
-                id_val="enter-bed-time"
-                className={enterBedTime !== '' && "existing-data"}
-                type="time" 
-                value={enterBedTime}
-                onChange={handleFormInput}
-              />
-              <Form.Label>3b. Last night I turned off the lights and tried to fall asleep at ___. (Example: <span className="add-data-form-example">11:40 PM</span>)</Form.Label>
-              <Form.Control 
-                id_val="lights-off-time"
-                className={lightsOffTime !== '' && "existing-data"}
-                type="time" 
-                value={lightsOffTime}
-                onChange={handleFormInput}
-              />
-              <Form.Label>4. After I turned off the lights, it took me about ___ minutes to fall asleep. (Example: <span className="add-data-form-example">75 min</span>)</Form.Label>
-              <Form.Control 
-                id_val="time-to-fall-asleep"
-                className={timeToFallAsleep !== '' && "existing-data"}
-                type="number" 
-                value={timeToFallAsleep}
-                onChange={handleFormInput}
-              />
-              <Form.Label>5. I woke up from sleep ___ times. (Do not count when you finally woke up here.) (Example: <span className="add-data-form-example">3 times</span>)</Form.Label>
-              <Form.Control 
-                id_val="number-times-arousal"
-                className={numberTimesArousal !== '' && "existing-data"}
-                type="number" 
-                value={numberTimesArousal}
-                onChange={handleFormInput}
-              />
-              <Form.Label>6. My arousals lasted ___ minutes. (List each arousal seperately. You can simply list the arousals as numbers seperated by spaces) (Example for arousals of 25min, 40min, and 10min: <span className="add-data-form-example">25 40 10</span>)</Form.Label>
-              <Form.Control 
-                id_val="arousal-duration"
-                className={arousalDuration !== '' && "existing-data"}
-                type="text" 
-                value={arousalDuration}
-                onChange={handleFormInput}
-              />
-              <Form.Label>7. Today I woke up at ___. (Note: this is when you finally woke up.) (Example: <span className="add-data-form-example">6:30 AM</span>)</Form.Label>
-              <Form.Control 
-                id_val="morning-wake-time"
-                className={morningWakeTime !== '' && "existing-data"}
-                type="time" 
-                value={morningWakeTime}
-                onChange={handleFormInput}
-              />
-              <Form.Label>8. Today I got out of bed for the day at ___. (Example: <span className="add-data-form-example">06:45 AM</span>)</Form.Label>
-              <Form.Control 
-                id_val="exit-bed-time"
-                className={exitBedTime !== '' && "existing-data"}
-                type="time" 
-                value={exitBedTime}
-                onChange={handleFormInput}
-              />
-              <Form.Label>9. Today I woke up ___ minutes earlier than I wanted to. (Example: <span className="add-data-form-example">0</span>)</Form.Label>
-              <Form.Control 
-                id_val="minutes-early-woke"
-                className={minutesEarlyWoke !== '' && "existing-data"}
-                type="number" 
-                value={minutesEarlyWoke}
-                onChange={handleFormInput}
-              />
-              <Form.Label>
-                10.  I would rate the quality of last night's sleep as 1 = very poor, 2 = poor, 3 = fair, 4 = good, or 5 = excellent. (Example: <span className="add-data-form-example">3</span>)</Form.Label>
-              <Form.Control 
-                id_val="quality-rating"
-                className={qualityRating !== '' && "existing-data"}
-                type="number" 
-                value={qualityRating}
-                onChange={handleFormInput}
-              />
-            </Form>
-            <Button onClick={handleDataSubmit}>Submit</Button>
           </>
         }
       </Container>
     </>
-  );
+    );
 }
 
 export default AddData;
