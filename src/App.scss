@@ -8,8 +8,50 @@ h2 {
   display: inline-block;
   padding: 20px;
   // max-width: 500px;
+  width: 100%;
 }
 #spinner-centered {
   display: block;
   margin: 100px auto;
+}
+$colWdthLg: 33.333%;
+$colWdthMd: 50%;
+.app-charts-container {
+  display: grid; 
+  grid-template-columns: $colWdthLg $colWdthLg $colWdthLg;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    " ct1   ct2   ct3 "
+    " ct4   ct5   ct6 "
+    " ct7   ct8   ct9 "
+    " .   ct10  . ";
+  @media (max-width: 992px){
+    grid-template-columns: $colWdthMd $colWdthMd;
+    grid-template-areas: 
+      " ct1   ct2 "
+      " ct3   ct4 "
+      " ct5   ct6 "
+      " ct7   ct8 "
+      " ct9   ct10";
+  }
+  @media (max-width: 768px){
+    grid-template-columns: 100%;
+    grid-template-areas: 
+      " ct1 "  
+      " ct2 "
+      " ct3 " 
+      " ct4 "
+      " ct5 " 
+      " ct6 "
+      " ct7 " 
+      " ct8 "
+      " ct9 " 
+      " ct10";
+  }
+}
+$charts: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+@each $chart in $charts {
+  .ct#{$chart} {
+    width: 100%;
+  }
 }

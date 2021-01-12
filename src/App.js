@@ -143,32 +143,34 @@ function App() {
       <Route path="/sleep">
         <>
           {navbar}
-          <Container fluid>
-            <Row>
-              <Col lg>
-                <SleepAidItemChart 
-                  loggedInUser={loggedInUser}
-                />
-              </Col>
-              <Col lg>
-                <QualityRatingChart 
-                  loggedInUser={loggedInUser}
-                />
-              </Col>
-              <Col lg>
-                <ArousalDurationChart 
-                  loggedInUser={loggedInUser}
-                />
-              </Col>
-            </Row>
+          <Container fluid className="app-charts-container">
+            <div className="ct1">
+              <EnterBedTimesChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
+            <div className="ct2">
+              <LightsOffTimesChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
+            <div className="ct3">
+              <TimeToFallAsleepChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
+              <SleepAidItemChart 
+                loggedInUser={loggedInUser}
+              />
+              <QualityRatingChart 
+                loggedInUser={loggedInUser}
+              />
+              <ArousalDurationChart 
+                loggedInUser={loggedInUser}
+              />
             <Row>
               <Col lg>
                 <MinutesEarlyWokeChart 
-                  loggedInUser={loggedInUser}
-                />
-              </Col>
-              <Col lg>
-                <TimeToFallAsleepChart 
                   loggedInUser={loggedInUser}
                 />
               </Col>
@@ -179,16 +181,6 @@ function App() {
               </Col>
             </Row>
             <Row>
-              <Col lg>
-                <EnterBedTimesChart 
-                  loggedInUser={loggedInUser}
-                  />
-              </Col>
-              <Col lg>
-                <LightsOffTimesChart 
-                  loggedInUser={loggedInUser}
-                  />
-              </Col>
               <Col lg>
                 <MorningWakeTimesChart 
                   loggedInUser={loggedInUser}
