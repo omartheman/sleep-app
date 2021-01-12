@@ -4,6 +4,7 @@ import {Navbar, Nav, NavDropdown, Form, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import url from './global_items';
+import NightModeSwitch from './NightModeSwitch';
 
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;
@@ -12,6 +13,7 @@ const urlLogout = `${url}logout`;
 const NavbarContainer = (props) => {
   const {loginSubmit, loggedInUser, onLoginFormChange, onLogout} = props;
   const [loginDropdown, setLoginDropdown] = useState(false);
+  
   useEffect(() => {
     // add when mounted
     document.addEventListener("mousedown", handleClick);
@@ -65,9 +67,11 @@ const NavbarContainer = (props) => {
       {/* <Navbar.Collapse id="basic-navbar-nav"> */}
         <Nav.Link as={Link} to="/sleep/home-logged-out">Home</Nav.Link>
         <Nav.Link as={Link} to="/sleep/">Overview</Nav.Link>
-
         <Nav.Link as={Link} to="/sleep/add-data/">Add Data</Nav.Link>
         <Nav.Link className={loggedInUser === null || loggedInUser === '' ? "hidden" : null} as={Link} to="/recipeapp/myrecipes">Conditional Link</Nav.Link>
+        <div className="ml-auto">
+          <NightModeSwitch/>
+        </div>
         <NavDropdown 
           title={`Hello, ${loggedInUser}!`} 
           id="basic-nav-dropdown" 

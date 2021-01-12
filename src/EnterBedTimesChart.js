@@ -97,7 +97,7 @@ class EnterBedTimesChart extends React.Component {
               style={ this.props.nightMode && {data: {stroke: '#00ffcb'}}}
             />
           </VictoryChart>
-          <h2 className="enter-bed-charts-heading">Time I Got in Bed</h2>
+          <h2 className="enter-bed-charts-heading" title="This is the time that you entered your bed - you may not yet have turned the lights off.">Time I Got in Bed</h2>
         </div>
       </>
     )
