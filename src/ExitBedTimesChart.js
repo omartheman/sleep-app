@@ -12,7 +12,7 @@ class LightsOffTimesChart extends React.Component {
     chartInfo: []
   }
   componentDidMount(){
-    axios.post(urlGetData, {user: 'omar'})
+    axios.post(urlGetData, {user: this.props.loggedInUser})
     .then(res => {
       console.log(res);
       let newChartInfo = [];
@@ -25,6 +25,23 @@ class LightsOffTimesChart extends React.Component {
       })
       this.setState({chartInfo: newChartInfo});
     })
+  }
+  componentDidUpdate(prevProps){
+    if (prevProps.loggedInUser !== this.props.loggedInUser){
+      axios.post(urlGetData, {user: this.props.loggedInUser})
+      .then(res => {
+        console.log(res);
+        let newChartInfo = [];
+        res.data.map(x => {
+          newChartInfo = [...newChartInfo, {
+            date: x.date,
+            exitBedTime: x.exitBedTime
+          }];
+          return null;
+        })
+        this.setState({chartInfo: newChartInfo});
+      })
+    }
   }
   render() {
     const {chartInfo} = this.state;
@@ -48,7 +65,6 @@ class LightsOffTimesChart extends React.Component {
     return (
       <>
           <div className="victory-chart-1-container">
-            <h2>Time Out of Bed</h2>
             <VictoryChart
               theme={VictoryTheme.material}
               padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
@@ -68,6 +84,7 @@ class LightsOffTimesChart extends React.Component {
                 data={data}
               />
             </VictoryChart>
+            <h2>Time Out of Bed</h2>
           </div>
       </>
     )

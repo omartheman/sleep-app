@@ -13,7 +13,7 @@ import EnterBedTimesChart from './EnterBedTimesChart';
 import MorningWakeTimesChart from './MorningWakeTimesChart';
 import LightsOffTimesChart from './LightsOffTimesChart';
 import ExitBedTimesChart from './ExitBedTimesChart';
-import { Container } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 import TimeToFallAsleepChart from './TimeToFallAsleepChart';
 import HomeLoggedOut from './HomeLoggedOut';
 import CreateAccount from './CreateAccount';
@@ -143,17 +143,61 @@ function App() {
       <Route path="/sleep">
         <>
           {navbar}
-          <Container>
-            <SleepAidItemChart />
-            <QualityRatingChart />
-            <ArousalDurationChart />
-            <MinutesEarlyWokeChart />
-            <TimeToFallAsleepChart />
-            <ExitBedTimesChart />
-            <LightsOffTimesChart />
-            <MorningWakeTimesChart />
-            <EnterBedTimesChart />
-            <NapTimesChart />
+          <Container fluid>
+            <Row>
+              <Col lg>
+                <SleepAidItemChart 
+                  loggedInUser={loggedInUser}
+                />
+              </Col>
+              <Col lg>
+                <QualityRatingChart 
+                  loggedInUser={loggedInUser}
+                />
+              </Col>
+              <Col lg>
+                <ArousalDurationChart 
+                  loggedInUser={loggedInUser}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg>
+                <MinutesEarlyWokeChart 
+                  loggedInUser={loggedInUser}
+                />
+              </Col>
+              <Col lg>
+                <TimeToFallAsleepChart 
+                  loggedInUser={loggedInUser}
+                />
+              </Col>
+              <Col lg>
+                <ExitBedTimesChart 
+                  loggedInUser={loggedInUser}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg>
+                <EnterBedTimesChart 
+                  loggedInUser={loggedInUser}
+                  />
+              </Col>
+              <Col lg>
+                <LightsOffTimesChart 
+                  loggedInUser={loggedInUser}
+                  />
+              </Col>
+              <Col lg>
+                <MorningWakeTimesChart 
+                  loggedInUser={loggedInUser}
+                />
+              </Col>
+            </Row>
+            <NapTimesChart 
+              loggedInUser={loggedInUser}
+            />
           </Container>
         </>
       </Route>

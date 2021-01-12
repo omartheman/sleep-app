@@ -11,7 +11,7 @@ class SleepAidItemChart extends React.Component {
     chartInfo: []
   }
   componentDidMount(){
-    axios.post(urlGetData, {user: 'omar'})
+    axios.post(urlGetData, {user: this.props.loggedInUser})
     .then(res => {
       console.log(res);
       let newChartInfo = [];
@@ -24,6 +24,23 @@ class SleepAidItemChart extends React.Component {
       })
       this.setState({chartInfo: newChartInfo});
     })
+  }
+  componentDidUpdate(prevProps){
+    if (prevProps.loggedInUser !== this.props.loggedInUser){
+      axios.post(urlGetData, {user: this.props.loggedInUser})
+      .then(res => {
+        console.log(res);
+        let newChartInfo = [];
+        res.data.map(x => {
+          newChartInfo = [...newChartInfo, {
+            date: x.date,
+            sleepAidItem: x.sleepAidItem
+          }];
+          return null;
+        })
+        this.setState({chartInfo: newChartInfo});
+      })
+    }
   }
   render() {
     const {chartInfo} = this.state;
@@ -63,19 +80,17 @@ class SleepAidItemChart extends React.Component {
     return (
       <>
           <div className="victory-chart-1-container">
-            <h2>Sleep Aid Item</h2>
             <VictoryChart
               theme={VictoryTheme.material}
               padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
               scale={{y:'number'}}
               domainPadding={{ x: 20, y: 20 }}
-              
             >
               <VictoryAxis
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
                 tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
-                />
+              />
               <VictoryAxis
                 style={{grid:{stroke:'black', strokeDasharray: '7'}}}
                 dependentAxis
@@ -114,6 +129,7 @@ class SleepAidItemChart extends React.Component {
                 }
               />
             </VictoryChart>
+            <h2>Sleep Aid Item</h2>
           </div>
       </>
     )

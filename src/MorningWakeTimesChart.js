@@ -13,7 +13,7 @@ class MorningWakeTimesChart extends React.Component {
     chartInfo: []
   }
   componentDidMount(){
-    axios.post(urlGetData, {user: 'omar'})
+    axios.post(urlGetData, {user: this.props.loggedInUser})
     .then(res => {
       console.log(res);
       let newChartInfo = [];
@@ -26,6 +26,23 @@ class MorningWakeTimesChart extends React.Component {
       })
       this.setState({chartInfo: newChartInfo});
     })
+  }
+  componentDidUpdate(prevProps){
+    if (prevProps.loggedInUser !== this.props.loggedInUser){
+      axios.post(urlGetData, {user: this.props.loggedInUser})
+      .then(res => {
+        console.log(res);
+        let newChartInfo = [];
+        res.data.map(x => {
+          newChartInfo = [...newChartInfo, {
+            date: x.date,
+            morningWakeTime: x.morningWakeTime
+          }];
+          return null;
+        })
+        this.setState({chartInfo: newChartInfo});
+      })
+    }
   }
   render() {
     const {chartInfo} = this.state;
@@ -49,7 +66,6 @@ class MorningWakeTimesChart extends React.Component {
     return (
       <>
         <div className="victory-chart-1-container">
-          <h2>Wake Up Times</h2>
           <VictoryChart
             theme={VictoryTheme.material}
             padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
@@ -69,6 +85,7 @@ class MorningWakeTimesChart extends React.Component {
               data={data}
             />
           </VictoryChart>
+          <h2>Wake Up Times</h2>
         </div>
       </>
     )

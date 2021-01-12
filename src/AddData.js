@@ -143,18 +143,20 @@ function AddData (props) {
       <Container className="add-data">
         <h1>Add Data</h1>
         <h2>Pick a Date to Add Data</h2> 
-        <Calendar
-          onChange={onChange}
-          value={value}
-          view={'month'}
-          onClickDay={(value, event) => {
-            // console.log('New date is: ', value)
-            // c('valueonly', value);
-            setDate(value);
-            c('date value', value)
-            checkExistingData(value);
-          }}
-        />
+        <div className="add-data-calendar-container">
+          <Calendar
+            onChange={onChange}
+            value={value}
+            view={'month'}
+            onClickDay={(value, event) => {
+              // console.log('New date is: ', value)
+              // c('valueonly', value);
+              setDate(value);
+              c('date value', value)
+              checkExistingData(value);
+            }}
+          />
+        </div>
         {date && 
           <>
             <h2>Adding data for {getClickedDate(date) === getClickedDate((new Date())) && 'today: '}<strong>{dateHeading}</strong>: </h2>
@@ -274,7 +276,7 @@ function AddData (props) {
                     onChange={handleFormInput}
                   />
                 </Form>
-                <Button onClick={handleDataSubmit}>Submit</Button>
+                <Button className="add-data-submit-button" onClick={handleDataSubmit}>Submit</Button>
               </>
             : 
               <Spinner variant="success" animation="border" role="status" id="spinner-centered" className="spinner-centered"><span className="sr-only">Loading...</span></Spinner>

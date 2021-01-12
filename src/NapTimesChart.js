@@ -13,7 +13,7 @@ class NapTimesChart extends React.Component {
     chartInfo: []
   };
   componentDidMount(){
-    axios.post(urlGetData, {user: 'omar'})
+    axios.post(urlGetData, {user: this.props.loggedInUser})
     .then(res => {
       console.log(res);
         let newNapInfo = [];
@@ -27,6 +27,24 @@ class NapTimesChart extends React.Component {
         })
         this.setState({chartInfo: newNapInfo});
     })
+  }
+  componentDidUpdate(prevProps){
+    if (prevProps.loggedInUser !== this.props.loggedInUser){
+      axios.post(urlGetData, {user: this.props.loggedInUser})
+      .then(res => {
+        console.log(res);
+          let newNapInfo = [];
+          res.data.map(x => {
+            newNapInfo = [...newNapInfo, {
+              date: x.date, 
+              napStartTime: x.napStartTime,
+              napEndTime: x.napEndTime
+            }]
+            return null;
+          })
+          this.setState({chartInfo: newNapInfo});
+      })
+    }
   }
   render() {
     const {chartInfo} = this.state;
@@ -61,7 +79,6 @@ class NapTimesChart extends React.Component {
     return (
       <>
         <div className="victory-chart-1-container">
-          <h2>Nap Times</h2>
           <VictoryChart
             theme={VictoryTheme.material}
             padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
@@ -108,6 +125,7 @@ class NapTimesChart extends React.Component {
               }
             />
           </VictoryChart>
+          <h2>Nap Times</h2>
         </div>
       </>
     )

@@ -11,7 +11,7 @@ class QualityRatingChart extends React.Component {
     chartInfo: []
   }
   componentDidMount(){
-    axios.post(urlGetData, {user: 'omar'})
+    axios.post(urlGetData, {user: this.props.loggedInUser})
     .then(res => {
       console.log(res);
       let newChartInfo = [];
@@ -24,6 +24,23 @@ class QualityRatingChart extends React.Component {
       })
       this.setState({chartInfo: newChartInfo});
     })
+  }
+  componentDidUpdate(prevProps){
+    if (prevProps.loggedInUser !== this.props.loggedInUser){
+      axios.post(urlGetData, {user: this.props.loggedInUser})
+      .then(res => {
+        console.log(res);
+        let newChartInfo = [];
+        res.data.map(x => {
+          newChartInfo = [...newChartInfo, {
+            date: x.date,
+            qualityRating: x.qualityRating
+          }];
+          return null;
+        })
+        this.setState({chartInfo: newChartInfo});
+      })
+    }
   }
   render() {
     const {chartInfo} = this.state;
@@ -60,7 +77,6 @@ class QualityRatingChart extends React.Component {
     return (
       <>
           <div className="victory-chart-1-container">
-            <h2>Sleep Quality Rating</h2>
             <VictoryChart
               theme={VictoryTheme.material}
               padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
@@ -105,6 +121,7 @@ class QualityRatingChart extends React.Component {
                 }
               />
             </VictoryChart>
+            <h2>Sleep Quality Rating</h2>
           </div>
       </>
     )
