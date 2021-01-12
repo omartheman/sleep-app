@@ -77,27 +77,30 @@ class EnterBedTimesChart extends React.Component {
             <VictoryAxis
               tickValues={xAxisTickValues}
               tickFormat={dateLabels}
-              style={{grid:{stroke:'#212529', strokeDasharray: '7'}}}
               style={ this.props.nightMode ? 
                 {tickLabels: {fill: 'white'}, 
                 grid: {stroke: '#212529', strokeDasharray: '7'}}
-                : {grid:{stroke:'#212529', strokeDasharray: '7'}}
+                : {grid: {stroke:'rgb(236, 239, 241)', strokeDasharray: '7'}}
               }
               />
             <VictoryAxis
-              style={{grid:{stroke:'black', strokeDasharray: '7'}}}
+              style={ this.props.nightMode ? 
+                {tickLabels: {fill: 'white'},
+                grid: {stroke:'rgb(236, 239, 241)', strokeDasharray: '7'}}
+                : {grid: {stroke:'#212529', strokeDasharray: '7'}}
+              }
               dependentAxis
               tickFormat={(y) => formatAMPM(y)}
-              style={ this.props.nightMode && {
-                tickLabels: {fill: 'white'}
-              }}
             />
             <VictoryLine
               data={data}
-              style={ this.props.nightMode && {data: {stroke: '#00ffcb'}}}
+              style={this.props.nightMode ? 
+                {data: {stroke: '#00ffcb'}}
+                : {data: {stroke: '#06790f'}}
+              }
             />
           </VictoryChart>
-          <h2 className="enter-bed-charts-heading" title="This is the time that you entered your bed - you may not yet have turned the lights off.">Time I Got in Bed</h2>
+          <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="This is the time that you entered your bed - you may not yet have turned the lights off.">Time I Got in Bed</h2>
         </div>
       </>
     )

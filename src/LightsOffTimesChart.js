@@ -82,9 +82,13 @@ class LightsOffTimesChart extends React.Component {
             />
             <VictoryLine
               data={data}
+              style={this.props.nightMode ? 
+                {data: {stroke: '#17ffa9'}}
+                : {data: {stroke: '#0c9864'}}
+              }
             />
           </VictoryChart>
-          <h2>Time Lights Turned Off</h2>
+          <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="The time you turned the lights off after getting in bed.">Time Lights Turned Off</h2>
         </div>
       </>
     )
