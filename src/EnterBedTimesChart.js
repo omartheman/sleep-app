@@ -4,7 +4,7 @@ import './EnterBedTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, nightModeTransitionTime} from './global_items';
+import {url, c, nightModeTransitionTime, victoryAxisStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
@@ -51,7 +51,7 @@ class EnterBedTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.enterBedTime).map((e, i) => {
+      data = chartInfo.filter(napObj => napObj.enterBedTime).map((e, i, arr) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
         const dateTime = new Date(`January 1, 2000 ${e.enterBedTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
@@ -59,7 +59,18 @@ class EnterBedTimesChart extends React.Component {
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
+        const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
+        const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
+        const dateDiff = lastDate - firstDate;
+        if (dateDiff < 15) {
+          dateLabels = [...dateLabels, dateLabel];
+        } else {
+          if (date % 2 === 0){
+            dateLabels = [...dateLabels, null]
+          } else {
+            dateLabels = [...dateLabels, dateLabel];
+          }
+        }
         return(
           { x: date, y: dateTime }
         );
@@ -75,42 +86,13 @@ class EnterBedTimesChart extends React.Component {
             domainPadding={{ x: 20, y: 20 }}
           >
             <VictoryAxis
+              tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
               tickValues={xAxisTickValues}
               tickFormat={dateLabels}
-              style={ this.props.nightMode ? 
-                {tickLabels: {
-                  fill: 'white',
-                  transition: `fill ${nightModeTransitionTime}`
-                }, 
-                grid: {
-                  stroke: '#212529', 
-                  strokeDasharray: '7',
-                  transition: `stroke ${nightModeTransitionTime}`
-                }}
-                : {grid: {
-                    stroke:'rgb(236, 239, 241)', 
-                    strokeDasharray: '7',
-                    transition: `stroke ${nightModeTransitionTime}`
-                  }}
-              }
+              style={victoryAxisStyle('x', this.props.nightMode)}
               />
             <VictoryAxis
-              style={ this.props.nightMode ? 
-                {tickLabels: {
-                  fill: 'white',
-                  transition: `fill ${nightModeTransitionTime}`
-                }, 
-                grid: {
-                  stroke:'rgb(236, 239, 241)', 
-                  strokeDasharray: '7',
-                  transition: `stroke ${nightModeTransitionTime}`
-                }}
-                : {grid: {
-                    stroke:'#212529', 
-                    strokeDasharray: '7',
-                    transition: `stroke ${nightModeTransitionTime}`
-                  }}
-              }
+              style={victoryAxisStyle('y', this.props.nightMode)}
               dependentAxis
               tickFormat={(y) => formatAMPM(y)}
             />

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c} from './global_items';
+import {url, c, victoryAxisStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -74,11 +74,13 @@ class LightsOffTimesChart extends React.Component {
             <VictoryAxis
               tickValues={xAxisTickValues}
               tickFormat={dateLabels}
-              />
+              tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+              style={victoryAxisStyle('x', this.props.nightMode)}
+            />
             <VictoryAxis
-              style={{grid:{stroke:'black', strokeDasharray: '7'}}}
               dependentAxis
               tickFormat={(y) => formatAMPM(y)}
+              style={victoryAxisStyle('y', this.props.nightMode)}
             />
             <VictoryLine
               data={data}
@@ -86,6 +88,11 @@ class LightsOffTimesChart extends React.Component {
                 {data: {stroke: '#17ffa9'}}
                 : {data: {stroke: '#0c9864'}}
               }
+            />
+            <VictoryScatter
+              style={{ data: { fill: "#c43a31" } }}
+              size={7}
+              data={data}
             />
           </VictoryChart>
           <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="The time you turned the lights off after getting in bed.">Time Lights Turned Off</h2>

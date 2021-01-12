@@ -3,6 +3,30 @@ const url = 'http://localhost:4000/sleep/api/';
 const url = 'https://omarshishani.com/sleep/api/';
 */
 
+const lightGrey = 'rgb(236, 239, 241)';
+const darkGrey = '#212529';
+const victoryAxisStyle = (axis, nightMode) => (nightMode ? 
+  {
+    tickLabels: {
+      fill: 'white',
+      transition: `fill ${nightModeTransitionTime}`
+    }, 
+    grid: {
+        stroke: axis === 'y' ? lightGrey : darkGrey, 
+        strokeDasharray: '7',
+        transition: `stroke ${nightModeTransitionTime}`
+    }
+  }
+  : 
+  {
+    grid: {
+      stroke: axis === 'y' ? darkGrey : lightGrey, 
+      strokeDasharray: '7',
+      transition: `stroke ${nightModeTransitionTime}`
+    }
+  }
+)
+
 const nightModeTransitionTime = '0.5s';
 
 function c (msg, input) {return(console.log(`${msg}: `, input))};
@@ -37,6 +61,6 @@ function getClickedDate(date, type){
 
 const varToString = varObj => Object.keys(varObj)[0]; 
 
-export {c, getClickedDate, url, varToString, nightModeTransitionTime};
+export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle};
 
 export default url;
