@@ -1,7 +1,15 @@
+import {VictoryScatter} from 'victory';
 const url = 'http://localhost:4000/sleep/api/';
 /*
 const url = 'https://omarshishani.com/sleep/api/';
 */
+
+const VictoryScatterLineComplement = (data) =>
+<VictoryScatter
+  style={{ data: { fill: "#c43a31" } }}
+  size={3}
+  data={data}
+/>;
 
 const lightGrey = 'rgb(236, 239, 241)';
 const darkGrey = '#212529';
@@ -61,6 +69,6 @@ function getClickedDate(date, type){
 
 const varToString = varObj => Object.keys(varObj)[0]; 
 
-export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle};
+export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement};
 
 export default url;

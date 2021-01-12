@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import './EnterBedTimesChart.scss';
-import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, nightModeTransitionTime, victoryAxisStyle} from './global_items';
+import {url, c, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement} from './global_items';
 
 const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
@@ -109,6 +109,7 @@ class EnterBedTimesChart extends React.Component {
                   }}
               }
             />
+            {VictoryScatterLineComplement(data)}
           </VictoryChart>
           <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="This is the time that you entered your bed - you may not yet have turned the lights off.">Time I Got in Bed</h2>
         </div>
@@ -131,5 +132,7 @@ function formatAMPM(date) {
 }
 
 EnterBedTimesChart.propTypes = {
-  dates: PropTypes.array
+  dates: PropTypes.array,
+  nightMode: PropTypes.bool, 
+  loggedInUser: PropTypes.string
 }

@@ -78,7 +78,6 @@ class TimeToFallAsleepChart extends React.Component {
               padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
               scale={{y:'number'}}
               domainPadding={{ x: 20, y: 20 }}
-              
             >
               <VictoryAxis
                 tickValues={xAxisTickValues}
@@ -127,6 +126,8 @@ class TimeToFallAsleepChart extends React.Component {
 export default TimeToFallAsleepChart; 
 
 TimeToFallAsleepChart.propTypes = {
-  dates: PropTypes.array
+  dates: PropTypes.array,
+  nightMode: PropTypes.bool, 
+  loggedInUser: PropTypes.string
 }
            
