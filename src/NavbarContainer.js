@@ -70,7 +70,9 @@ const NavbarContainer = (props) => {
         <Nav.Link as={Link} to="/sleep/add-data/">Add Data</Nav.Link>
         <Nav.Link className={loggedInUser === null || loggedInUser === '' ? "hidden" : null} as={Link} to="/recipeapp/myrecipes">Conditional Link</Nav.Link>
         <div className="ml-auto">
-          <NightModeSwitch/>
+          <NightModeSwitch
+            setNightMode={props.setNightMode}
+          />
         </div>
         <NavDropdown 
           title={`Hello, ${loggedInUser}!`} 

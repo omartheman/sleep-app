@@ -37,6 +37,10 @@ function App() {
   const [nightMode, setNightMode] = useState(true);
   // const [intervalId, setIntervalId] = useState(null);
   useEffect(() => {
+    
+    console.log('nightMode', nightMode)
+  }, [nightMode])
+  useEffect(() => {
     axios.get(urlAuth) 
     .then(res => { 
       setLoggedInUser(res.data);
@@ -101,6 +105,7 @@ function App() {
   }
   const navbar = 
     <NavbarContainer
+      setNightMode={setNightMode}
       nightMode={nightMode}
       loginSubmit={handleLoginSubmit}
       onLoginFormChange={handleLoginFormChange}

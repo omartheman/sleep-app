@@ -11,6 +11,9 @@ class NightModeSwitch extends Component {
   handleChange(checked) {
     this.setState({ checked });
   }
+  componentDidUpdate(){
+    this.props.setNightMode(this.state.checked);
+  }
 
   render() {
     return (
