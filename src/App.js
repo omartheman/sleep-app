@@ -34,6 +34,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [loggedInUserError, setLoggedinUserError] = useState(null);
+  const [nightMode, setNightMode] = useState(true);
   // const [intervalId, setIntervalId] = useState(null);
   useEffect(() => {
     axios.get(urlAuth) 
@@ -144,9 +145,8 @@ function App() {
       <Route path="/sleep">
         <>
           {navbar}
-          
           {!loggedInUser && <Redirect to="/sleep/home-logged-out" />}
-          <Container fluid className="app-charts-container">
+          <Container fluid className={nightMode ? "app-charts-container app-charts-container-night-mode ": "app-charts-container"}>
             <div className="ct1">
               <EnterBedTimesChart 
                 loggedInUser={loggedInUser}

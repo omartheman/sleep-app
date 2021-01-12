@@ -16,7 +16,12 @@ h2 {
 }
 $colWdthLg: 33.333%;
 $colWdthMd: 50%;
+.app-charts-container-night-mode {
+  background: rgb(10, 10, 10);
+}
 .app-charts-container {
+
+
   display: grid; 
   grid-template-columns: $colWdthLg $colWdthLg $colWdthLg;
   grid-template-rows: auto;

@@ -150,9 +150,14 @@ class ArousalDurationChart extends React.Component {
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
                 tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+                style={ this.props.nightMode && {
+                  tickLabels: {fill: 'white'}
+                }}
                 />
               <VictoryAxis
-                style={{grid:{stroke:'black', strokeDasharray: '7'}}}
+                style={{
+                  grid:{stroke:'black', strokeDasharray: '7'}
+                }}
                 dependentAxis
                 tickFormat={(y) => `${y} min` }
               />
