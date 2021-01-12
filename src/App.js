@@ -23,6 +23,7 @@ import MinutesEarlyWokeChart from './MinutesEarlyWokeChart';
 import ArousalDurationChart from './ArousalDurationChart';
 import QualityRatingChart from './QualityRatingChart';
 import SleepAidItemChart from './SleepAidItemChart';
+import {Redirect} from 'react-router-dom';
 
 const urlAuth = `${url}auth`;
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
@@ -143,6 +144,8 @@ function App() {
       <Route path="/sleep">
         <>
           {navbar}
+          
+          {!loggedInUser && <Redirect to="/sleep/home-logged-out" />}
           <Container fluid className="app-charts-container">
             <div className="ct1">
               <EnterBedTimesChart 
@@ -159,37 +162,41 @@ function App() {
                 loggedInUser={loggedInUser}
               />
             </div>
+            <div className="ct4">
               <SleepAidItemChart 
                 loggedInUser={loggedInUser}
               />
+            </div>
+            <div className="ct5">
               <QualityRatingChart 
                 loggedInUser={loggedInUser}
               />
+            </div>
+            <div className="ct6">
               <ArousalDurationChart 
                 loggedInUser={loggedInUser}
               />
-            <Row>
-              <Col lg>
-                <MinutesEarlyWokeChart 
-                  loggedInUser={loggedInUser}
-                />
-              </Col>
-              <Col lg>
-                <ExitBedTimesChart 
-                  loggedInUser={loggedInUser}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col lg>
-                <MorningWakeTimesChart 
-                  loggedInUser={loggedInUser}
-                />
-              </Col>
-            </Row>
-            <NapTimesChart 
-              loggedInUser={loggedInUser}
-            />
+            </div>
+            <div className="ct7">
+              <MinutesEarlyWokeChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
+            <div className="ct8">
+              <ExitBedTimesChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
+            <div className="ct9">
+              <MorningWakeTimesChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
+            <div className="ct10">
+              <NapTimesChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
           </Container>
         </>
       </Route>
