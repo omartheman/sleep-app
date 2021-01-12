@@ -75,29 +75,29 @@ class EnterBedTimesChart extends React.Component {
             domainPadding={{ x: 20, y: 20 }}
           >
             <VictoryAxis
-              // tickValues specifies both the number of ticks and where
-              // they are placed on the axis
-              // tickValues={[1, 2, 3, 4, 5]}
               tickValues={xAxisTickValues}
-              // tickFormat={["1 Jan", "2 Jan", "3 Jan", "Quarter 4"]}
               tickFormat={dateLabels}
+              style={{grid:{stroke:'#212529', strokeDasharray: '7'}}}
+              style={ this.props.nightMode ? 
+                {tickLabels: {fill: 'white'}, 
+                grid: {stroke: '#212529', strokeDasharray: '7'}}
+                : {grid:{stroke:'#212529', strokeDasharray: '7'}}
+              }
               />
             <VictoryAxis
               style={{grid:{stroke:'black', strokeDasharray: '7'}}}
               dependentAxis
               tickFormat={(y) => formatAMPM(y)}
-              // tickFormat specifies how ticks should be displayed
-              // tickFormat={(y) => {
-              //   return(
-              //     `${y-y%1}:${Math.round(y%1*10)/10*60}PM`
-              //   );
-              // }}
+              style={ this.props.nightMode && {
+                tickLabels: {fill: 'white'}
+              }}
             />
             <VictoryLine
               data={data}
+              style={ this.props.nightMode && {data: {stroke: '#00ffcb'}}}
             />
           </VictoryChart>
-          <h2>Time I Got in Bed</h2>
+          <h2 className="enter-bed-charts-heading">Time I Got in Bed</h2>
         </div>
       </>
     )

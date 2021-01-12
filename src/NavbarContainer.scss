@@ -7,6 +7,18 @@ nav {
   // height: var(--navHeight);
   // padding: 0 20px !important;
 }
+.navbar-night-mode {
+  background-color: rgb(24, 28, 240);
+  .nav-link {
+    color: white !important; 
+  }
+  .nav-link:hover {
+    color: rgb(221, 221, 221) !important; 
+  }
+  .navbar-brand {
+    color: white !important;
+  }
+}
 #basic-nav-dropdown {
   font-weight: 600;
 }

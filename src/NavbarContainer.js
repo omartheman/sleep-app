@@ -55,7 +55,7 @@ const NavbarContainer = (props) => {
   };
   return(
   <>
-    <Navbar expand="lg">
+    <Navbar expand="lg" className={props.nightMode && "navbar-night-mode"}>
       <Navbar.Brand as={Link} to="/sleep/" className="navbar-site-name">
         <span>
           Sleep App 

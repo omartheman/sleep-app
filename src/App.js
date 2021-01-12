@@ -101,6 +101,7 @@ function App() {
   }
   const navbar = 
     <NavbarContainer
+      nightMode={nightMode}
       loginSubmit={handleLoginSubmit}
       onLoginFormChange={handleLoginFormChange}
       loggedInUser={loggedInUser}
@@ -145,10 +146,11 @@ function App() {
       <Route path="/sleep">
         <>
           {navbar}
-          {!loggedInUser && <Redirect to="/sleep/home-logged-out" />}
+          {/* {!loggedInUser && <Redirect to="/sleep/home-logged-out" />} */}
           <Container fluid className={nightMode ? "app-charts-container app-charts-container-night-mode ": "app-charts-container"}>
             <div className="ct1">
               <EnterBedTimesChart 
+                nightMode={nightMode}
                 loggedInUser={loggedInUser}
               />
             </div>

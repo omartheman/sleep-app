@@ -4,6 +4,9 @@ body, html {
 h2 {
   text-align: center;
 }
+.enter-bed-charts-heading {
+  color: rgb(145, 255, 209);
+}
 .victory-chart-1-container {
   display: inline-block;
   padding: 20px;
@@ -16,9 +19,11 @@ h2 {
 }
 $colWdthLg: 33.333%;
 $colWdthMd: 50%;
+
 .app-charts-container-night-mode {
   background: rgb(10, 10, 10);
 }
+
 .app-charts-container {
 
 
