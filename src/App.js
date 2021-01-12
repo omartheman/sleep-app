@@ -162,23 +162,8 @@ function App() {
                 loggedInUser={loggedInUser}
               />
             </div>
-            <div className="ct4">
-              <SleepAidItemChart 
-                loggedInUser={loggedInUser}
-              />
-            </div>
-            <div className="ct5">
-              <QualityRatingChart 
-                loggedInUser={loggedInUser}
-              />
-            </div>
-            <div className="ct6">
-              <ArousalDurationChart 
-                loggedInUser={loggedInUser}
-              />
-            </div>
-            <div className="ct7">
-              <MinutesEarlyWokeChart 
+            <div className="ct9">
+              <MorningWakeTimesChart 
                 loggedInUser={loggedInUser}
               />
             </div>
@@ -187,11 +172,28 @@ function App() {
                 loggedInUser={loggedInUser}
               />
             </div>
-            <div className="ct9">
-              <MorningWakeTimesChart 
+            <div className="ct7">
+              <MinutesEarlyWokeChart 
                 loggedInUser={loggedInUser}
               />
             </div>
+
+            <div className="ct4">
+              <SleepAidItemChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
+            <div className="ct6">
+              <ArousalDurationChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
+            <div className="ct5">
+              <QualityRatingChart 
+                loggedInUser={loggedInUser}
+              />
+            </div>
+
             <div className="ct10">
               <NapTimesChart 
                 loggedInUser={loggedInUser}

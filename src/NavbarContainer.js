@@ -3,10 +3,11 @@ import './NavbarContainer.scss';
 import {Navbar, Nav, NavDropdown, Form, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import url from './global_items';
 
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;
-const urlLogout = '#'
+const urlLogout = `${url}logout`;
 
 const NavbarContainer = (props) => {
   const {loginSubmit, loggedInUser, onLoginFormChange, onLogout} = props;

@@ -53,8 +53,7 @@ function HomeLoggedOut() {
           <h2>Better life.</h2>
           <h2>Starting tonight.</h2>
           <div className="home-logged-out-section-3-button-container">
-            <Button as={Link} to={'/sleep/create-account'}>Create<br/>Account</Button>
-            <Button>Log In</Button>
+            <Button as={Link} to={'/sleep/create-account'}>Create Account</Button>
           </div>
         </div>
       </Container>

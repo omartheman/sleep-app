@@ -1,3 +1,12 @@
+11 jan Monday
+priority updates: 
+  - Add button to Overview so you can choose day range: 7 days, 15 days, 30 days, 60 days, 180  days. 
+  - Add a page where you can compare data from certain charts: 
+    - Time in bed vs. Morning Wake Time
+  - Color graphs
+  - Make app night themed 
+  - Remove "Log In" from homepage
+
 8 Jan Fri
 
 Add arousalDuration and minutesEarlyWoke

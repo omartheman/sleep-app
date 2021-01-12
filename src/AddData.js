@@ -157,7 +157,7 @@ function AddData (props) {
             }}
           />
         </div>
-        {date && 
+        {(date && props.loggedInUser) ?
           <>
             <h2>Adding data for {getClickedDate(date) === getClickedDate((new Date())) && 'today: '}<strong>{dateHeading}</strong>: </h2>
             {checkExistingDataCompleted ?
@@ -282,6 +282,8 @@ function AddData (props) {
               <Spinner variant="success" animation="border" role="status" id="spinner-centered" className="spinner-centered"><span className="sr-only">Loading...</span></Spinner>
             }
           </>
+          :
+          <Alert variant="warning">Please log in to add data.</Alert>
         }
       </Container>
     </>
