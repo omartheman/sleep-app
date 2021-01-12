@@ -1,3 +1,5 @@
+$nightModeTransitionTime: 0.5s;
+
 body, html {
   height: 100%;
 }
@@ -6,9 +8,11 @@ h2 {
 }
 .enter-bed-charts-heading-night {
   color: rgb(145, 255, 209);
+  transition: color $nightModeTransitionTime; 
 }
 .enter-bed-charts-heading {
   color: #064112;
+  transition: color $nightModeTransitionTime;
 }
 .victory-chart-1-container {
   display: inline-block;
@@ -25,11 +29,12 @@ $colWdthMd: 50%;
 
 .app-charts-container-night-mode {
   background: rgb(10, 10, 10);
+  transition: background-color $nightModeTransitionTime; 
 }
 
 .app-charts-container {
-
-
+  
+  transition: background-color $nightModeTransitionTime;
   display: grid; 
   grid-template-columns: $colWdthLg $colWdthLg $colWdthLg;
   grid-template-rows: auto;

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Switch from "react-switch";
 
 class NightModeSwitch extends Component {
-  constructor() {
-    super();
-    this.state = { checked: true };
+  constructor(props) {
+    super(props);
+    this.state = { checked: this.props.nightMode };
     this.handleChange = this.handleChange.bind(this);
   }
 

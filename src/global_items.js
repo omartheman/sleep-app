@@ -3,6 +3,8 @@ const url = 'http://localhost:4000/sleep/api/';
 const url = 'https://omarshishani.com/sleep/api/';
 */
 
+const nightModeTransitionTime = '0.5s';
+
 function c (msg, input) {return(console.log(`${msg}: `, input))};
 
 function getClickedDate(date, type){
@@ -35,6 +37,6 @@ function getClickedDate(date, type){
 
 const varToString = varObj => Object.keys(varObj)[0]; 
 
-export {c, getClickedDate, url, varToString};
+export {c, getClickedDate, url, varToString, nightModeTransitionTime};
 
 export default url;

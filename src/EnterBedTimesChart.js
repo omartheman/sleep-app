@@ -4,7 +4,7 @@ import './EnterBedTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c} from './global_items';
+import {url, c, nightModeTransitionTime} from './global_items';
 
 const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
@@ -78,16 +78,38 @@ class EnterBedTimesChart extends React.Component {
               tickValues={xAxisTickValues}
               tickFormat={dateLabels}
               style={ this.props.nightMode ? 
-                {tickLabels: {fill: 'white'}, 
-                grid: {stroke: '#212529', strokeDasharray: '7'}}
-                : {grid: {stroke:'rgb(236, 239, 241)', strokeDasharray: '7'}}
+                {tickLabels: {
+                  fill: 'white',
+                  transition: `fill ${nightModeTransitionTime}`
+                }, 
+                grid: {
+                  stroke: '#212529', 
+                  strokeDasharray: '7',
+                  transition: `stroke ${nightModeTransitionTime}`
+                }}
+                : {grid: {
+                    stroke:'rgb(236, 239, 241)', 
+                    strokeDasharray: '7',
+                    transition: `stroke ${nightModeTransitionTime}`
+                  }}
               }
               />
             <VictoryAxis
               style={ this.props.nightMode ? 
-                {tickLabels: {fill: 'white'},
-                grid: {stroke:'rgb(236, 239, 241)', strokeDasharray: '7'}}
-                : {grid: {stroke:'#212529', strokeDasharray: '7'}}
+                {tickLabels: {
+                  fill: 'white',
+                  transition: `fill ${nightModeTransitionTime}`
+                }, 
+                grid: {
+                  stroke:'rgb(236, 239, 241)', 
+                  strokeDasharray: '7',
+                  transition: `stroke ${nightModeTransitionTime}`
+                }}
+                : {grid: {
+                    stroke:'#212529', 
+                    strokeDasharray: '7',
+                    transition: `stroke ${nightModeTransitionTime}`
+                  }}
               }
               dependentAxis
               tickFormat={(y) => formatAMPM(y)}
@@ -95,8 +117,14 @@ class EnterBedTimesChart extends React.Component {
             <VictoryLine
               data={data}
               style={this.props.nightMode ? 
-                {data: {stroke: '#00ffcb'}}
-                : {data: {stroke: '#06790f'}}
+                {data: {
+                  stroke: '#00ffcb',
+                  transition: `stroke ${nightModeTransitionTime}`
+                }}
+                : {data: {
+                    stroke: '#06790f',
+                    transition: `stroke ${nightModeTransitionTime}`
+                  }}
               }
             />
           </VictoryChart>

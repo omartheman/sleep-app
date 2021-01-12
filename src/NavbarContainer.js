@@ -72,6 +72,7 @@ const NavbarContainer = (props) => {
         <div className="ml-auto">
           <NightModeSwitch
             setNightMode={props.setNightMode}
+            nightMode={props.nightMode}
           />
         </div>
         <NavDropdown 
