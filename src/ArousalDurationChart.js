@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip, VictoryStack } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle} from './global_items';
+import {url, c, victoryAxisStyle, flyoutStyleNight, getLongDate} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -54,30 +54,16 @@ class ArousalDurationChart extends React.Component {
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
-        const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
-        const dateDiff = lastDate - firstDate;
-        if (dateDiff < 15) {
-          dateLabels = [...dateLabels, dateLabel];
-        } else {
-          if (date % 2 === 0){
-            dateLabels = [...dateLabels, null]
-          } else {
-            dateLabels = [...dateLabels, dateLabel];
-          }
-        }
+        dateLabels = [...dateLabels, dateLabel];
         let durationData = [];
         for (let i = 0; i < durations.length; i++) {
           durationData = [...durationData, 
-            { x: date, y: durations[i], dateLabel: dateLabel}
+            { x: date, y: durations[i], dateLabel: getLongDate(dateLabelPrimer)}
           ];
         }
-        return(durationData);
+        return(durationData);  
       });
     }
-    //SORT DATA INTO AROUSAL1 AROUSAL2 AROUSAL3... 
-    //FIRST FILL AROUSALS WITH CORRECT # EMPTY ARRAYS
-    //then do a forEach, and you need  
 
     const maxNumberArousals = Math.max(...data.map(x => x.length));
     const arousals = [];
@@ -105,6 +91,11 @@ class ArousalDurationChart extends React.Component {
       for (let i = 0; i < maxNumberArousals; i++){
         bars.push(
           <VictoryBar
+          style={{
+            labels: {
+              fill: this.props.nightMode ? 'white' : 'black'
+            }
+          }}
             key={i}
             data={arousals[i]}
             barWidth={() => {
@@ -119,11 +110,11 @@ class ArousalDurationChart extends React.Component {
               );
             }}
             labels={({ datum }) => {
-              return(`${datum.dateLabel} \n${datum.y} min`);
+              return(`${datum.y} min\n${datum.dateLabel}`);
             }}
             labelComponent={
               <VictoryTooltip
-                flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
+                flyoutStyle={flyoutStyleNight(this.props.nightMode)}
               />
             }
           />
@@ -140,7 +131,6 @@ class ArousalDurationChart extends React.Component {
               padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
               scale={{y:'number'}}
               domainPadding={{ x: 20, y: 20 }}
-              
             >
               <VictoryAxis
                 tickValues={xAxisTickValues}

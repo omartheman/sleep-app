@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -51,21 +51,10 @@ class MinutesEarlyWokeChart extends React.Component {
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
-        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
-        const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
-        const dateDiff = lastDate - firstDate;
-        if (dateDiff < 15) {
-          dateLabels = [...dateLabels, dateLabel];
-        } else {
-          if (date % 2 === 0){
-            dateLabels = [...dateLabels, null]
-          } else {
-            dateLabels = [...dateLabels, dateLabel];
-          }
-        }
+        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`;  
+        dateLabels = [...dateLabels, dateLabel];
         return(
-          { x: date, y: e.minutesEarlyWoke, dateLabel: dateLabel}
+          { x: date, y: e.minutesEarlyWoke, dateLabel: getLongDate(dateLabelPrimer), timeLabel: `${e.minutesEarlyWoke} min` }
         );
       });
     }
@@ -119,7 +108,7 @@ class MinutesEarlyWokeChart extends React.Component {
                   );
                 }}
                 labels={({ datum }) => {
-                  return(`${datum.dateLabel} \n${datum.y} min`);
+                  return(`${datum.y} min\n${datum.dateLabel}`);
                 }}
                 labelComponent={
                   <VictoryTooltip

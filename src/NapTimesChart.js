@@ -4,7 +4,7 @@ import './NapTimesChart.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -61,17 +61,8 @@ class NapTimesChart extends React.Component {
         const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
         const dateDiff = lastDate - firstDate;
         dateLabels = [...dateLabels, dateLabel];
-        // if (dateDiff < 15) {
-        //   dateLabels = [...dateLabels, dateLabel];
-        // } else {
-        //   if (date % 2 === 0){
-        //     dateLabels = [...dateLabels, null]
-        //   } else {
-        //     dateLabels = [...dateLabels, dateLabel];
-        //   }
-        // }
         return(
-          { x: date, y0: dateTime, y: dateTimeEnd }
+          { x: date, y0: dateTime, y: dateTimeEnd, dateLabel: getLongDate(dateLabelPrimer)}
         );
       });
     }
@@ -125,8 +116,11 @@ class NapTimesChart extends React.Component {
               }}
               cornerRadius={{topLeft: 3, topRight: 3, bottomLeft: 3, bottomRight: 3}}
               labels={({ datum }) => {
-                return(duration(new Date(datum._y0), new Date(datum._y)))}
+                return(
+                  `${duration(new Date(datum._y0), new Date(datum._y))}\n${datum.dateLabel}`
+                )}
               }
+              
               labelComponent={
                 <VictoryTooltip
                   flyoutStyle={flyoutStyleNight(this.props.nightMode)}

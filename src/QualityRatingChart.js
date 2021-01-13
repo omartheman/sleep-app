@@ -121,7 +121,7 @@ class QualityRatingChart extends React.Component {
                   );
                 }}
                 labels={({ datum }) => {
-                  return(`${datum.dateLabel} \n${datum.y} out of 5`);
+                  return(`${datum.y} out of 5\n${datum.dateLabel}`);
                 }}
                 labelComponent={
                   <VictoryTooltip

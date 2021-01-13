@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, victoryTooltipLabelStyle} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, victoryTooltipLabelStyle, getLongDate} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -51,20 +51,9 @@ class TimeToFallAsleepChart extends React.Component {
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
-        const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
-        const dateDiff = lastDate - firstDate;
-        if (dateDiff < 15) {
-          dateLabels = [...dateLabels, dateLabel];
-        } else {
-          if (date % 2 === 0){
-            dateLabels = [...dateLabels, null]
-          } else {
-            dateLabels = [...dateLabels, dateLabel];
-          }
-        }
+        dateLabels = [...dateLabels, dateLabel];
         return(
-          { x: date, y: e.timeToFallAsleep, dateLabel: dateLabel}
+          { x: date, y: e.timeToFallAsleep, dateLabel: getLongDate(dateLabelPrimer), timeLabel: `${e.timeToFallAsleep} min` }
         );
       });
     }
