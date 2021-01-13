@@ -2,6 +2,8 @@
 
   - fix date label: right now the date is correct, but the day (fri) shows 1 day early
   - remove extra fields from adddata
+  - button to view large graphs on overview page
+  - make each graph a link to it's own page, where it has an expanded view. 
 
 11 jan Monday
 priority updates: 
