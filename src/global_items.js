@@ -3,6 +3,15 @@ const url = 'http://localhost:4000/sleep/api/';
 /*
 const url = 'https://omarshishani.com/sleep/api/';
 */
+
+const flyoutStyleNight = (nightMode) => (
+  { 
+    stroke: nightMode ? "#00ff2b" : "tomato", 
+    fill: nightMode ? 'black' : '#fff5eb',
+    strokeWidth: 2 
+  }
+)
+
 const getLongDate = (date) => {
   var weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -10,6 +19,18 @@ const getLongDate = (date) => {
   return longDateLabel;
 }
 // exitBedCharts sleepQualityCharts  
+const victoryTooltipLabelStyle = (nightMode) => (
+  { 
+    labels: {fill: nightMode ? 'white' : 'black'}
+  }
+);
+
+const victoryBarStyle = (nightMode) => (nightMode ? 
+    { 
+      labels: {fill: nightMode ? 'white' : 'black'}
+    }
+    :null
+);
 const victoryLineStyle = (nightMode, chartGroup) => (nightMode ? 
   {data: {
     stroke: 
@@ -116,6 +137,6 @@ function getClickedDate(date, type){
 
 const varToString = varObj => Object.keys(varObj)[0]; 
 
-export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement, getLongDate, victoryLineStyle};
+export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement, getLongDate, victoryLineStyle, flyoutStyleNight, victoryTooltipLabelStyle};
 
 export default url;

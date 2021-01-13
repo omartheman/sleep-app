@@ -4,7 +4,7 @@ import './NapTimesChart.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -98,6 +98,15 @@ class NapTimesChart extends React.Component {
               style={victoryAxisStyle('y', this.props.nightMode)}
             />
             <VictoryBar
+              style={{
+                data: {
+                  fill: this.props.nightMode ? 'rgb(0 168 255)' : '#964c9d', 
+                  transition: `fill ${nightModeTransitionTime}`
+                },
+                labels: {
+                  fill: this.props.nightMode ? 'white' : 'black'
+                }
+              }}
               data={data}
               barWidth={() => {
                 let firstDate;
@@ -115,14 +124,12 @@ class NapTimesChart extends React.Component {
                 );
               }}
               cornerRadius={{topLeft: 3, topRight: 3, bottomLeft: 3, bottomRight: 3}}
-              style={{ data: {fill: '#964c9d'} }}
               labels={({ datum }) => {
                 return(duration(new Date(datum._y0), new Date(datum._y)))}
               }
               labelComponent={
                 <VictoryTooltip
-                  flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
-                  // centerOffset={{ y: 45 }}
+                  flyoutStyle={flyoutStyleNight(this.props.nightMode)}
                 />
               }
             />

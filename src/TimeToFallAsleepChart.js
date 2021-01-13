@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, victoryTooltipLabelStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -91,6 +91,15 @@ class TimeToFallAsleepChart extends React.Component {
                 style={victoryAxisStyle('y', this.props.nightMode)}
               />
               <VictoryBar
+                style={{
+                  data: {
+                    fill: this.props.nightMode ? 'rgb(0 168 255)' : '#00b6ba', 
+                    transition: `fill ${nightModeTransitionTime}`
+                  },
+                  labels: {
+                    fill: this.props.nightMode ? 'white' : 'black'
+                  }
+                }}
                 data={data}
                 barWidth={() => {
                   let firstDate;
@@ -108,11 +117,15 @@ class TimeToFallAsleepChart extends React.Component {
                   );
                 }}
                 labels={({ datum }) => {
-                  return(`${datum.dateLabel} \n${datum.y} min`);
+                  if (datum){
+                    return(
+                      `${datum.timeLabel}\n${datum.dateLabel}`
+                    );
+                  }
                 }}
                 labelComponent={
                   <VictoryTooltip
-                    flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
+                    flyoutStyle={flyoutStyleNight(this.props.nightMode)}
                   />
                 }
               />
