@@ -60,15 +60,16 @@ class NapTimesChart extends React.Component {
         const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
         const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
         const dateDiff = lastDate - firstDate;
-        if (dateDiff < 15) {
-          dateLabels = [...dateLabels, dateLabel];
-        } else {
-          if (date % 2 === 0){
-            dateLabels = [...dateLabels, null]
-          } else {
-            dateLabels = [...dateLabels, dateLabel];
-          }
-        }
+        dateLabels = [...dateLabels, dateLabel];
+        // if (dateDiff < 15) {
+        //   dateLabels = [...dateLabels, dateLabel];
+        // } else {
+        //   if (date % 2 === 0){
+        //     dateLabels = [...dateLabels, null]
+        //   } else {
+        //     dateLabels = [...dateLabels, dateLabel];
+        //   }
+        // }
         return(
           { x: date, y0: dateTime, y: dateTimeEnd }
         );
@@ -86,6 +87,7 @@ class NapTimesChart extends React.Component {
             <VictoryAxis
               tickValues={xAxisTickValues}
               tickFormat={dateLabels}
+              fixLabelOverlap={true}
               tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
               />
             <VictoryAxis

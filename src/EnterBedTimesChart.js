@@ -60,15 +60,16 @@ class EnterBedTimesChart extends React.Component {
         const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
         const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
         const dateDiff = lastDate - firstDate;
-        if (dateDiff < 15) {
-          dateLabels = [...dateLabels, dateLabel];
-        } else {
-          if (date % 2 === 0){
-            dateLabels = [...dateLabels, null]
-          } else {
-            dateLabels = [...dateLabels, dateLabel];
-          }
-        }
+        dateLabels = [...dateLabels, dateLabel];
+        // if (dateDiff < 15) {
+        //   dateLabels = [...dateLabels, dateLabel];
+        // } else {
+        //   if (date % 2 === 0){
+        //     dateLabels = [...dateLabels, null]
+        //   } else {
+        //     dateLabels = [...dateLabels, dateLabel];
+        //   }
+        // }
         var weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const longDateLabel = `${weekday[dateLabelPrimer.getDay()]}, ${month[dateLabelPrimer.getMonth()]} ${dateLabelPrimer.getDate()}`;
@@ -90,6 +91,7 @@ class EnterBedTimesChart extends React.Component {
               tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
               tickValues={xAxisTickValues}
               tickFormat={dateLabels}
+              fixLabelOverlap={true}
               style={victoryAxisStyle('x', this.props.nightMode)}
               />
             <VictoryAxis
@@ -111,23 +113,7 @@ class EnterBedTimesChart extends React.Component {
                 }}
               }
             />
-            <VictoryScatter
-              style={{ data: { fill: "#c43a31" } }}
-              size={4}
-              data={data}
-              labels={({ datum }) => {
-                if (datum){
-                  return(
-                    `${datum.timeLabel}\n${datum.dateLabel}`
-                  );
-                }
-              }}
-              labelComponent={
-                <VictoryTooltip
-                  flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
-                />
-              }
-            />
+            {VictoryScatterLineComplement(data, this.props.nightMode)}
           </VictoryChart>
           <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="This is the time that you entered your bed - you may not yet have turned the lights off.">Time I Got in Bed</h2>
         </div>

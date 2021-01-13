@@ -6,18 +6,20 @@ const url = 'https://omarshishani.com/sleep/api/';
 
 const victoryScatterLabels = (datum) => {
   if (datum){
-    console.log('datum true')
-    c('datum.y', datum.y)
-
     return(
       `${datum.y}\n${datum.dateLabel}`
     );
   }
 }
 
-const VictoryScatterLineComplement = (data) =>
+const VictoryScatterLineComplement = (data, nightMode) =>
 <VictoryScatter
-  style={{ data: { fill: "#c43a31" } }}
+  style={
+    { 
+      data: { fill: "#c43a31" }, 
+      labels: {fill: nightMode ? 'white' : 'black'}
+    }
+  }
   size={4}
   data={data}
   labels={({ datum }) => {
@@ -29,7 +31,11 @@ const VictoryScatterLineComplement = (data) =>
   }}
   labelComponent={
     <VictoryTooltip
-      flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
+      flyoutStyle={{ 
+        stroke: nightMode ? "#00ff2b" : "tomato", 
+        fill: nightMode ? 'black' : '#fff5eb',
+        strokeWidth: 2 
+      }}
     />
   }
 />;
