@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c} from './global_items';
+import {url, c, victoryAxisStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -83,11 +83,13 @@ class MinutesEarlyWokeChart extends React.Component {
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
                 tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
-                />
+                style={victoryAxisStyle('x', this.props.nightMode)}
+              />
               <VictoryAxis
                 style={{grid:{stroke:'black', strokeDasharray: '7'}}}
                 dependentAxis
                 tickFormat={(y) => `${y} min` }
+                style={victoryAxisStyle('y', this.props.nightMode)}
               />
               <VictoryBar
                 data={data}

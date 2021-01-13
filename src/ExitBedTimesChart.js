@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c} from './global_items';
+import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -72,11 +72,13 @@ class LightsOffTimesChart extends React.Component {
               <VictoryAxis
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
-                />
+                style={victoryAxisStyle('x', this.props.nightMode)}
+              />
               <VictoryAxis
                 style={{grid:{stroke:'black', strokeDasharray: '7'}}}
                 dependentAxis
                 tickFormat={(y) => formatAMPM(y)}
+                style={victoryAxisStyle('x', this.props.nightMode)}
               />
               <VictoryLine
                 data={data}

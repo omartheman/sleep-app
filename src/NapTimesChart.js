@@ -4,7 +4,7 @@ import './NapTimesChart.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c} from './global_items';
+import {url, c, victoryAxisStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -89,11 +89,13 @@ class NapTimesChart extends React.Component {
               tickFormat={dateLabels}
               fixLabelOverlap={true}
               tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
-              />
+              style={victoryAxisStyle('x', this.props.nightMode)}
+            />
             <VictoryAxis
               style={{grid:{stroke:'black', strokeDasharray: '7'}}}
               dependentAxis
               tickFormat={(y) => formatAMPM(y)}
+              style={victoryAxisStyle('y', this.props.nightMode)}
             />
             <VictoryBar
               data={data}

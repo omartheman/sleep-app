@@ -3,13 +3,11 @@ const url = 'http://localhost:4000/sleep/api/';
 /*
 const url = 'https://omarshishani.com/sleep/api/';
 */
-
-const victoryScatterLabels = (datum) => {
-  if (datum){
-    return(
-      `${datum.y}\n${datum.dateLabel}`
-    );
-  }
+const getLongDate = (date) => {
+  var weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const longDateLabel = `${weekday[date.getDay()]}, ${month[date.getMonth()]} ${date.getDate()}`;
+  return longDateLabel;
 }
 
 const VictoryScatterLineComplement = (data, nightMode) =>
@@ -98,6 +96,6 @@ function getClickedDate(date, type){
 
 const varToString = varObj => Object.keys(varObj)[0]; 
 
-export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement};
+export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement, getLongDate};
 
 export default url;

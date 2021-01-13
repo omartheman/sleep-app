@@ -4,7 +4,7 @@ import './EnterBedTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryTooltip, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement} from './global_items';
+import {url, c, nightModeTransitionTime, victoryAxisStyle, getLongDate,  VictoryScatterLineComplement} from './global_items';
 
 const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
@@ -57,24 +57,9 @@ class EnterBedTimesChart extends React.Component {
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
-        const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
-        const dateDiff = lastDate - firstDate;
         dateLabels = [...dateLabels, dateLabel];
-        // if (dateDiff < 15) {
-        //   dateLabels = [...dateLabels, dateLabel];
-        // } else {
-        //   if (date % 2 === 0){
-        //     dateLabels = [...dateLabels, null]
-        //   } else {
-        //     dateLabels = [...dateLabels, dateLabel];
-        //   }
-        // }
-        var weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const longDateLabel = `${weekday[dateLabelPrimer.getDay()]}, ${month[dateLabelPrimer.getMonth()]} ${dateLabelPrimer.getDate()}`;
         return(
-          { x: date, y: dateTime, dateLabel: longDateLabel, timeLabel: formatAMPM(dateTime) }
+          { x: date, y: dateTime, dateLabel: getLongDate(dateLabelPrimer), timeLabel: formatAMPM(dateTime) }
         );
       });
     }

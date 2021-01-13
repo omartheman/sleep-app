@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c} from './global_items';
+import {url, c, victoryAxisStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -81,11 +81,13 @@ class TimeToFallAsleepChart extends React.Component {
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
                 tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+                style={victoryAxisStyle('x', this.props.nightMode)}
                 />
               <VictoryAxis
                 style={{grid:{stroke:'black', strokeDasharray: '7'}}}
                 dependentAxis
                 tickFormat={(y) => `${y} min` }
+                style={victoryAxisStyle('y', this.props.nightMode)}
               />
               <VictoryBar
                 data={data}
@@ -114,7 +116,7 @@ class TimeToFallAsleepChart extends React.Component {
                 }
               />
             </VictoryChart>
-            <h2>How Long To Fall Asleep</h2>
+              <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="How long it took you to fall asleep after turning the lights off.">How Long To Fall Asleep</h2>
           </div>
       </>
     )
