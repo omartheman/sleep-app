@@ -8,6 +8,9 @@
   .react-calendar__month-view__days__day--neighboringMonth abbr {
     color: rgb(234, 0, 255) !important;
   }
+  .react-calendar__month-view__days__day--weekend abbr {
+    color: yellow !important;
+  }
   input:focus {
     color: white;
     background: #0e0e0e;
