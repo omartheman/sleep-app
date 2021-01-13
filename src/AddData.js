@@ -40,11 +40,7 @@ function AddData (props) {
 
   const checkExistingData = (clickedDate) => {
     setCheckExistingDataCompleted(false);
-    c('checking existing data')
-    c('user',props.loggedInUser)
-    c('props', props)
     if (!props.loggedInUser){return};
-    c('didnt return')
     axios.post(urlCheckExistingData, {
       clickedDate: getClickedDate(clickedDate, 'mysql'),
       user: props.loggedInUser
@@ -105,8 +101,6 @@ function AddData (props) {
     dateClickedYear = date.getFullYear();
   }
   const handleFormInput = (e) => {
-    c('e id', e.target.getAttribute('id_val'));
-    c('existnap value', e.target.value);
     if (e.target.getAttribute('id_val') === 'nap-start-time') {
       setExistingNapStart(e.target.value);
     } else if (e.target.getAttribute('id_val') === 'nap-end-time') {
@@ -120,7 +114,6 @@ function AddData (props) {
     } else if (e.target.getAttribute('id_val') === 'lights-off-time'){
       setLightsOffTime(e.target.value);
     } else if (e.target.getAttribute('id_val') === 'time-to-fall-asleep'){
-      c('timetosleep', typeof e.target.value)
       setTimeToFallAsleep(e.target.value);
     } else if (e.target.getAttribute('id_val') === 'number-times-arousal'){
       setNumberTimesArousal(e.target.value);
@@ -131,7 +124,6 @@ function AddData (props) {
     } else if (e.target.getAttribute('id_val') === 'exit-bed-time'){
       setExitBedTime(e.target.value);
     } else if (e.target.getAttribute('id_val') === 'minutes-early-woke'){
-      c('minutesEarlyWoke', typeof e.target.value)
       setMinutesEarlyWoke(e.target.value);
     } else if (e.target.getAttribute('id_val') === 'quality-rating'){
       setQualityRating(e.target.value);
@@ -153,10 +145,7 @@ function AddData (props) {
             value={value}
             view={'month'}
             onClickDay={(value, event) => {
-              // console.log('New date is: ', value)
-              // c('valueonly', value);
               setDate(value);
-              c('date value', value)
               checkExistingData(value);
             }}
           />

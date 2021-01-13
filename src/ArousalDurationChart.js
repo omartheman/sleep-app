@@ -55,7 +55,6 @@ class ArousalDurationChart extends React.Component {
         const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
         xAxisTickValues = [...xAxisTickValues, date];
 
-        c('datelabelprimer arousal', dateLabelPrimer);
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         dateLabels = [...dateLabels, dateLabel];
         let durationData = [];
