@@ -35,6 +35,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [loggedInUserError, setLoggedinUserError] = useState(null);
   const [nightMode, setNightMode] = useState(true);
+  const [range, setRange] = useState(30);
   // const [intervalId, setIntervalId] = useState(null);
   useEffect(() => {
     axios.get(urlAuth) 
@@ -142,14 +143,23 @@ function App() {
         </>
       </Route>
       <Route path="/sleep">
-        <>
+        <div className={`${nightMode && 'app-charts-container-wrapper-night'}`}>
           {navbar}
           {/* {!loggedInUser && <Redirect to="/sleep/home-logged-out" />} */}
-          <Container fluid className={nightMode ? "app-charts-container app-charts-container-night-mode ": "app-charts-container"}>
+          <label>Range of dates</label>
+          <input 
+            type='number'
+            onChange={(e) => {
+              console.log('range', range);
+              setRange(Number(e.target.value));
+            }}
+          />
+          <Container fluid className="app-charts-container">
             <div className="ct1">
               <EnterBedTimesChart 
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
+                range={range}
                 />
             </div>
             <div className="ct2">
@@ -209,7 +219,7 @@ function App() {
                 />
             </div>
           </Container>
-        </>
+        </div>
       </Route>
       <Route path="/recipeapp/create-account-success" render={() => (
         <>

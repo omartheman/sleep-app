@@ -43,13 +43,11 @@ h2 {
 $colWdthLg: 33.333%;
 $colWdthMd: 50%;
 
-.app-charts-container-night-mode {
+.app-charts-container-wrapper-night {
   background: rgb(10, 10, 10);
   transition: background-color $nightModeTransitionTime; 
 }
-
 .app-charts-container {
-  
   transition: background-color $nightModeTransitionTime;
   display: grid; 
   grid-template-columns: $colWdthLg $colWdthLg $colWdthLg;
