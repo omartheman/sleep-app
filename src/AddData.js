@@ -140,7 +140,11 @@ function AddData (props) {
   const curYear = (new Date()).getFullYear();
   return(
     <>
-      <Container className="add-data">
+      <Container 
+        className={
+          `add-data add-data-container ${props.nightMode && 'add-data-container-night'}`
+        }
+      >
         <h1>Add Data</h1>
         <h2>Pick a Date to Add Data</h2> 
         <div className="add-data-calendar-container">
@@ -271,7 +275,10 @@ function AddData (props) {
                 <Button className="add-data-submit-button" onClick={handleDataSubmit}>Submit</Button>
               </>
             : 
-              <Spinner variant="success" animation="border" role="status" id="spinner-centered" className="spinner-centered"><span className="sr-only">Loading...</span></Spinner>
+              <>
+                <Spinner variant="success" animation="border" role="status" id="spinner-centered" className="spinner-centered"><span className="sr-only">Loading...</span></Spinner>
+                <div className="add-data-spinner-padding-for-night-mode"></div>
+              </>
             }
           </>
           :

@@ -1,3 +1,37 @@
+.add-data-container-night {
+  h1, h2, label, input, .react-calendar button, .react-calendar abbr {
+    color: white;
+  }
+  input, .react-calendar {
+    background: #1f1f1f;
+  }
+  .react-calendar__month-view__days__day--neighboringMonth abbr {
+    color: rgb(234, 0, 255) !important;
+  }
+  input:focus {
+    color: white;
+    background: #0e0e0e;
+  }
+  .react-calendar button:hover, .react-calendar button:focus {
+    background: #0e0e0e !important;
+  }
+  .react-calendar__tile--now {
+    background: rgb(0, 119, 0);
+  }
+  .alert-success {
+    color: #9bffb2;
+    background-color: #001a06;
+    border-color: #c3e6cb;
+  }
+  .alert-warning {
+    color: #f4ff50;
+    background-color: #4a3800;
+    border-color: #ffeeba;
+  }
+}
+.add-data-component-wrapper-night {
+  background-color: #0a0a0a;
+}
 .add-data-form  .form-label {
   margin-top: 20px;
 }
@@ -18,4 +52,7 @@
 }
 .add-data-submit-button {
   margin: 20px 0 40px;
+}
+.add-data-spinner-padding-for-night-mode {
+  padding-bottom: 100vh
 }

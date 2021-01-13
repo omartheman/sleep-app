@@ -133,9 +133,12 @@ function App() {
       <Route path="/sleep/add-data">
         <>
           {navbar}
-          <AddData 
-            loggedInUser={loggedInUser}
-          />
+          <div className={nightMode && "add-data-component-wrapper-night"}>
+            <AddData 
+              nightMode={nightMode}
+              loggedInUser={loggedInUser}
+            />
+          </div>
         </>
       </Route>
       <Route path="/sleep">
