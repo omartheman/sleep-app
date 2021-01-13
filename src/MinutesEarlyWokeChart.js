@@ -13,7 +13,6 @@ class MinutesEarlyWokeChart extends React.Component {
   componentDidMount(){
     axios.post(urlGetData, {user: this.props.loggedInUser})
     .then(res => {
-      console.log(res);
       let newChartInfo = [];
       res.data.map(x => {
         newChartInfo = [...newChartInfo, {
@@ -29,7 +28,6 @@ class MinutesEarlyWokeChart extends React.Component {
     if (prevProps.loggedInUser !== this.props.loggedInUser){
       axios.post(urlGetData, {user: this.props.loggedInUser})
       .then(res => {
-        console.log(res);
         let newChartInfo = [];
         res.data.map(x => {
           newChartInfo = [...newChartInfo, {
@@ -66,7 +64,6 @@ class MinutesEarlyWokeChart extends React.Component {
             dateLabels = [...dateLabels, dateLabel];
           }
         }
-        c('e.minearly', e.minutesEarlyWoke)
         return(
           { x: date, y: e.minutesEarlyWoke, dateLabel: dateLabel}
         );

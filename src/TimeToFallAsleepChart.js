@@ -13,7 +13,6 @@ class TimeToFallAsleepChart extends React.Component {
   componentDidMount(){
     axios.post(urlGetData, {user: this.props.loggedInUser})
     .then(res => {
-      console.log(res);
       let newChartInfo = [];
       res.data.map(x => {
         newChartInfo = [...newChartInfo, {
@@ -29,7 +28,6 @@ class TimeToFallAsleepChart extends React.Component {
     if (prevProps.loggedInUser !== this.props.loggedInUser){
       axios.post(urlGetData, {user: this.props.loggedInUser})
       .then(res => {
-        console.log(res);
         let newChartInfo = [];
         res.data.map(x => {
           newChartInfo = [...newChartInfo, {

@@ -13,7 +13,6 @@ class QualityRatingChart extends React.Component {
   componentDidMount(){
     axios.post(urlGetData, {user: this.props.loggedInUser})
     .then(res => {
-      console.log(res);
       let newChartInfo = [];
       res.data.map(x => {
         newChartInfo = [...newChartInfo, {
@@ -29,7 +28,6 @@ class QualityRatingChart extends React.Component {
     if (prevProps.loggedInUser !== this.props.loggedInUser){
       axios.post(urlGetData, {user: this.props.loggedInUser})
       .then(res => {
-        console.log(res);
         let newChartInfo = [];
         res.data.map(x => {
           newChartInfo = [...newChartInfo, {
@@ -65,7 +63,6 @@ class QualityRatingChart extends React.Component {
             dateLabels = [...dateLabels, dateLabel];
           }
         }
-        c('e.minearly', e.qualityRating)
         var weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const longDateLabel = `${weekday[dateLabelPrimer.getDay()]}, ${month[dateLabelPrimer.getMonth()]} ${dateLabelPrimer.getDate()}`;

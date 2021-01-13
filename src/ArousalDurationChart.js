@@ -50,7 +50,6 @@ class ArousalDurationChart extends React.Component {
     if (chartInfo.length > 1) {
       data =  chartInfo.filter(napObj => napObj.arousalDuration).map((e, i, arr) => {
         const durations = e.arousalDuration.match(/\d+/g).map(x => Number(x));
-        c('durations',durations)
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
         const dateLabelPrimer = new Date(Date.parse(e.date));
@@ -79,7 +78,6 @@ class ArousalDurationChart extends React.Component {
     //SORT DATA INTO AROUSAL1 AROUSAL2 AROUSAL3... 
     //FIRST FILL AROUSALS WITH CORRECT # EMPTY ARRAYS
     //then do a forEach, and you need  
-    c('data',data)
 
     const maxNumberArousals = Math.max(...data.map(x => x.length));
     const arousals = [];
@@ -102,13 +100,12 @@ class ArousalDurationChart extends React.Component {
       firstDate = arousals[0][0].x;
       lastDate = arousals[0][arousals[0].length - 1].x;
     }
-    c('arousals', arousals)
 
     const createBars = () => {
       for (let i = 0; i < maxNumberArousals; i++){
-        c('for', i)
         bars.push(
           <VictoryBar
+            key={i}
             data={arousals[i]}
             barWidth={() => {
               let dateDiff;
@@ -135,7 +132,6 @@ class ArousalDurationChart extends React.Component {
     }
     createBars();
 
-    data.forEach((x, i) => c(`data foreach ${i}`, x))
     return (
       <>
           <div className="victory-chart-1-container">

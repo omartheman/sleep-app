@@ -37,10 +37,6 @@ function App() {
   const [nightMode, setNightMode] = useState(true);
   // const [intervalId, setIntervalId] = useState(null);
   useEffect(() => {
-
-    console.log('nightMode', nightMode)
-  }, [nightMode])
-  useEffect(() => {
     axios.get(urlAuth) 
     .then(res => { 
       setLoggedInUser(res.data);
@@ -52,7 +48,6 @@ function App() {
   const checkLoggedIn = () => {
     axios.get(urlAuth) 
     .then(res => { 
-      console.log('loggedInUser: ', res.data);
       setLoggedInUser(res.data);
     }).catch(error => {
       console.log(error)
@@ -68,13 +63,10 @@ function App() {
     })
   }
   const handleNewLoggedInUser = (newLoggedInUser) => {
-    console.log('new logged in user: ',newLoggedInUser)
     setLoggedInUser(newLoggedInUser);
   }
   const handleLoginSubmit = (e) => {
-    console.log('login clicked')
     e.preventDefault();
-    console.log('error not here')
     axios.post(urlAuth,     
       {
         username: username, 
@@ -82,12 +74,10 @@ function App() {
       }
     )
     .then(response => {
-      console.log('axios response: ', response)
     }).catch(error => {console.log(error)})
     .then( 
       axios.get(urlAuth) 
       .then(res => { 
-        console.log(res);
         setLoggedInUser(res.data);
       }).catch(error => {console.log('Axios error from urlAuth: ', error)})
     )
