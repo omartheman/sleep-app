@@ -1,5 +1,12 @@
+13 jan wed
+
+  - fix date label: right now the date is correct, but the day (fri) shows 1 day early
+  - remove extra fields from adddata
+
 11 jan Monday
 priority updates: 
+
+
   -need to subtract 1 from each date for "last night" data, otherwise you're showing as if the thing happened the next day
   - Add button to Overview so you can choose day range: 7 days, 15 days, 30 days, 60 days, 180  days. 
   - Add a page where you can compare data from certain charts: 

@@ -3,6 +3,12 @@ const url = 'http://localhost:4000/sleep/api/';
 /*
 const url = 'https://omarshishani.com/sleep/api/';
 */
+const yesterdaysDateLabelPrimer = (date) => {
+  return new Date(Date.parse(date) - 1000*86400);
+}
+const yesterdaysDate = (date) => {
+  return Math.floor(Date.parse(date)/1000/86400) - 1;
+};
 
 const flyoutStyleNight = (nightMode) => (
   { 
@@ -13,7 +19,7 @@ const flyoutStyleNight = (nightMode) => (
 )
 
 const getLongDate = (date) => {
-  var weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const longDateLabel = `${weekday[date.getDay()]}, ${month[date.getMonth()]} ${date.getDate()}`;
   return longDateLabel;
@@ -147,6 +153,6 @@ function getClickedDate(date, type){
 
 const varToString = varObj => Object.keys(varObj)[0]; 
 
-export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement, getLongDate, victoryLineStyle, flyoutStyleNight, victoryTooltipLabelStyle};
+export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement, getLongDate, victoryLineStyle, flyoutStyleNight, victoryTooltipLabelStyle, yesterdaysDate, yesterdaysDateLabelPrimer};
 
 export default url;

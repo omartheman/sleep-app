@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, yesterdaysDate, yesterdaysDateLabelPrimer} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -47,9 +47,11 @@ class QualityRatingChart extends React.Component {
     let data;
     if (chartInfo.length > 1) {
       data = chartInfo.filter(napObj => napObj.qualityRating || napObj.qualityRating === 0).map((e, i, arr) => {
-        const date = Math.floor(Date.parse(e.date)/1000/86400) - 1;
+
+        const date = yesterdaysDate(e.date);
+        const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
         xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date) - 1000*86400);
+
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
         const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);

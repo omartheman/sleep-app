@@ -4,7 +4,7 @@ import './NapTimesChart.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -54,9 +54,9 @@ class NapTimesChart extends React.Component {
         const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         
-        const date = Math.floor(Date.parse(e.date)/1000/86400) - 1;
+        const date = yesterdaysDate(e.date);
+        const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
         xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date) - 1000*86400);
 
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         dateLabels = [...dateLabels, dateLabel];

@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -47,9 +47,10 @@ class SleepAidItemChart extends React.Component {
     let data;
     if (chartInfo.length > 1) {
       data = chartInfo.filter(napObj => napObj.sleepAidItem || napObj.sleepAidItem === 0).map((e, i, arr) => {
-        const date = Math.floor(Date.parse(e.date)/1000/86400) - 1;
+        const date = yesterdaysDate(e.date);
+        const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
         xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date) - 1000*86400);
+
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         const sleepAidMg = e.sleepAidItem.match(/\d+/g);
         const sleepAidItem = e.sleepAidItem.match(/(?<=\s+)[A-Za-z]+/g)[0];
