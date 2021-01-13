@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle} from './global_items';
+import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle, victoryLineStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -56,7 +56,7 @@ class LightsOffTimesChart extends React.Component {
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         dateLabels = [...dateLabels, dateLabel];
         return(
-          { x: date, y: dateTime }
+          { x: date, y: dateTime, dateLabel: getLongDate(dateLabelPrimer), timeLabel: formatAMPM(dateTime) }
         );
       });
     }
@@ -82,9 +82,11 @@ class LightsOffTimesChart extends React.Component {
               />
               <VictoryLine
                 data={data}
+                style={victoryLineStyle(this.props.nightMode, 'exitBedCharts')}
               />
+              {VictoryScatterLineComplement(data, this.props.nightMode)}
             </VictoryChart>
-            <h2>Time Out of Bed</h2>
+          <h2 className={this.props.nightMode ? "exit-bed-charts exit-bed-charts-heading exit-bed-charts-heading-night" : "exit-bed-charts-heading exit-bed-charts-heading-day"} title="The time you woke up. This could be before you got out of bed.">Time Out of Bed</h2>
           </div>
       </>
     )

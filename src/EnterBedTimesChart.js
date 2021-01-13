@@ -4,7 +4,7 @@ import './EnterBedTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryTooltip, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, nightModeTransitionTime, victoryAxisStyle, getLongDate,  VictoryScatterLineComplement} from './global_items';
+import {url, c, nightModeTransitionTime, victoryAxisStyle, getLongDate,  VictoryScatterLineComplement, victoryLineStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
@@ -86,21 +86,11 @@ class EnterBedTimesChart extends React.Component {
             />
             <VictoryLine
               data={data}
-              style={this.props.nightMode ? 
-                {data: {
-                  stroke: '#00ffcb',
-                  transition: `stroke ${nightModeTransitionTime}`
-                }}
-                : 
-                {data: {
-                  stroke: '#06790f',
-                  transition: `stroke ${nightModeTransitionTime}`
-                }}
-              }
+              style={victoryLineStyle(this.props.nightMode, 'enterBedCharts')}
             />
             {VictoryScatterLineComplement(data, this.props.nightMode)}
           </VictoryChart>
-          <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="This is the time that you entered your bed - you may not yet have turned the lights off.">Time I Got in Bed</h2>
+          <h2 className={this.props.nightMode ? "enter-bed-charts enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="This is the time that you entered your bed - you may not yet have turned the lights off.">Time I Got in Bed</h2>
         </div>
       </>
     )

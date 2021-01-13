@@ -118,7 +118,7 @@ class MinutesEarlyWokeChart extends React.Component {
                 }
               />
             </VictoryChart>
-            <h2>Minutes Early Awake</h2>
+             <h2 className={this.props.nightMode ? "exit-bed-charts exit-bed-charts-heading exit-bed-charts-heading-night" : "exit-bed-charts-heading exit-bed-charts-heading-day"} title="The time you woke up. This could be before you got out of bed.">Minutes Early Awake</h2>
           </div>
       </>
     )

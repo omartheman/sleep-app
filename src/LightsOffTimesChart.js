@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, VictoryScatterLineComplement} from './global_items';
+import {url, c, victoryAxisStyle, VictoryScatterLineComplement, victoryLineStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -96,10 +96,7 @@ class LightsOffTimesChart extends React.Component {
             />
             <VictoryLine
               data={data}
-              style={this.props.nightMode ? 
-                {data: {stroke: '#17ffa9'}}
-                : {data: {stroke: '#0c9864'}}
-              }
+              style={victoryLineStyle(this.props.nightMode, 'enterBedCharts')}
             />
             {VictoryScatterLineComplement(data, this.props.nightMode)}
           </VictoryChart>

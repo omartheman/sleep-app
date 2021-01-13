@@ -1,3 +1,4 @@
+$nightModeTransitionTime: 0.5s;
 :root {
   --navHeight: 60px;
 }
@@ -6,6 +7,7 @@ nav {
   // height: 60px;
   // height: var(--navHeight);
   // padding: 0 20px !important;
+  transition: background-color $nightModeTransitionTime; 
 }
 .navbar-night-mode {
   background-color: rgb(28, 30, 133);

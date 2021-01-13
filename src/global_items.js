@@ -9,6 +9,26 @@ const getLongDate = (date) => {
   const longDateLabel = `${weekday[date.getDay()]}, ${month[date.getMonth()]} ${date.getDate()}`;
   return longDateLabel;
 }
+// exitBedCharts sleepQualityCharts  
+const victoryLineStyle = (nightMode, chartGroup) => (nightMode ? 
+  {data: {
+    stroke: 
+      chartGroup === 'enterBedCharts' ? '#00ffcb'
+      : chartGroup === 'exitBedCharts' ? 'rgb(216 255 0)'
+      : null
+      ,
+    transition: `stroke ${nightModeTransitionTime}`
+  }}
+  : 
+  {data: {
+    stroke: 
+      chartGroup === 'enterBedCharts' ? '#06790f'
+      : chartGroup === 'exitBedCharts' ? 'rgb(164 0 0)'
+      : null
+      ,
+    transition: `stroke ${nightModeTransitionTime}`
+  }}
+);
 
 const VictoryScatterLineComplement = (data, nightMode) =>
 <VictoryScatter
@@ -96,6 +116,6 @@ function getClickedDate(date, type){
 
 const varToString = varObj => Object.keys(varObj)[0]; 
 
-export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement, getLongDate};
+export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement, getLongDate, victoryLineStyle};
 
 export default url;

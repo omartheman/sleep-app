@@ -10,8 +10,16 @@ h2 {
   color: rgb(145, 255, 209);
   transition: color $nightModeTransitionTime; 
 }
+.exit-bed-charts-heading-night {
+  color: #ff9817;
+  transition: color $nightModeTransitionTime; 
+}
 .enter-bed-charts-heading {
   color: #064112;
+  transition: color $nightModeTransitionTime;
+}
+.exit-bed-charts-heading-day {
+  color: #462710;
   transition: color $nightModeTransitionTime;
 }
 .victory-chart-1-container {

@@ -4,7 +4,7 @@ import './MorningWakeTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle} from './global_items';
+import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle, victoryLineStyle} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -83,10 +83,11 @@ class MorningWakeTimesChart extends React.Component {
             />
             <VictoryLine
               data={data}
+              style={victoryLineStyle(this.props.nightMode, 'exitBedCharts')}
             />
             {VictoryScatterLineComplement(data, this.props.nightMode)}
           </VictoryChart>
-          <h2>Wake Up Times</h2>
+          <h2 className={this.props.nightMode ? "exit-bed-charts exit-bed-charts-heading exit-bed-charts-heading-night" : "exit-bed-charts-heading exit-bed-charts-heading-day"} title="The time you woke up. This could be before you got out of bed.">Wake Up Times</h2>
         </div>
       </>
     )

@@ -186,20 +186,12 @@ function AddData (props) {
                     value={existingNapEnd}
                     onChange={handleFormInput}
                     />
-                  <Form.Label>2a. Last night I took ___ as a sleep aid. (Example: <span className="add-data-form-example">Ambien</span>)</Form.Label>
+                  <Form.Label>2. Last night I took ___ mg/oz of ___ as a sleep aid. (mg is for medicine, oz is for alcohol - but the unit doesn't need to be included in the input. Example: <span className="add-data-form-example">5 Ambien</span>)</Form.Label>
                   <Form.Control 
                     id_val="sleep-aid-item"
                     className={sleepAidItem !== '' && "existing-data"}
                     type="text" 
                     value={sleepAidItem}
-                    onChange={handleFormInput}
-                    />
-                  <Form.Label>2b. The amount of sleep aid I took last night was ___ mg/ounces (mg for medication / ounces for alcohol). (Example: <span className="add-data-form-example">5</span>)</Form.Label>
-                  <Form.Control 
-                    id_val="sleep-aid-mg"
-                    className={sleepAidMg !== '' && "existing-data"}
-                    type="number" 
-                    value={sleepAidMg}
                     onChange={handleFormInput}
                     />
                   <Form.Label>3a. Last night I got into bed at ___.  (Example: <span className="add-data-form-example">11:00 PM</span>)</Form.Label>
