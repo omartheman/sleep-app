@@ -119,7 +119,7 @@ class TimeToFallAsleepChart extends React.Component {
                 }
               />
             </VictoryChart>
-              <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="How long it took you to fall asleep after turning the lights off.">How Long To Fall Asleep</h2>
+              <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="How long it took you to fall asleep after turning the lights off.">Time to Fall Asleep</h2>
           </div>
       </>
     )

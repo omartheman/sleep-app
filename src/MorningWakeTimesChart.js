@@ -89,7 +89,7 @@ class MorningWakeTimesChart extends React.Component {
             />
             {VictoryScatterLineComplement(data, this.props.nightMode, 'exitBedCharts')}
           </VictoryChart>
-          <h2 className={this.props.nightMode ? "exit-bed-charts exit-bed-charts-heading exit-bed-charts-heading-night" : "exit-bed-charts-heading exit-bed-charts-heading-day"} title="The time you woke up. This could be before you got out of bed.">Wake Up Times</h2>
+          <h2 className={this.props.nightMode ? "exit-bed-charts exit-bed-charts-heading exit-bed-charts-heading-night" : "exit-bed-charts-heading exit-bed-charts-heading-day"} title="The time you woke up. This could be before you got out of bed.">Wake Up Time</h2>
         </div>
       </>
     )
