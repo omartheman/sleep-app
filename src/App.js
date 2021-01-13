@@ -143,80 +143,82 @@ function App() {
         </>
       </Route>
       <Route path="/sleep">
-        <div className={`${nightMode && 'app-charts-container-wrapper-night'}`}>
+        <div className={`app-charts-container-wrapper ${nightMode && 'app-charts-container-wrapper-night'}`}>
           {navbar}
-          {/* {!loggedInUser && <Redirect to="/sleep/home-logged-out" />} */}
-          <label>Range of dates</label>
-          <input 
-            type='number'
-            onChange={(e) => {
-              console.log('range', range);
-              setRange(Number(e.target.value));
-            }}
-          />
-          <Container fluid className="app-charts-container">
-            <div className="ct1">
-              <EnterBedTimesChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
-                range={range}
-                />
-            </div>
-            <div className="ct2">
-              <LightsOffTimesChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
-                />
-            </div>
-            <div className="ct3">
-              <TimeToFallAsleepChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
-                />
-            </div>
-            <div className="ct9">
-              <MorningWakeTimesChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
-                />
-            </div>
-            <div className="ct8">
-              <ExitBedTimesChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
-                />
-            </div>
-            <div className="ct7">
-              <MinutesEarlyWokeChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
-                />
-            </div>
+          <Container>
+            {/* {!loggedInUser && <Redirect to="/sleep/home-logged-out" />} */}
+            <label>Range of dates</label>
+            <input 
+              type='number'
+              onChange={(e) => {
+                console.log('range', range);
+                setRange(Number(e.target.value));
+              }}
+            />
+            <div fluid className="app-charts-container">
+              <div className="ct1">
+                <EnterBedTimesChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
+                  range={range}
+                  />
+              </div>
+              <div className="ct2">
+                <LightsOffTimesChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
+                  />
+              </div>
+              <div className="ct3">
+                <TimeToFallAsleepChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
+                  />
+              </div>
+              <div className="ct9">
+                <MorningWakeTimesChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
+                  />
+              </div>
+              <div className="ct8">
+                <ExitBedTimesChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
+                  />
+              </div>
+              <div className="ct7">
+                <MinutesEarlyWokeChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
+                  />
+              </div>
 
-            <div className="ct4">
-              <SleepAidItemChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
+              <div className="ct4">
+                <SleepAidItemChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
+                  />
+              </div>
+              <div className="ct6">
+                <ArousalDurationChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
                 />
-            </div>
-            <div className="ct6">
-              <ArousalDurationChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
-              />
-            </div>
-            <div className="ct5">
-              <QualityRatingChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
-                />
-            </div>
+              </div>
+              <div className="ct5">
+                <QualityRatingChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
+                  />
+              </div>
 
-            <div className="ct10">
-              <NapTimesChart 
-                nightMode={nightMode}
-                loggedInUser={loggedInUser}
-                />
+              <div className="ct10">
+                <NapTimesChart 
+                  nightMode={nightMode}
+                  loggedInUser={loggedInUser}
+                  />
+              </div>
             </div>
           </Container>
         </div>
