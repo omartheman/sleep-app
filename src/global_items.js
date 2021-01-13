@@ -25,12 +25,6 @@ const victoryTooltipLabelStyle = (nightMode) => (
   }
 );
 
-const victoryBarStyle = (nightMode) => (nightMode ? 
-    { 
-      labels: {fill: nightMode ? 'white' : 'black'}
-    }
-    :null
-);
 const victoryLineStyle = (nightMode, chartGroup) => (nightMode ? 
   {data: {
     stroke: 
@@ -51,11 +45,20 @@ const victoryLineStyle = (nightMode, chartGroup) => (nightMode ?
   }}
 );
 
-const VictoryScatterLineComplement = (data, nightMode) =>
+const VictoryScatterLineComplement = (data, nightMode, chartGroup) =>
 <VictoryScatter
   style={
     { 
-      data: { fill: "#c43a31" }, 
+      data: 
+        { fill: 
+          chartGroup === 'enterBedCharts' ? 
+            nightMode ? "red" : "tomato" 
+          :
+          chartGroup === 'exitBedCharts' ?   
+            nightMode ? "rgb(0, 255, 43)" : "#00c95a"
+          : 
+          nightMode ? "rgb(0, 255, 43)" : "#00c95a", 
+        }, 
       labels: {fill: nightMode ? 'white' : 'black'}
     }
   }
@@ -71,7 +74,14 @@ const VictoryScatterLineComplement = (data, nightMode) =>
   labelComponent={
     <VictoryTooltip
       flyoutStyle={{ 
-        stroke: nightMode ? "#00ff2b" : "tomato", 
+        stroke: 
+          chartGroup === 'enterBedCharts' ? 
+            nightMode ? "#00ff2b" : "tomato" 
+          :
+          chartGroup === 'exitBedCharts' ?   
+            nightMode ? "rgb(0 255 161)" : "tomato"
+          : 
+          nightMode ? "#00ff2b" : "tomato",
         fill: nightMode ? 'black' : '#fff5eb',
         strokeWidth: 2 
       }}

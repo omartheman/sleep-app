@@ -91,7 +91,7 @@ class NapTimesChart extends React.Component {
             <VictoryBar
               style={{
                 data: {
-                  fill: this.props.nightMode ? 'rgb(0 168 255)' : '#964c9d', 
+                  fill: this.props.nightMode ? 'rgb(255 0 113)' : 'rgb(129 33 255)', 
                   transition: `fill ${nightModeTransitionTime}`
                 },
                 labels: {

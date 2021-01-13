@@ -84,7 +84,7 @@ class MinutesEarlyWokeChart extends React.Component {
               <VictoryBar
                 style={{
                   data: {
-                    fill: this.props.nightMode ? 'rgb(0 168 255)' : '#00b6ba', 
+                    fill: this.props.nightMode ? 'rgb(255 52 0)' : 'rgb(186 0 177)', 
                     transition: `fill ${nightModeTransitionTime}`
                   },
                   labels: {

@@ -98,7 +98,7 @@ class SleepAidItemChart extends React.Component {
               <VictoryBar
                 style={{
                   data: {
-                    fill: this.props.nightMode ? 'rgb(0 168 255)' : '#00b6ba', 
+                    fill: this.props.nightMode ? 'rgb(255 0 207)' : 'rgb(49 0 186)', 
                     transition: `fill ${nightModeTransitionTime}`
                   },
                   labels: {

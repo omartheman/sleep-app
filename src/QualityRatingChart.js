@@ -97,7 +97,7 @@ class QualityRatingChart extends React.Component {
               <VictoryBar
                 style={{
                   data: {
-                    fill: this.props.nightMode ? 'rgb(0 168 255)' : '#00b6ba', 
+                    fill: this.props.nightMode ? 'rgb(173 31 255)' : 'rgb(37 39 255)', 
                     transition: `fill ${nightModeTransitionTime}`
                   },
                   labels: {

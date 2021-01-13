@@ -88,7 +88,7 @@ class EnterBedTimesChart extends React.Component {
               data={data}
               style={victoryLineStyle(this.props.nightMode, 'enterBedCharts')}
             />
-            {VictoryScatterLineComplement(data, this.props.nightMode)}
+            {VictoryScatterLineComplement(data, this.props.nightMode, 'enterBedCharts')}
           </VictoryChart>
           <h2 className={this.props.nightMode ? "enter-bed-charts enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="This is the time that you entered your bed - you may not yet have turned the lights off.">Time I Got in Bed</h2>
         </div>
