@@ -111,11 +111,10 @@ class SleepAidItemChart extends React.Component {
                 }}
                 labels={({ datum }) => {
                   if (datum.sleepAidItem){
-                    return(datum.sleepAidItem.toLowerCase() === 'alcohol' ?
-                      `${datum.dateLabel}\n${datum.y}oz ${datum.sleepAidItem}`
-                      :
-                      `${datum.dateLabel} \n${datum.y}mg ${datum.sleepAidItem}`
-                      );
+                    const sleepAidItem = datum.sleepAidItem.toLowerCase();
+                    return(
+                      `${datum.y}${sleepAidItem === 'alcohol' ? 'oz' : 'mg'} ${datum.sleepAidItem}\n${datum.dateLabel}`
+                    );
                   }
                 }}
                 labelComponent={

@@ -1,14 +1,37 @@
-import {VictoryScatter} from 'victory';
+import {VictoryScatter, VictoryTooltip} from 'victory';
 const url = 'http://localhost:4000/sleep/api/';
 /*
 const url = 'https://omarshishani.com/sleep/api/';
 */
 
+const victoryScatterLabels = (datum) => {
+  if (datum){
+    console.log('datum true')
+    c('datum.y', datum.y)
+
+    return(
+      `${datum.y}\n${datum.dateLabel}`
+    );
+  }
+}
+
 const VictoryScatterLineComplement = (data) =>
 <VictoryScatter
   style={{ data: { fill: "#c43a31" } }}
-  size={3}
+  size={4}
   data={data}
+  labels={({ datum }) => {
+    if (datum){
+      return(
+        `${datum.timeLabel}\n${datum.dateLabel}`
+      );
+    }
+  }}
+  labelComponent={
+    <VictoryTooltip
+      flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
+    />
+  }
 />;
 
 const lightGrey = 'rgb(236, 239, 241)';

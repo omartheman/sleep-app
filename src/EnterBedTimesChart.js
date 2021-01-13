@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import './EnterBedTimesChart.scss';
-import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryScatter } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryTooltip, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {url, c, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement} from './global_items';
@@ -69,8 +69,11 @@ class EnterBedTimesChart extends React.Component {
             dateLabels = [...dateLabels, dateLabel];
           }
         }
+        var weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const longDateLabel = `${weekday[dateLabelPrimer.getDay()]}, ${month[dateLabelPrimer.getMonth()]} ${dateLabelPrimer.getDate()}`;
         return(
-          { x: date, y: dateTime }
+          { x: date, y: dateTime, dateLabel: longDateLabel, timeLabel: formatAMPM(dateTime) }
         );
       });
     }
@@ -101,13 +104,30 @@ class EnterBedTimesChart extends React.Component {
                   stroke: '#00ffcb',
                   transition: `stroke ${nightModeTransitionTime}`
                 }}
-                : {data: {
-                    stroke: '#06790f',
-                    transition: `stroke ${nightModeTransitionTime}`
-                  }}
+                : 
+                {data: {
+                  stroke: '#06790f',
+                  transition: `stroke ${nightModeTransitionTime}`
+                }}
               }
             />
-            {VictoryScatterLineComplement(data)}
+            <VictoryScatter
+              style={{ data: { fill: "#c43a31" } }}
+              size={4}
+              data={data}
+              labels={({ datum }) => {
+                if (datum){
+                  return(
+                    `${datum.timeLabel}\n${datum.dateLabel}`
+                  );
+                }
+              }}
+              labelComponent={
+                <VictoryTooltip
+                  flyoutStyle={{ stroke: "tomato", strokeWidth: 2 }}
+                />
+              }
+            />
           </VictoryChart>
           <h2 className={this.props.nightMode ? "enter-bed-charts-heading-night" : "enter-bed-charts-heading"} title="This is the time that you entered your bed - you may not yet have turned the lights off.">Time I Got in Bed</h2>
         </div>
