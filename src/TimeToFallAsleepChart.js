@@ -47,9 +47,9 @@ class TimeToFallAsleepChart extends React.Component {
     let data;
     if (chartInfo.length > 1) {
       data = chartInfo.filter(napObj => napObj.timeToFallAsleep).map((e, i, arr) => {
-        const date = Math.floor(Date.parse(e.date)/1000/86400);
+        const date = Math.floor(Date.parse(e.date)/1000/86400) - 1;
         xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date));
+        const dateLabelPrimer = new Date(Date.parse(e.date) - 1000*86400);
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         dateLabels = [...dateLabels, dateLabel];
         return(

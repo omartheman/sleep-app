@@ -53,13 +53,12 @@ class NapTimesChart extends React.Component {
       data = chartInfo.filter(napObj => napObj.napStartTime).map((e, i, arr) => {
         const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
-        const date = Math.floor(Date.parse(e.date)/1000/86400);
+        
+        const date = Math.floor(Date.parse(e.date)/1000/86400) - 1;
         xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date));
+        const dateLabelPrimer = new Date(Date.parse(e.date) - 1000*86400);
+
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
-        const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
-        const dateDiff = lastDate - firstDate;
         dateLabels = [...dateLabels, dateLabel];
         return(
           { x: date, y0: dateTime, y: dateTimeEnd, dateLabel: getLongDate(dateLabelPrimer)}

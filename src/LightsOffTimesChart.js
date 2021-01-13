@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, VictoryScatterLineComplement, victoryLineStyle} from './global_items';
+import {url, c, victoryAxisStyle, VictoryScatterLineComplement, victoryLineStyle, getLongDate} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -50,27 +50,13 @@ class LightsOffTimesChart extends React.Component {
       data = chartInfo.filter(napObj => napObj.lightsOffTime).map((e, i, arr) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
         const dateTime = new Date(`January 1, 2000 ${e.lightsOffTime}`);
-        const date = Math.floor(Date.parse(e.date)/1000/86400);
+        const date = Math.floor(Date.parse(e.date)/1000/86400) - 1;
         xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date));
+        const dateLabelPrimer = new Date(Date.parse(e.date) - 1000*86400);
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
-        const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);
-        const dateDiff = lastDate - firstDate;
-        if (dateDiff < 15) {
-          dateLabels = [...dateLabels, dateLabel];
-        } else {
-          if (date % 2 === 0){
-            dateLabels = [...dateLabels, null]
-          } else {
-            dateLabels = [...dateLabels, dateLabel];
-          }
-        }
-        var weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const longDateLabel = `${weekday[dateLabelPrimer.getDay()]}, ${month[dateLabelPrimer.getMonth()]} ${dateLabelPrimer.getDate()}`;
+        dateLabels = [...dateLabels, dateLabel];
         return(
-          { x: date, y: dateTime, dateLabel: longDateLabel, timeLabel: formatAMPM(dateTime) }
+          { x: date, y: dateTime, dateLabel: getLongDate(dateLabelPrimer), timeLabel: formatAMPM(dateTime) }
         );
       });
     }

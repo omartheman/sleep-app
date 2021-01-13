@@ -52,10 +52,12 @@ class EnterBedTimesChart extends React.Component {
       data = chartInfo.filter(napObj => napObj.enterBedTime).map((e, i, arr) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
         const dateTime = new Date(`January 1, 2000 ${e.enterBedTime}`);
-        const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
-        const date = Math.floor(Date.parse(e.date)/1000/86400);
+
+        
+        const date = Math.floor(Date.parse(e.date)/1000/86400) - 1;
         xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date));
+        const dateLabelPrimer = new Date(Date.parse(e.date) - 1000*86400);
+
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         dateLabels = [...dateLabels, dateLabel];
         return(

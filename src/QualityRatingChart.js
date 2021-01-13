@@ -47,9 +47,9 @@ class QualityRatingChart extends React.Component {
     let data;
     if (chartInfo.length > 1) {
       data = chartInfo.filter(napObj => napObj.qualityRating || napObj.qualityRating === 0).map((e, i, arr) => {
-        const date = Math.floor(Date.parse(e.date)/1000/86400);
+        const date = Math.floor(Date.parse(e.date)/1000/86400) - 1;
         xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date));
+        const dateLabelPrimer = new Date(Date.parse(e.date) - 1000*86400);
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         const firstDate = Math.floor(Date.parse(arr[0].date)/1000/86400);
         const lastDate = Math.floor(Date.parse(arr[arr.length - 1].date)/1000/86400);

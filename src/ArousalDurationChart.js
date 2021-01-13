@@ -50,9 +50,9 @@ class ArousalDurationChart extends React.Component {
     if (chartInfo.length > 1) {
       data =  chartInfo.filter(napObj => napObj.arousalDuration).map((e, i, arr) => {
         const durations = e.arousalDuration.match(/\d+/g).map(x => Number(x));
-        const date = Math.floor(Date.parse(e.date)/1000/86400);
+        const date = Math.floor(Date.parse(e.date)/1000/86400) - 1;
         xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date));
+        const dateLabelPrimer = new Date(Date.parse(e.date) - 1000*86400);
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         dateLabels = [...dateLabels, dateLabel];
         let durationData = [];
