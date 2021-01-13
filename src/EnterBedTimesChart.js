@@ -73,9 +73,9 @@ class EnterBedTimesChart extends React.Component {
             domainPadding={{ x: 20, y: 20 }}
           >
             <VictoryAxis
-              tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
               tickValues={xAxisTickValues}
               tickFormat={dateLabels}
+              tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
               fixLabelOverlap={true}
               style={victoryAxisStyle('x', this.props.nightMode)}
               />

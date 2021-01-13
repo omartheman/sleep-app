@@ -127,7 +127,17 @@ class NapTimesChart extends React.Component {
               }
             />
           </VictoryChart>
-          <h2>Nap Times</h2>
+          <h2 
+            className={
+              `charts-heading ${this.props.nightMode ?
+                'quality-rating-charts-heading-night'  
+                : 'quality-rating-charts-heading-day'
+              }`
+            }
+            title="The range of time from the beggining of your first nap to the end of your last nap."
+          >
+            Nap Times
+          </h2>
         </div>
       </>
     )

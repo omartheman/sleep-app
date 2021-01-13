@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import './MorningWakeTimesChart.scss';
-import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine } from 'victory';
+import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle, victoryLineStyle} from './global_items';
@@ -74,6 +74,8 @@ class MorningWakeTimesChart extends React.Component {
               tickValues={xAxisTickValues}
               tickFormat={dateLabels}
               style={victoryAxisStyle('x', this.props.nightMode)}
+              tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+              fixLabelOverlap={true}
             />
             <VictoryAxis
               style={{grid:{stroke:'black', strokeDasharray: '7'}}}

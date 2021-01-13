@@ -146,6 +146,7 @@ class ArousalDurationChart extends React.Component {
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
                 tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+                fixLabelOverlap={true}
                 style={victoryAxisStyle('x', this.props.nightMode)}
               />
               <VictoryAxis
@@ -157,7 +158,17 @@ class ArousalDurationChart extends React.Component {
                 {[...bars]}
               </VictoryStack>
             </VictoryChart>
-            <h2>Arousal Durations</h2>
+            <h2 
+              className={
+                `charts-heading ${this.props.nightMode ?
+                  'quality-rating-charts-heading-night'  
+                  : 'quality-rating-charts-heading-day'
+                }`
+              }
+              title="The amounts of time you were awake last night. Each colored bar represents a seperate time waking up."
+            >
+              Arousal Durations
+            </h2>
           </div>
       </>
     )

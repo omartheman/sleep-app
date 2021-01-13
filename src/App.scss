@@ -6,6 +6,9 @@ body, html {
 h2 {
   text-align: center;
 }
+.charts-heading {
+  transition: color $nightModeTransitionTime; 
+}
 .enter-bed-charts-heading-night {
   color: rgb(145, 255, 209);
   transition: color $nightModeTransitionTime; 
@@ -20,7 +23,12 @@ h2 {
 }
 .exit-bed-charts-heading-day {
   color: #462710;
-  transition: color $nightModeTransitionTime;
+}
+.quality-rating-charts-heading-day {
+  color: #2a0077;
+}
+.quality-rating-charts-heading-night {
+  color: #ff2ddc;
 }
 .victory-chart-1-container {
   display: inline-block;

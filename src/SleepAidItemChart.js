@@ -86,6 +86,7 @@ class SleepAidItemChart extends React.Component {
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
                 tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+                fixLabelOverlap={true}
                 style={victoryAxisStyle('x', this.props.nightMode)}
               />
               <VictoryAxis
@@ -126,7 +127,17 @@ class SleepAidItemChart extends React.Component {
                 }
               />
             </VictoryChart>
-            <h2>Sleep Aid Item</h2>
+            <h2 
+              className={
+                `charts-heading ${this.props.nightMode ?
+                  'quality-rating-charts-heading-night'  
+                  : 'quality-rating-charts-heading-day'
+                }`
+              }
+              title="The item and amount of sleep aid you took last night."
+            >
+              Sleep Aid Item
+            </h2>
           </div>
       </>
     )

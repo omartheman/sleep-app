@@ -81,6 +81,7 @@ class TimeToFallAsleepChart extends React.Component {
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
                 tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+                fixLabelOverlap={true}
                 style={victoryAxisStyle('x', this.props.nightMode)}
                 />
               <VictoryAxis

@@ -84,6 +84,7 @@ class MinutesEarlyWokeChart extends React.Component {
                 tickFormat={dateLabels}
                 tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
                 style={victoryAxisStyle('x', this.props.nightMode)}
+                fixLabelOverlap={true}
               />
               <VictoryAxis
                 style={{grid:{stroke:'black', strokeDasharray: '7'}}}

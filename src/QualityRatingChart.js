@@ -85,6 +85,7 @@ class QualityRatingChart extends React.Component {
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
                 tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+                fixLabelOverlap={true}
                 style={victoryAxisStyle('x', this.props.nightMode)}
               />
               <VictoryAxis
@@ -120,7 +121,17 @@ class QualityRatingChart extends React.Component {
                 }
               />
             </VictoryChart>
-            <h2>Sleep Quality Rating</h2>
+            <h2 
+              className={
+                `charts-heading ${this.props.nightMode ?
+                  'quality-rating-charts-heading-night'  
+                  : 'quality-rating-charts-heading-day'
+                }`
+              }
+              title="A rating out of 5 of how well you slept last night."
+            >
+              Sleep Quality Rating
+            </h2>
           </div>
       </>
     )

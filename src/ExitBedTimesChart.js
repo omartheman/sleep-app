@@ -73,12 +73,14 @@ class LightsOffTimesChart extends React.Component {
                 tickValues={xAxisTickValues}
                 tickFormat={dateLabels}
                 style={victoryAxisStyle('x', this.props.nightMode)}
+                tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+                fixLabelOverlap={true}
               />
               <VictoryAxis
                 style={{grid:{stroke:'black', strokeDasharray: '7'}}}
                 dependentAxis
                 tickFormat={(y) => formatAMPM(y)}
-                style={victoryAxisStyle('x', this.props.nightMode)}
+                style={victoryAxisStyle('y', this.props.nightMode)}
               />
               <VictoryLine
                 data={data}
