@@ -4,7 +4,7 @@ import './NapTimesChart.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createXAxisTickValues, createDateLabels} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -50,20 +50,11 @@ class NapTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.napStartTime).map((e, i, arr) => {
-        const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
-        const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
-        
-        const date = yesterdaysDate(e.date);
-        const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
-        xAxisTickValues = [...xAxisTickValues, date];
-
-        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
-        return(
-          { x: date, y0: dateTime, y: dateTimeEnd, dateLabel: getLongDate(dateLabelPrimer)}
-        );
-      });
+      const showYesterdaysDate = true;
+      const barGraph = false;
+      data = createData1(chartInfo, this.props.range, 'napStartTime', showYesterdaysDate, barGraph);
+      dateLabels = createDateLabels(chartInfo, this.props.range, 'napStartTime', showYesterdaysDate, barGraph);
+      xAxisTickValues = createXAxisTickValues(chartInfo, this.props.range, 'napStartTime', showYesterdaysDate, barGraph);
     }
     return (
       <>

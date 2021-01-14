@@ -34,15 +34,25 @@ const createData1 = (chartInfo, range, chart, showYesterdaysDate, barGraph) => {
         return(
           { x: date, y: sleepAidMg, dateLabel: getLongDate(dateLabelPrimer), sleepAidItem: sleepAidItem}
         );
-      }
-      if (barGraph){
+      } else if (chart === 'arousalDuration'){
+        const durations = e.arousalDuration.match(/\d+/g).map(x => Number(x));
+        let durationData = [];
+        for (let i = 0; i < durations.length; i++) {
+          durationData = [...durationData, 
+            { x: date, y: durations[i], dateLabel: getLongDate(dateLabelPrimer)}
+          ];
+        }
+        return(durationData);  
+      } else if (chart === 'napStartTime'){
+        const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         return(
-          { x: date, y: e[chart], dateLabel: getLongDate(dateLabelPrimer), timeLabel: `${e[chart]} min` }
+          { x: date, y0: dateTime, y: dateTimeEnd, dateLabel: getLongDate(dateLabelPrimer)}
         );
+      } else if (barGraph){
+        return { x: date, y: e[chart], dateLabel: getLongDate(dateLabelPrimer), timeLabel: `${e[chart]} min` }
+      } else {
+        return { x: date, y: dateTime, dateLabel: getLongDate(dateLabelPrimer), timeLabel: formatAMPM(dateTime) }
       }
-      return(
-        { x: date, y: dateTime, dateLabel: getLongDate(dateLabelPrimer), timeLabel: formatAMPM(dateTime) }
-      );
     })
   ) 
 }

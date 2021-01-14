@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip, VictoryStack } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, flyoutStyleNight, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer} from './global_items';
+import {url, c, victoryAxisStyle, flyoutStyleNight, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createXAxisTickValues, createDateLabels} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -49,24 +49,11 @@ class ArousalDurationChart extends React.Component {
     let xAxisTickValues = [];
     let data = [];
     if (chartInfo.length > 1) {
-      data =  chartInfo.filter((dataObj, i) => i + 1 < this.props.range && dataObj.arousalDuration).map((e, i, arr) => {
-        
-        const date = yesterdaysDate(e.date);
-        const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
-        xAxisTickValues = [...xAxisTickValues, date];
-        
-        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
-        
-        const durations = e.arousalDuration.match(/\d+/g).map(x => Number(x));
-        let durationData = [];
-        for (let i = 0; i < durations.length; i++) {
-          durationData = [...durationData, 
-            { x: date, y: durations[i], dateLabel: getLongDate(dateLabelPrimer)}
-          ];
-        }
-        return(durationData);  
-      });
+      const showYesterdaysDate = true;
+      const barGraph = false;
+      data = createData1(chartInfo, this.props.range, 'arousalDuration', showYesterdaysDate, barGraph);
+      dateLabels = createDateLabels(chartInfo, this.props.range, 'arousalDuration', showYesterdaysDate, barGraph);
+      xAxisTickValues = createXAxisTickValues(chartInfo, this.props.range, 'arousalDuration', showYesterdaysDate, barGraph);
     }
 
     const maxNumberArousals = Math.max(...data.map(x => x.length));
