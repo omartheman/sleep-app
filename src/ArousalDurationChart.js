@@ -43,21 +43,22 @@ class ArousalDurationChart extends React.Component {
     }
   }
   render() {
-    const {chartInfo} = this.state;
+    const chartInfoPrimer = this.state.chartInfo;
+    const chartInfo = chartInfoPrimer.slice(0).reverse();
     let dateLabels = [];
     let xAxisTickValues = [];
     let data = [];
     if (chartInfo.length > 1) {
       data =  chartInfo.filter((dataObj, i) => i + 1 < this.props.range && dataObj.arousalDuration).map((e, i, arr) => {
         
-        const durations = e.arousalDuration.match(/\d+/g).map(x => Number(x));
-
         const date = yesterdaysDate(e.date);
         const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
         xAxisTickValues = [...xAxisTickValues, date];
-
+        
         const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
         dateLabels = [...dateLabels, dateLabel];
+        
+        const durations = e.arousalDuration.match(/\d+/g).map(x => Number(x));
         let durationData = [];
         for (let i = 0; i < durations.length; i++) {
           durationData = [...durationData, 
@@ -68,12 +69,10 @@ class ArousalDurationChart extends React.Component {
       });
     }
 
-    c('data',data)
     const maxNumberArousals = Math.max(...data.map(x => x.length));
     const arousals = [];
     const bars = [];
-    //find the date with the most arousals, and push this many arrays to 'arousals'
-    //data.length only gives how many dates. 
+    //A SEPERATE ARRAY IS CREATED FOR EACH AROUSAL: THE FIRST, SECOND, ETC., ALL THE WAY UNTIL THE MAX NUMBER OF AROUSALS FOR THE GIVEN DATA SET
     for (let i = 0; i < maxNumberArousals; i++){
       arousals.push([]);
     }
@@ -84,6 +83,7 @@ class ArousalDurationChart extends React.Component {
         }
       }
     })
+    c('arousals', arousals)
     let firstDate;
     let lastDate;
     if (arousals[0]) {
@@ -91,15 +91,16 @@ class ArousalDurationChart extends React.Component {
       lastDate = arousals[0][arousals[0].length - 1].x;
     }
 
+    c('maxNumberArousals', maxNumberArousals)
     const createBars = () => {
       for (let i = 0; i < maxNumberArousals; i++){
         bars.push(
           <VictoryBar
-          style={{
-            labels: {
-              fill: this.props.nightMode ? 'white' : 'black'
-            }
-          }}
+            style={{
+              labels: {
+                fill: this.props.nightMode ? 'white' : 'black'
+              }
+            }}
             key={i}
             data={arousals[i]}
             barWidth={() => {
@@ -126,7 +127,7 @@ class ArousalDurationChart extends React.Component {
       }
     }
     createBars();
-
+    c('bars',bars)
     return (
       <>
           <div className="victory-chart-1-container">

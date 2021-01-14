@@ -17,7 +17,7 @@ function formatAMPM(date) {
 
 const createData1 = (chartInfo, range, chart, showYesterdaysDate, barGraph) => {
   return(
-    chartInfo.filter((dataObj, i) => i < range && dataObj[chart]).map((e, i, arr) => {
+    chartInfo.filter((dataObj, i) => (i < range && dataObj[chart]) || (i < range && dataObj[chart] === 0)).map((e, i, arr) => {
       const dateTime = new Date(`January 1, 2000 ${e[chart]}`);
       let date;
       let dateLabelPrimer;
