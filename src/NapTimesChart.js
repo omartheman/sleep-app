@@ -50,7 +50,7 @@ class NapTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.napStartTime).map((e, i, arr) => {
+      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.napStartTime).map((e, i, arr) => {
         const dateTime = new Date(`January 1, 2000 ${e.napStartTime}`);
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         

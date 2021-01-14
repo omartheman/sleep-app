@@ -49,9 +49,7 @@ class EnterBedTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(
-          (napObj, i) => i < this.props.range + 1 && napObj.enterBedTime
-        ).map((e, i, arr) => {
+      data = chartInfo.filter((dataObj, i) => i < this.props.range && dataObj.enterBedTime).map((e, i, arr) => {
         const dateTime = new Date(`January 1, 2000 ${e.enterBedTime}`);
         const date = yesterdaysDate(e.date);
         const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);

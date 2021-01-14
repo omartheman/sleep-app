@@ -145,7 +145,7 @@ app.post(`/sleep/api/check-existing-data`, (req, res) => {
 app.post(`/sleep/api/get-data`, (req, res) => {
   console.log('Got a POST request to "/sleep/api/get-data"');
   const sql = `
-  SELECT * FROM sleep_data WHERE user = ? ORDER BY date;
+  SELECT * FROM sleep_data WHERE user = ? ORDER BY date DESC;
   `;
   connection.query(sql, [req.body.user], (err, result) => {
     console.log(result);

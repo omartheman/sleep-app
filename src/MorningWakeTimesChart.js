@@ -48,7 +48,7 @@ class MorningWakeTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.morningWakeTime).map((e, i) => {
+      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.morningWakeTime).map((e, i) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
         const dateTime = new Date(`January 1, 2000 ${e.morningWakeTime}`);
         const date = Math.floor(Date.parse(e.date)/1000/86400);

@@ -46,7 +46,7 @@ class TimeToFallAsleepChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.timeToFallAsleep).map((e, i, arr) => {
+      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.timeToFallAsleep).map((e, i, arr) => {
 
         const date = yesterdaysDate(e.date);
         const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);

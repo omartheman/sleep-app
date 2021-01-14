@@ -47,7 +47,7 @@ class LightsOffTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.lightsOffTime).map((e, i, arr) => {
+      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.lightsOffTime).map((e, i, arr) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
         const dateTime = new Date(`January 1, 2000 ${e.lightsOffTime}`);
         

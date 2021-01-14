@@ -46,7 +46,7 @@ class MinutesEarlyWokeChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter(napObj => napObj.minutesEarlyWoke || napObj.minutesEarlyWoke === 0).map((e, i, arr) => {
+      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.minutesEarlyWoke || i < this.props.range + 1 &&  dataObj.minutesEarlyWoke === 0).map((e, i, arr) => {
         //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
         const date = Math.floor(Date.parse(e.date)/1000/86400);
         xAxisTickValues = [...xAxisTickValues, date];
