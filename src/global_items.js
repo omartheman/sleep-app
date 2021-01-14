@@ -46,7 +46,7 @@ const createData1 = (chartInfo, range, chart, showYesterdaysDate, barGraph) => {
       } else if (chart === 'napStartTime'){
         const dateTimeEnd = new Date(`January 1, 2000 ${e.napEndTime}`);
         return(
-          { x: date, y0: dateTime, y: dateTimeEnd, dateLabel: getLongDate(dateLabelPrimer)}
+          { x: date, y0: dateTime, y: dateTimeEnd, dateLabel: getLongDate(dateLabelPrimer), barWidthDate: date}
         );
       } else if (barGraph){
         return { x: date, y: e[chart], dateLabel: getLongDate(dateLabelPrimer), timeLabel: `${e[chart]} min` }
