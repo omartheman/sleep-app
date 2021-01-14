@@ -46,7 +46,7 @@ class SleepAidItemChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 0) {
-      const showYesterdaysDate = false;
+      const showYesterdaysDate = true;
       const barGraph = false;
       data = createData1(chartInfo, this.props.range, 'sleepAidItem', showYesterdaysDate, barGraph);
       dateLabels = createDateLabels(chartInfo, this.props.range, 'sleepAidItem', showYesterdaysDate, barGraph);

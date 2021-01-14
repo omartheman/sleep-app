@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Alert, Button, Container, Form, Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { Calendar } from 'react-calendar';
 import './AddData.scss';
 import axios from 'axios';
@@ -31,12 +32,15 @@ function AddData (props) {
   const [qualityRating, setQualityRating] = useState('');
   const [clickedDate, setClickedDate] = useState(null);
   const [checkExistingDataCompleted, setCheckExistingDataCompleted] = useState(false);
-
+  const [submittedMessage, setSubmittedMessage] = useState(false); 
   useEffect(() => {
     let d = new Date();
     setDate(d);
     checkExistingData(d);
   }, [props]);
+  useEffect(() => {
+    setSubmittedMessage(false);
+  }, [clickedDate])
 
   const checkExistingData = (clickedDate) => {
     setCheckExistingDataCompleted(false);
@@ -92,6 +96,9 @@ function AddData (props) {
       exitBedTime: exitBedTime === '' ? null : exitBedTime,
       minutesEarlyWoke: minutesEarlyWoke === '' ? null : minutesEarlyWoke,
       qualityRating: qualityRating === '' ? null : qualityRating
+    })
+    .then(() => {
+      setSubmittedMessage(true);
     })
   };
   let dateHeading;
@@ -265,6 +272,12 @@ function AddData (props) {
                     onChange={handleFormInput}
                   />
                 </Form>
+                {submittedMessage &&
+                  <>
+                    <Alert variant="success" className="alert-bootstrap">Your data has been submitted!</Alert>
+                    <Button as={Link} to='/sleep/'>Go to Data Overview</Button>
+                  </>
+                }
                 <Button className="add-data-submit-button" onClick={handleDataSubmit}>Submit</Button>
               </>
             : 

@@ -29,8 +29,18 @@ const createData1 = (chartInfo, range, chart, showYesterdaysDate, barGraph) => {
         dateLabelPrimer = new Date(Date.parse(e.date));
       }
       if (chart === 'sleepAidItem'){
-        const sleepAidItem = e.sleepAidItem.match(/(?<=\s+)[A-Za-z]+/g)[0];
-        const sleepAidMg = e.sleepAidItem.match(/\d+/g);
+        let sleepAidItem;
+        let sleepAidMg;
+        if (e.sleepAidItem.match(/(?<=\s+)[A-Za-z]+/g)){
+          sleepAidItem = e.sleepAidItem.match(/(?<=\s+)[A-Za-z]+/g)[0];
+          sleepAidMg = e.sleepAidItem.match(/\d+/g);
+          
+        } else {
+
+          sleepAidItem = 'None';
+          sleepAidMg = null;
+        }
+        c('sleepAidItem', sleepAidItem)
         return(
           { x: date, y: sleepAidMg, dateLabel: getLongDate(dateLabelPrimer), sleepAidItem: sleepAidItem}
         );
