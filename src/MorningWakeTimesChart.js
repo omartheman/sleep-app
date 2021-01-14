@@ -47,7 +47,7 @@ class MorningWakeTimesChart extends React.Component {
     let dateLabels = [];
     let xAxisTickValues = [];
     let data;
-    if (chartInfo.length > 1) {
+    if (chartInfo.length > 0) {
       const showYesterdaysDate = false;
       data = createData1(chartInfo, this.props.range, 'morningWakeTime', showYesterdaysDate);
       dateLabels = createDateLabels(chartInfo, this.props.range, 'morningWakeTime', showYesterdaysDate);

@@ -138,10 +138,12 @@ function App() {
         <>
           {navbar}
           <div className={`app-container-wrapper ${nightMode && 'app-container-wrapper-night'}`}>
-            <AddData 
-              nightMode={nightMode}
-              loggedInUser={loggedInUser}
-            />
+            <div className={nightMode && "add-data-component-wrapper-night"}>
+              <AddData 
+                nightMode={nightMode}
+                loggedInUser={loggedInUser}
+              />
+            </div>
           </div>
         </>
       </Route>

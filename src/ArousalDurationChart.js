@@ -48,7 +48,7 @@ class ArousalDurationChart extends React.Component {
     let dateLabels = [];
     let xAxisTickValues = [];
     let data = [];
-    if (chartInfo.length > 1) {
+    if (chartInfo.length > 0) {
       const showYesterdaysDate = true;
       const barGraph = false;
       data = createData1(chartInfo, this.props.range, 'arousalDuration', showYesterdaysDate, barGraph);
@@ -70,7 +70,6 @@ class ArousalDurationChart extends React.Component {
         }
       }
     })
-    c('arousals', arousals)
     let firstDate;
     let lastDate;
     if (arousals[0]) {
@@ -78,7 +77,6 @@ class ArousalDurationChart extends React.Component {
       lastDate = arousals[0][arousals[0].length - 1].x;
     }
 
-    c('maxNumberArousals', maxNumberArousals)
     const createBars = () => {
       for (let i = 0; i < maxNumberArousals; i++){
         bars.push(
@@ -114,7 +112,6 @@ class ArousalDurationChart extends React.Component {
       }
     }
     createBars();
-    c('bars',bars)
     return (
       <>
           <div className="victory-chart-1-container">

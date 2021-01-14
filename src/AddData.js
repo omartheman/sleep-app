@@ -183,7 +183,7 @@ function AddData (props) {
                     value={existingNapEnd}
                     onChange={handleFormInput}
                     />
-                  <Form.Label>2. Last night I took ___ mg/oz of ___ as a sleep aid. (mg is for medicine, oz is for alcohol - but the unit doesn't need to be included in the input. Example: <span className="add-data-form-example">5 Ambien</span>)</Form.Label>
+                  <Form.Label>2. Last night I took ___ mg/oz of ___ as a sleep aid. (If none, leave blank. Unit "mg" is for medicine, "oz" is for alcohol - but the unit doesn't need to be included in the input. Example: <span className="add-data-form-example">5 Ambien</span>)</Form.Label>
                   <Form.Control 
                     id_val="sleep-aid-item"
                     className={sleepAidItem !== '' && "existing-data"}

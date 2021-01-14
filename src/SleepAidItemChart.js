@@ -45,22 +45,12 @@ class SleepAidItemChart extends React.Component {
     let dateLabels = [];
     let xAxisTickValues = [];
     let data;
-    if (chartInfo.length > 1) {
-      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.sleepAidItem || i < this.props.range + 1 && dataObj.sleepAidItem === 0).map((e, i, arr) => {
-        const date = yesterdaysDate(e.date);
-        const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
-        xAxisTickValues = [...xAxisTickValues, date];
-
-        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
-
-        const sleepAidMg = e.sleepAidItem.match(/\d+/g);
-        const sleepAidItem = e.sleepAidItem.match(/(?<=\s+)[A-Za-z]+/g)[0];
-        
-        return(
-          { x: date, y: sleepAidMg, dateLabel: getLongDate(dateLabelPrimer), sleepAidItem: sleepAidItem}
-        );
-      });
+    if (chartInfo.length > 0) {
+      const showYesterdaysDate = false;
+      const barGraph = false;
+      data = createData1(chartInfo, this.props.range, 'sleepAidItem', showYesterdaysDate, barGraph);
+      dateLabels = createDateLabels(chartInfo, this.props.range, 'sleepAidItem', showYesterdaysDate, barGraph);
+      xAxisTickValues = createXAxisTickValues(chartInfo, this.props.range, 'sleepAidItem', showYesterdaysDate, barGraph);
     }
     return (
       <>

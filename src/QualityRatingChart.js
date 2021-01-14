@@ -45,7 +45,7 @@ class QualityRatingChart extends React.Component {
     let dateLabels = [];
     let xAxisTickValues = [];
     let data;
-    if (chartInfo.length > 1) {
+    if (chartInfo.length > 0) {
       const showYesterdaysDate = true;
       const barGraph = true;
       data = createData1(chartInfo, this.props.range, 'qualityRating', showYesterdaysDate, barGraph);
