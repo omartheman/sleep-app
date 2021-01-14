@@ -12,8 +12,8 @@
     color: yellow !important;
   }
   input:focus {
-    color: white;
-    background: #0e0e0e;
+    color: black;
+    background: #9b9b9b;
   }
   .react-calendar button:hover, .react-calendar button:focus {
     background: #0e0e0e !important;
@@ -36,6 +36,9 @@
     background-color: #004085;
     border-color: #b8daff;
   }
+}
+.add-data-container input {
+  width: fit-content; 
 }
 .add-data-spacer-logged-out {
   margin-bottom: 100vh !important;
