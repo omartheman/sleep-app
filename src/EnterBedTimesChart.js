@@ -4,7 +4,7 @@ import './EnterBedTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryTooltip, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, nightModeTransitionTime, victoryAxisStyle, getLongDate,  VictoryScatterLineComplement, victoryLineStyle, yesterdaysDate, yesterdaysDateLabelPrimer} from './global_items';
+import {url, c, nightModeTransitionTime, victoryAxisStyle, getLongDate,  VictoryScatterLineComplement, victoryLineStyle, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createXAxisTickValues, createDateLabels} from './global_items';
 
 const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
@@ -49,18 +49,10 @@ class EnterBedTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter((dataObj, i) => i < this.props.range && dataObj.enterBedTime).map((e, i, arr) => {
-        const dateTime = new Date(`January 1, 2000 ${e.enterBedTime}`);
-        const date = yesterdaysDate(e.date);
-        const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
-        xAxisTickValues = [...xAxisTickValues, date];
-
-        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
-        return(
-          { x: date, y: dateTime, dateLabel: getLongDate(dateLabelPrimer), timeLabel: formatAMPM(dateTime) }
-        );
-      });
+      const showYesterdaysDate = true;
+      data = createData1(chartInfo, this.props.range, 'enterBedTime', showYesterdaysDate);
+      dateLabels = createDateLabels(chartInfo, this.props.range, 'enterBedTime', showYesterdaysDate);
+      xAxisTickValues = createXAxisTickValues(chartInfo, this.props.range, 'enterBedTime', showYesterdaysDate);
     }
     return (
       <>

@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, victoryTooltipLabelStyle, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, victoryTooltipLabelStyle, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createXAxisTickValues, createDateLabels} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -46,18 +46,11 @@ class TimeToFallAsleepChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.timeToFallAsleep).map((e, i, arr) => {
-
-        const date = yesterdaysDate(e.date);
-        const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
-        xAxisTickValues = [...xAxisTickValues, date];
-        
-        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
-        return(
-          { x: date, y: e.timeToFallAsleep, dateLabel: getLongDate(dateLabelPrimer), timeLabel: `${e.timeToFallAsleep} min` }
-        );
-      });
+      const showYesterdaysDate = true;
+      const barGraph = true;
+      data = createData1(chartInfo, this.props.range, 'timeToFallAsleep', showYesterdaysDate, barGraph);
+      dateLabels = createDateLabels(chartInfo, this.props.range, 'timeToFallAsleep', showYesterdaysDate, barGraph);
+      xAxisTickValues = createXAxisTickValues(chartInfo, this.props.range, 'timeToFallAsleep', showYesterdaysDate, barGraph);
     }
     return (
       <>

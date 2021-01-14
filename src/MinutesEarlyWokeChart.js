@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryBar, VictoryLabel, VictoryTooltip } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate, createData1, createXAxisTickValues, createDateLabels} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -46,17 +46,11 @@ class MinutesEarlyWokeChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.minutesEarlyWoke || i < this.props.range + 1 &&  dataObj.minutesEarlyWoke === 0).map((e, i, arr) => {
-        //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
-        const date = Math.floor(Date.parse(e.date)/1000/86400);
-        xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date));
-        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`;  
-        dateLabels = [...dateLabels, dateLabel];
-        return(
-          { x: date, y: e.minutesEarlyWoke, dateLabel: getLongDate(dateLabelPrimer), timeLabel: `${e.minutesEarlyWoke} min` }
-        );
-      });
+      const showYesterdaysDate = false;
+      const barGraph = true;
+      data = createData1(chartInfo, this.props.range, 'minutesEarlyWoke', showYesterdaysDate, barGraph);
+      dateLabels = createDateLabels(chartInfo, this.props.range, 'minutesEarlyWoke', showYesterdaysDate, barGraph);
+      xAxisTickValues = createXAxisTickValues(chartInfo, this.props.range, 'minutesEarlyWoke', showYesterdaysDate, barGraph);
     }
     return (
       <>

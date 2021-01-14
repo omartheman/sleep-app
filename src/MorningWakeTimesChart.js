@@ -4,7 +4,7 @@ import './MorningWakeTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle, victoryLineStyle} from './global_items';
+import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle, victoryLineStyle, createData1, createXAxisTickValues, createDateLabels} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -48,18 +48,10 @@ class MorningWakeTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.morningWakeTime).map((e, i) => {
-        //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
-        const dateTime = new Date(`January 1, 2000 ${e.morningWakeTime}`);
-        const date = Math.floor(Date.parse(e.date)/1000/86400);
-        xAxisTickValues = [...xAxisTickValues, date];
-        const dateLabelPrimer = new Date(Date.parse(e.date));
-        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
-        return(
-          { x: date, y: dateTime, dateLabel: getLongDate(dateLabelPrimer), timeLabel: formatAMPM(dateTime) }
-        );
-      });
+      const showYesterdaysDate = false;
+      data = createData1(chartInfo, this.props.range, 'morningWakeTime', showYesterdaysDate);
+      dateLabels = createDateLabels(chartInfo, this.props.range, 'morningWakeTime', showYesterdaysDate);
+      xAxisTickValues = createXAxisTickValues(chartInfo, this.props.range, 'morningWakeTime', showYesterdaysDate);
     }
     return (
       <>

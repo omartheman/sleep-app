@@ -3,6 +3,80 @@ const url = 'http://localhost:4000/sleep/api/';
 /*
 const url = 'https://omarshishani.com/sleep/api/';
 */
+
+function formatAMPM(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+ minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
+
+const createData1 = (chartInfo, range, chart, showYesterdaysDate, barGraph) => {
+  return(
+    chartInfo.filter((dataObj, i) => i < range && dataObj[chart]).map((e, i, arr) => {
+      const dateTime = new Date(`January 1, 2000 ${e[chart]}`);
+      let date;
+      let dateLabelPrimer;
+      if (showYesterdaysDate) {
+        date = yesterdaysDate(e.date);
+        dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
+      } else {
+        date = Math.floor(Date.parse(e.date)/1000/86400);
+        dateLabelPrimer = new Date(Date.parse(e.date));
+      }
+      if (chart === 'sleepAidItem'){
+        const sleepAidItem = e.sleepAidItem.match(/(?<=\s+)[A-Za-z]+/g)[0];
+        const sleepAidMg = e.sleepAidItem.match(/\d+/g);
+        return(
+          { x: date, y: sleepAidMg, dateLabel: getLongDate(dateLabelPrimer), sleepAidItem: sleepAidItem}
+        );
+      }
+      if (barGraph){
+        return(
+          { x: date, y: e[chart], dateLabel: getLongDate(dateLabelPrimer), timeLabel: `${e[chart]} min` }
+        );
+      }
+      return(
+        { x: date, y: dateTime, dateLabel: getLongDate(dateLabelPrimer), timeLabel: formatAMPM(dateTime) }
+      );
+    })
+  ) 
+}
+const createXAxisTickValues = (chartInfo, range, chart, showYesterdaysDate) => {
+  let xAxisTickValues = [];
+  chartInfo.filter((dataObj, i) => i < range && dataObj[chart]).forEach((e, i, arr) => {
+    let date;
+    if (showYesterdaysDate) {
+      date = yesterdaysDate(e.date);
+    } else {
+      date = Math.floor(Date.parse(e.date)/1000/86400);
+    }
+    xAxisTickValues = [...xAxisTickValues, date];
+  })
+  return xAxisTickValues;
+}
+const createDateLabels = (chartInfo, range, chart, showYesterdaysDate) => {
+  let dateLabels = [];
+  chartInfo.filter((dataObj, i) => i < range && dataObj[chart]).forEach((e, i, arr) => {
+    let dateLabelPrimer;
+    
+    if (showYesterdaysDate) {
+      dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
+    } else {
+      dateLabelPrimer = new Date(Date.parse(e.date));
+    }
+
+
+    const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
+    dateLabels = [...dateLabels, dateLabel];
+  })
+  return dateLabels;
+}
+
 const yesterdaysDateLabelPrimer = (date) => {
   return new Date(Date.parse(date) - 1000*86400);
 }
@@ -153,6 +227,6 @@ function getClickedDate(date, type){
 
 const varToString = varObj => Object.keys(varObj)[0]; 
 
-export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement, getLongDate, victoryLineStyle, flyoutStyleNight, victoryTooltipLabelStyle, yesterdaysDate, yesterdaysDateLabelPrimer};
+export {c, getClickedDate, url, varToString, nightModeTransitionTime, victoryAxisStyle, VictoryScatterLineComplement, getLongDate, victoryLineStyle, flyoutStyleNight, victoryTooltipLabelStyle, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createDateLabels, createXAxisTickValues};
 
 export default url;

@@ -48,7 +48,7 @@ class ArousalDurationChart extends React.Component {
     let xAxisTickValues = [];
     let data = [];
     if (chartInfo.length > 1) {
-      data =  chartInfo.filter((dataObj, i) => i + 2 < this.props.range && dataObj.arousalDuration).map((e, i, arr) => {
+      data =  chartInfo.filter((dataObj, i) => i + 1 < this.props.range && dataObj.arousalDuration).map((e, i, arr) => {
         
         const durations = e.arousalDuration.match(/\d+/g).map(x => Number(x));
 

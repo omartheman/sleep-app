@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, VictoryScatterLineComplement, victoryLineStyle, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer} from './global_items';
+import {url, c, victoryAxisStyle, VictoryScatterLineComplement, victoryLineStyle, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createXAxisTickValues, createDateLabels} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -47,20 +47,10 @@ class LightsOffTimesChart extends React.Component {
     let xAxisTickValues = [];
     let data;
     if (chartInfo.length > 1) {
-      data = chartInfo.filter((dataObj, i) => i < this.props.range + 1 && dataObj.lightsOffTime).map((e, i, arr) => {
-        //DATE JAN 1 2000 USED BECAUSE DATE NEEDED FOR TIME VALUE
-        const dateTime = new Date(`January 1, 2000 ${e.lightsOffTime}`);
-        
-        const date = yesterdaysDate(e.date);
-        const dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
-        xAxisTickValues = [...xAxisTickValues, date];
-
-        const dateLabel = `${dateLabelPrimer.getMonth()+1}/${dateLabelPrimer.getDate()}`; 
-        dateLabels = [...dateLabels, dateLabel];
-        return(
-          { x: date, y: dateTime, dateLabel: getLongDate(dateLabelPrimer), timeLabel: formatAMPM(dateTime) }
-        );
-      });
+      const showYesterdaysDate = true;
+      data = createData1(chartInfo, this.props.range, 'lightsOffTime', showYesterdaysDate);
+      dateLabels = createDateLabels(chartInfo, this.props.range, 'lightsOffTime', showYesterdaysDate);
+      xAxisTickValues = createXAxisTickValues(chartInfo, this.props.range, 'lightsOffTime', showYesterdaysDate);
     }
     return (
       <>
