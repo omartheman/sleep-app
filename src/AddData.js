@@ -96,7 +96,10 @@ function AddData (props) {
   };
   let dateHeading;
   let dateClickedYear;
+  let dateHeadingYesterday;
   if (date){
+    const dateInMsYesterday = new Date(Date.parse(date) - 1000*86400);
+    dateHeadingYesterday = getClickedDate(dateInMsYesterday);
     dateHeading = getClickedDate(date);
     dateClickedYear = date.getFullYear();
   }
@@ -161,6 +164,7 @@ function AddData (props) {
                 {existingDataAlert && 
                   <Alert variant="success">You have already submitted data for {dateHeading}. Your previous data has been autofilled below. You can resubmit if you would like to add or change data.</Alert>
                 }
+                <Alert variant="primary">Data from inputs asking about things that took place "yesterday" or "last night" will be dated on the graphs as {dateHeadingYesterday}.</Alert>
                 <Form className="add-data-form">
                   <Form.Label>1a. Yesterday I started my first nap at ___. (Example: <span className="add-data-form-example">2:30 PM</span>)</Form.Label>
                   <Form.Control 
