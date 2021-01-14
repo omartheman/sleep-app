@@ -275,7 +275,10 @@ function AddData (props) {
             }
           </>
           :
-          <Alert variant="warning">Please log in to add data.</Alert>
+          <>
+            <Alert variant="warning">Please log in to add data.</Alert>
+            <div className="add-data-spacer-logged-out"></div>
+          </>
         }
       </Container>
     </>

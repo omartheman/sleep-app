@@ -137,7 +137,7 @@ function App() {
       <Route path="/sleep/add-data">
         <>
           {navbar}
-          <div className={nightMode && "add-data-component-wrapper-night"}>
+          <div className={`app-container-wrapper ${nightMode && 'app-container-wrapper-night'}`}>
             <AddData 
               nightMode={nightMode}
               loggedInUser={loggedInUser}

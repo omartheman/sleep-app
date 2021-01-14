@@ -42,7 +42,11 @@ h2 {
 }
 $colWdthLg: 33.333%;
 $colWdthMd: 50%;
-
+.app-container-wrapper-night {
+  height: 100vh;
+  background-color: #0a0a0a;
+  transition: background-color $nightModeTransitionTime;
+}
 .app-charts-container-wrapper {
   transition: background-color $nightModeTransitionTime; 
 }
