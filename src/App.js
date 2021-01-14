@@ -119,7 +119,10 @@ function App() {
       <Route path="/sleep/create-account" render={() => (
         <>
           {navbar}
-          <CreateAccount />
+          <CreateAccount 
+            loggedInUser={loggedInUser}
+            setNewLoggedInUser={handleNewLoggedInUser}
+          />
         </>
       )} />
       <Route path="/sleep/home-logged-out" render={() => (
@@ -233,15 +236,6 @@ function App() {
           </Container>
         </div>
       </Route>
-      <Route path="/recipeapp/create-account-success" render={() => (
-        <>
-          {navbar}
-          {/* <CreateAccountSuccess
-            loggedInUser={loggedInUser}
-            onLogout={this.handleLogout}
-          /> */}
-        </>
-      )} />
       <Route path="/recipeapp/recipe-upload-success" render={() => (
         <>
           {navbar}

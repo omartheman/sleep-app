@@ -4,6 +4,7 @@ import axios from 'axios';
 import './CreateAccount.scss';
 import { Redirect } from 'react-router-dom';
 import url from './global_items';
+import PropTypes from 'prop-types';
 
 const urlAuth = `${url}auth`;
 const urlCreateAcc = `${url}create-account`;
@@ -12,6 +13,12 @@ axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;
 
 class CreateAccount extends React.Component{
+  componentDidMount(){
+    console.log('props', this.props);
+  }
+  componentDidUpdate(){
+    console.log('props', this.props);
+  }
   constructor(props){
     super(props);
     this.state = {
@@ -203,6 +210,10 @@ class CreateAccount extends React.Component{
       </>
     )
   }
+}
+
+CreateAccount.propTypes = {
+  setNewLoggedInUser: PropTypes.func
 }
 
 export default CreateAccount;

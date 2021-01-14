@@ -1,9 +1,12 @@
-import { useState } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './CreateAccountSuccess.scss'
 import { Link, Redirect } from 'react-router-dom';
 
 function CreateAccountSuccess (props) {
+  useEffect(() => {
+    
+  })
   const [redirect, setRedirect] = useState(null);
   const handleRedirect = (id) => {
     console.log('handle work')
