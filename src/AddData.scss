@@ -5,15 +5,15 @@
   input, .react-calendar {
     background: #1f1f1f;
   }
+  input:focus {
+    color: black;
+    background: #9b9b9b;
+  }
   .react-calendar__month-view__days__day--neighboringMonth abbr {
     color: rgb(234, 0, 255) !important;
   }
   .react-calendar__month-view__days__day--weekend abbr {
     color: yellow !important;
-  }
-  input:focus {
-    color: black;
-    background: #9b9b9b;
   }
   .react-calendar button:hover, .react-calendar button:focus {
     background: #0e0e0e !important;
@@ -53,6 +53,10 @@
 .add-data-button-go-to-data-overview {
   margin-right: 10px;
   margin-bottom: 10px;
+  width: fit-content;
+}
+.add-data-link-go-to-data-overview {
+  width: fit-content;
 }
 .add-data-container input {
   width: fit-content; 

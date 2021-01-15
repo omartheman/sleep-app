@@ -91,8 +91,8 @@ class MinutesEarlyWokeChart extends React.Component {
                   let lastDate;
                   let dateDiff;
                   if (data) {
-                    firstDate = data[0].x; 
-                    lastDate = data[data.length - 1].x; 
+                    firstDate = data[data.length - 1].x; 
+                    lastDate = data[0].x; 
                     dateDiff = lastDate - firstDate;
                   }
                   return(

@@ -54,34 +54,34 @@ class LightsOffTimesChart extends React.Component {
     }
     return (
       <>
-          <div className="victory-chart-1-container">
-            <VictoryChart
-              theme={VictoryTheme.material}
-              padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
-              scale={{y:'time'}}
-              domainPadding={{ x: 20, y: 20 }}
-            >
-              <VictoryAxis
-                tickValues={xAxisTickValues}
-                tickFormat={dateLabels}
-                style={victoryAxisStyle('x', this.props.nightMode)}
-                tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
-                fixLabelOverlap={true}
-              />
-              <VictoryAxis
-                style={{grid:{stroke:'black', strokeDasharray: '7'}}}
-                dependentAxis
-                tickFormat={(y) => formatAMPM(y)}
-                style={victoryAxisStyle('y', this.props.nightMode)}
-              />
-              <VictoryLine
-                data={data}
-                style={victoryLineStyle(this.props.nightMode, 'exitBedCharts')}
-              />
-              {VictoryScatterLineComplement(data, this.props.nightMode)}
-            </VictoryChart>
-          <h2 className={this.props.nightMode ? "exit-bed-charts exit-bed-charts-heading exit-bed-charts-heading-night" : "exit-bed-charts-heading exit-bed-charts-heading-day"} title="The time you woke up. This could be before you got out of bed.">Time Out of Bed</h2>
-          </div>
+        <div className="victory-chart-1-container">
+          <VictoryChart
+            theme={VictoryTheme.material}
+            padding={{ left: 70, top: 20, right: 30, bottom: 50 }}
+            scale={{y:'time'}}
+            domainPadding={{ x: 20, y: 20 }}
+          >
+            <VictoryAxis
+              tickValues={xAxisTickValues}
+              tickFormat={dateLabels}
+              style={victoryAxisStyle('x', this.props.nightMode)}
+              tickLabelComponent={<VictoryLabel dy={0} dx={10} angle={55}/>}
+              fixLabelOverlap={true}
+            />
+            <VictoryAxis
+              style={{grid:{stroke:'black', strokeDasharray: '7'}}}
+              dependentAxis
+              tickFormat={(y) => formatAMPM(y)}
+              style={victoryAxisStyle('y', this.props.nightMode)}
+            />
+            <VictoryLine
+              data={data}
+              style={victoryLineStyle(this.props.nightMode, 'exitBedCharts')}
+            />
+            {VictoryScatterLineComplement(data, this.props.nightMode)}
+          </VictoryChart>
+        <h2 className={this.props.nightMode ? "exit-bed-charts exit-bed-charts-heading exit-bed-charts-heading-night" : "exit-bed-charts-heading exit-bed-charts-heading-day"} title="The time you woke up. This could be before you got out of bed.">Time Out of Bed</h2>
+        </div>
       </>
     )
   }

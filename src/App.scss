@@ -97,19 +97,16 @@ $charts: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
   }
 }
 .app-range-input-container {
+  input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {  
+   opacity: 1;
+  }
   margin: 20px 50px 0;
   label {
     margin-right: 10px; 
-  }
-}
-.app-range-input-container-night {
-  display: flex;
-  align-items: center;
-  color: white; 
-  transition: color $nightModeTransitionTime; 
-  label {
     margin-bottom: 0;
   }
+  display: flex;
+  align-items: center;
   @media(max-width: 992px){
     flex-direction: column;
     label {
@@ -118,6 +115,18 @@ $charts: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
     input {
       margin-bottom: 10px;
     }
+  }
+}
+.app-range-input-container-night {
+  color: white; 
+  transition: color $nightModeTransitionTime; 
+  input {
+    color: white;
+    background: #1f1f1f;
+  }
+  input:focus {
+    color: black;
+    background: #9b9b9b;
   }
 }
 .button-inline {

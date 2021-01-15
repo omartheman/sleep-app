@@ -276,7 +276,7 @@ function AddData (props) {
                   <>
                     <Alert variant="success" className="alert-bootstrap add-data-alert-submitted">Your data has been submitted!</Alert>
                     <Button as={Link} to='/sleep/' variant="info" className="add-data-button-go-to-data-overview">Go to Data Overview</Button>
-                    <a href="#top">
+                    <a href="#top" className="add-data-link-go-to-data-overview">
                       <Button variant="info" className="add-data-button-go-to-data-overview">Add More Data</Button>
                     </a>
                   </>
