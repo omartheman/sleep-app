@@ -160,7 +160,6 @@ function App() {
               type='number'
               value={range}
               onChange={(e) => {
-                console.log('range', range);
                 setRange(Number(e.target.value));
               }}
             />

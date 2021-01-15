@@ -1,4 +1,5 @@
 14 jan thu
+  -fix login form so doesn't lag because all graph components are updating
   - add success message after data is submitted
   - add 'if none, leave blank' to 'My arousals lasted...' and 'I woke up...'
   - display data even if only one date is filled out  

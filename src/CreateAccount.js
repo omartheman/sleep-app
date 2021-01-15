@@ -13,12 +13,6 @@ axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;
 
 class CreateAccount extends React.Component{
-  componentDidMount(){
-    console.log('props', this.props);
-  }
-  componentDidUpdate(){
-    console.log('props', this.props);
-  }
   constructor(props){
     super(props);
     this.state = {

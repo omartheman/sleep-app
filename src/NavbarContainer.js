@@ -13,7 +13,8 @@ const urlLogout = `${url}logout`;
 const NavbarContainer = (props) => {
   const {loginSubmit, loggedInUser, onLoginFormChange, onLogout} = props;
   const [loginDropdown, setLoginDropdown] = useState(false);
-  
+  const [usernameInput, setUsernameInput] = useState(null);
+  const [passwordInput, setPasswordInput] = useState(null);
   useEffect(() => {
     // add when mounted
     document.addEventListener("mousedown", handleClick);
@@ -113,7 +114,7 @@ const NavbarContainer = (props) => {
           required
           id="username"
           onChange={(e) => {
-            onLoginFormChange(e.target.value, 'username');
+            setUsernameInput(e.target.value);
           }}
         />
       </Form>
@@ -129,7 +130,7 @@ const NavbarContainer = (props) => {
           placeholder="Give me password!" 
           required
           onChange={(e) => {
-            onLoginFormChange(e.target.value, 'password');
+            setPasswordInput(e.target.value);
           }} 
         />
         <Button 
@@ -137,6 +138,8 @@ const NavbarContainer = (props) => {
           variant={props.nightMode ? "info" : "primary"} 
           type="submit"
           onClick={(e) => {
+            onLoginFormChange(usernameInput, 'username');
+            onLoginFormChange(passwordInput, 'password');
             loginSubmit(e);
           }}
         >
