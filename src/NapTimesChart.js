@@ -94,10 +94,9 @@ class NapTimesChart extends React.Component {
                 let lastDate;
                 let dateDiff;
                 if (data) {
-                  firstDate = data[0].barWidthDate; 
-                  lastDate = data[data.length - 1].barWidthDate; 
+                  firstDate = data[data.length - 1].x; 
+                  lastDate = data[0].x; 
                   dateDiff = lastDate - firstDate;
-                  c('firstDate',firstDate)
                 }
                 return(
                   dateDiff < 10 ? 18
