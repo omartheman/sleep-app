@@ -13,7 +13,7 @@ import EnterBedTimesChart from './EnterBedTimesChart';
 import MorningWakeTimesChart from './MorningWakeTimesChart';
 import LightsOffTimesChart from './LightsOffTimesChart';
 import ExitBedTimesChart from './ExitBedTimesChart';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Button, Container, Col, Row } from 'react-bootstrap';
 import TimeToFallAsleepChart from './TimeToFallAsleepChart';
 import HomeLoggedOut from './HomeLoggedOut';
 import CreateAccount from './CreateAccount';
@@ -154,6 +154,7 @@ function App() {
           <div className={`app-range-input-container ${nightMode && 'app-range-input-container-night'}`}>
             <label>Show data from up to ___ days ago.</label>
             <input 
+              className="mr-3"
               type='number'
               value={range}
               onChange={(e) => {
@@ -161,6 +162,13 @@ function App() {
                 setRange(Number(e.target.value));
               }}
             />
+            <div>
+              <Button className="button-inline" onClick={() => {setRange(7)}}>7</Button>
+              <Button className="button-inline" onClick={() => {setRange(15)}}>15</Button>
+              <Button className="button-inline" onClick={() => {setRange(30)}}>30</Button>
+              <Button className="button-inline" onClick={() => {setRange(60)}}>60</Button>
+              <Button className="button-inline" onClick={() => {setRange(180)}}>180</Button>
+            </div>
           </div>
           <Container fluid className="app-charts-container">
             <div className="ct1">

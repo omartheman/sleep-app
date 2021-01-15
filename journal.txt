@@ -2,7 +2,8 @@
   - add success message after data is submitted
   - add 'if none, leave blank' to 'My arousals lasted...' and 'I woke up...'
   - display data even if only one date is filled out  
-  - fix 'nap-times' so that the bar is thick when smaller amounts of data are shown
+  - fix 'nap-times' so that the bar is thick when smaller amounts of data are show
+  - add 'clear input' button to time inputs.
 
 13 jan wed
 

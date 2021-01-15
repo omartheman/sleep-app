@@ -177,11 +177,11 @@ function AddData (props) {
                   <Form.Control 
                     id_val="nap-start-time"
                     type="time" 
-                    className={existingNapStart !== '' && "existing-data"}
+                    className={`add-data-form-time ${existingNapStart !== '' && "existing-data"}`}
                     value={existingNapStart} 
                     placeholder={existingNapStart} 
                     onChange={handleFormInput}
-                    />
+                  />
                   <Form.Label>1a. Yesterday I ended my last nap at ___. (Example: <span className="add-data-form-example">3:15 PM</span>)</Form.Label>
                   <Form.Control 
                     id_val="nap-end-time"
@@ -189,7 +189,7 @@ function AddData (props) {
                     type="time" 
                     value={existingNapEnd}
                     onChange={handleFormInput}
-                    />
+                  />
                   <Form.Label>2. Last night I took ___ mg/oz of ___ as a sleep aid. (If none, leave blank. Unit "mg" is for medicine, "oz" is for alcohol - but the unit doesn't need to be included in the input. Example: <span className="add-data-form-example">5 Ambien</span>)</Form.Label>
                   <Form.Control 
                     id_val="sleep-aid-item"
@@ -274,11 +274,15 @@ function AddData (props) {
                 </Form>
                 {submittedMessage &&
                   <>
-                    <Alert variant="success" className="alert-bootstrap">Your data has been submitted!</Alert>
-                    <Button as={Link} to='/sleep/'>Go to Data Overview</Button>
+                    <Alert variant="success" className="alert-bootstrap add-data-alert-submitted">Your data has been submitted!</Alert>
+                    <Button as={Link} to='/sleep/' variant="info" className="add-data-button-go-to-data-overview">Go to Data Overview</Button>
+                    <a href="#top">
+                      <Button variant="info" className="add-data-button-go-to-data-overview">Add More Data</Button>
+                    </a>
                   </>
                 }
                 <Button className="add-data-submit-button" onClick={handleDataSubmit}>Submit</Button>
+                <div className="spacer"></div>
               </>
             : 
               <>
