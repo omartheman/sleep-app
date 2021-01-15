@@ -135,3 +135,34 @@ $charts: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
 .spacer {
   height: 100px;
 }
+.container-wrapper-night-mode {
+  background: #0a0a0a;
+}
+.container-night-mode {
+  background: #0a0a0a;
+  h1, h2, label, input, .react-calendar button, .react-calendar abbr {
+    color: white;
+  }
+  input, .react-calendar {
+    background: #161616;
+  }
+  input:focus {
+    color: rgb(255, 255, 255);
+    background: #0e0e0e;
+  }
+  .alert-success {
+    color: #9bffb2;
+    background-color: #001a06;
+    border-color: #c3e6cb;
+  }
+  .alert-warning {
+    color: #f4ff50;
+    background-color: #4a3800;
+    border-color: #ffeeba;
+  }
+  .alert-primary {
+    color: #cce5ff;
+    background-color: #004085;
+    border-color: #b8daff;
+  }
+}

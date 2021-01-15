@@ -109,21 +109,23 @@ function App() {
   return(
     <Switch>
       <Route path="/sleep/create-account-success" render={() => (
-        <>
+        <div className={nightMode && 'container-wrapper-night-mode'}>
           {navbar}
           <CreateAccountSuccess 
+            nightMode={nightMode}
             loggedInUser={loggedInUser}
           />
-        </>
+        </div>
       )} />
       <Route path="/sleep/create-account" render={() => (
-        <>
+        <div className={nightMode && 'container-wrapper-night-mode'}>
           {navbar}
           <CreateAccount 
+            nightMode={nightMode}
             loggedInUser={loggedInUser}
             setNewLoggedInUser={handleNewLoggedInUser}
           />
-        </>
+        </div>
       )} />
       <Route path="/sleep/home-logged-out" render={() => (
         <>

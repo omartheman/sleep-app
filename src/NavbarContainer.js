@@ -103,11 +103,11 @@ const NavbarContainer = (props) => {
       {/* </Navbar.Collapse> */}
     </Navbar>
     
-    <div className={loginDropdown ? "navbar-login-form login-form-identifier" :"navbar-login-form hidden login-form-identifier"}>
+    <div className={`${loginDropdown ? "navbar-login-form login-form-identifier" :"navbar-login-form hidden login-form-identifier"} ${props.nightMode && 'navbar-login-form-night-mode'}`}>
       <Form action="auth" onSubmit={loginSubmit} className="login-form-identifier">
         <Form.Label className="login-form-identifier">Username</Form.Label>
         <Form.Control 
-          className="login-form-identifier"
+          className="navbar-login-form-username-input login-form-identifier"
           type="text" 
           placeholder="Enter username" 
           required
@@ -124,7 +124,7 @@ const NavbarContainer = (props) => {
       >
         <Form.Label className="login-form-identifier">Password</Form.Label>
         <Form.Control 
-          className="login-form-identifier"
+          className="login-form-identifier navbar-login-form-password-input"
           type="password" 
           placeholder="Give me password!" 
           required
@@ -134,7 +134,7 @@ const NavbarContainer = (props) => {
         />
         <Button 
           className="login-form-identifier"
-          variant="primary" 
+          variant={props.nightMode ? "info" : "primary"} 
           type="submit"
           onClick={(e) => {
             loginSubmit(e);

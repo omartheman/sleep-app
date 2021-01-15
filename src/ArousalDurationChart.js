@@ -133,7 +133,22 @@ class ArousalDurationChart extends React.Component {
                 tickFormat={(y) => `${y} min` }
                 style={victoryAxisStyle('y', this.props.nightMode)}
               />
-              <VictoryStack>
+              <VictoryStack
+                colorScale={
+                  this.props.nightMode ? 
+                  ['rgb(67 0 255)', 
+                  'rgb(244 0 255)', 
+                  'rgb(8 190 0)', 
+                  'rgb(255 217 0)', 
+                  'red']
+                  : 
+                  ['rgb(126 81 255)', 
+                  'rgb(244 0 255)', 
+                  'rgb(8 190 0)', 
+                  'rgb(255 134 0)', 
+                  'red']
+                }
+              >
                 {[...bars]}
               </VictoryStack>
             </VictoryChart>

@@ -26,7 +26,7 @@ function CreateAccountSuccess (props) {
   return(
     <>
       {redirect}
-      <Container className="create-account-success-container">
+      <Container className={`create-account-success-container ${props.nightMode && 'container-night-mode'}`}>
         <h1>Success!</h1>
         <h2>Yahoo{` ${props.loggedInUser}`}! Your account was created!</h2>
         <Row className="success-redirect-buttons">
@@ -34,6 +34,7 @@ function CreateAccountSuccess (props) {
             <Button onClick={() => {handleRedirect('add-data')}}>Add some data!</Button> 
           </Col>
         </Row>
+        <div className='create-account-success-spacer'></div>
       </Container>
       
     </>

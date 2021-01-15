@@ -113,7 +113,9 @@ class CreateAccount extends React.Component{
     return(
       <>
         {this.state.redirect ? <Redirect to="/sleep/create-account-success" /> : null}
-        <Container className="create-account-form-container">
+        <Container 
+          className={`create-account-form-container ${this.props.nightMode && 'container-night-mode'}`}
+        >
           <h1>Create Account</h1>
           <Form action="auth" onSubmit={this.handleCreateAccSubmit}>
             <div className="create-account-form-section">
@@ -202,7 +204,7 @@ class CreateAccount extends React.Component{
             variant="primary" 
             type="submit"
             onClick={this.handleCreateAccSubmit}
-            className="submit-button-general"
+            className="submit-button-general mb-5"
           >
             Sign Me Up!
           </Button>

@@ -4,6 +4,8 @@ $nightModeTransitionTime: 0.5s;
 }
 nav {
   background-color: rgb(172, 198, 255);
+  background-color: #d1dfff;
+  
   // height: 60px;
   // height: var(--navHeight);
   // padding: 0 20px !important;
@@ -19,6 +21,24 @@ nav {
   }
   .navbar-brand {
     color: white !important;
+  }
+  .navbar-login-button-link {
+    color: white;
+  }
+  .navbar-login-button path {
+    fill: lightgrey;
+  }
+  .navbar-login-button-link:hover {
+
+    color: #dddddd !important;
+  }
+  .navbar-login-button:hover {
+    fill: lightgrey;
+  }
+  button.navbar-toggler {
+    border: 1px solid rgb(187, 187, 187) !important;
+    background: rgb(160, 160, 160);
+    background: #7a7dff;
   }
 }
 #basic-nav-dropdown {
@@ -78,9 +98,25 @@ nav {
     left: 10px;
   }
   background-color: rgb(248, 249, 250);
+  background-color: #d1dfff;
   padding: 20px;
   width: 300px;
   z-index: 1001;
+}
+.navbar-login-form-night-mode {
+  border: 1px solid rgb(255 255 255 / 50%);
+  background-color: #353535;
+  color: white;
+  input, .react-calendar {
+    background: #1f1f1f;
+  }
+  input:focus {
+    color: rgb(255, 255, 255);
+    background: #111111;
+  }
+}
+.navbar-login-form-password-input, .navbar-login-form-username-input {
+  margin-bottom: 10px;
 }
 .navbar-site-name {
   display: flex !important;
