@@ -18,10 +18,16 @@ function formatAMPM(date) {
 const createData1 = (chartInfo, range, chart, showYesterdaysDate, barGraph) => {
   return(
     chartInfo.filter((dataObj, i) => (i < range && dataObj[chart]) || (i < range && dataObj[chart] === 0)).map((e, i, arr) => {
-      const dateTime = new Date(`January 1, 2000 ${e[chart]}`);
+      let dateTime = new Date(`January 1, 2000 ${e[chart]}`);
+      if (chart === 'enterBedTime' || chart === 'lightsOffTime'){
+        if (Date.parse(dateTime) > 946713600000 && Date.parse(dateTime) < 946756800000){
+          dateTime = new Date(Date.parse(dateTime) + 86400*1000);
+        }
+      }
       let date;
       let dateLabelPrimer;
       if (showYesterdaysDate) {
+
         date = yesterdaysDate(e.date);
         dateLabelPrimer = yesterdaysDateLabelPrimer(e.date);
       } else {
@@ -34,9 +40,7 @@ const createData1 = (chartInfo, range, chart, showYesterdaysDate, barGraph) => {
         if (e.sleepAidItem.match(/(?<=\s+)[A-Za-z]+/g)){
           sleepAidItem = e.sleepAidItem.match(/(?<=\s+)[A-Za-z]+/g)[0];
           sleepAidMg = e.sleepAidItem.match(/\d+/g);
-          
         } else {
-
           sleepAidItem = 'None';
           sleepAidMg = null;
         }

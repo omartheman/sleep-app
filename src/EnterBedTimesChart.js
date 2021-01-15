@@ -54,6 +54,7 @@ class EnterBedTimesChart extends React.Component {
       dateLabels = createDateLabels(chartInfo, this.props.range, 'enterBedTime', showYesterdaysDate);
       xAxisTickValues = createXAxisTickValues(chartInfo, this.props.range, 'enterBedTime', showYesterdaysDate);
     }
+    c('data', data)
     return (
       <>
         <div className="victory-chart-1-container">
