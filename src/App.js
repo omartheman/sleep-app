@@ -177,42 +177,42 @@ function App() {
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
             <div className="ct2">
               <LightsOffTimesChart 
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
             <div className="ct3">
               <TimeToFallAsleepChart 
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
             <div className="ct9">
               <MorningWakeTimesChart 
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
             <div className="ct8">
               <ExitBedTimesChart 
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
             <div className="ct7">
               <MinutesEarlyWokeChart 
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
 
             <div className="ct4">
@@ -220,21 +220,21 @@ function App() {
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
             <div className="ct6">
               <ArousalDurationChart 
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
             <div className="ct5">
               <QualityRatingChart 
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
 
             <div className="ct10">
@@ -242,7 +242,7 @@ function App() {
                 nightMode={nightMode}
                 loggedInUser={loggedInUser}
                 range={range}
-                />
+              />
             </div>
           </Container>
         </div>

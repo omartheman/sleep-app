@@ -65,17 +65,11 @@ const NavbarContainer = (props) => {
         </span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      {/* <Navbar.Collapse id="basic-navbar-nav"> */}
+      <Navbar.Collapse id="basic-navbar-nav">
         <Nav.Link as={Link} to="/sleep/home-logged-out">Home</Nav.Link>
         <Nav.Link as={Link} to="/sleep/">Overview</Nav.Link>
         <Nav.Link as={Link} to="/sleep/add-data/">Add Data</Nav.Link>
         <Nav.Link className={loggedInUser === null || loggedInUser === '' ? "hidden" : null} as={Link} to="/recipeapp/myrecipes">Conditional Link</Nav.Link>
-        <div className="ml-auto">
-          <NightModeSwitch
-            setNightMode={props.setNightMode}
-            nightMode={props.nightMode}
-          />
-        </div>
         <NavDropdown 
           title={`Hello, ${loggedInUser}!`} 
           id="basic-nav-dropdown" 
@@ -100,8 +94,15 @@ const NavbarContainer = (props) => {
             </svg>
           </div>
           <Nav.Link  className="navbar-create-acc-button" as={Link} to="/sleep/create-account">Create Account</Nav.Link>
+          <span>Night Mode: &nbsp;</span>
+          <div className="ml-auto">
+            <NightModeSwitch
+              setNightMode={props.setNightMode}
+              nightMode={props.nightMode}
+            />
+          </div>
         </div>
-      {/* </Navbar.Collapse> */}
+      </Navbar.Collapse>
     </Navbar>
     
     <div className={`${loginDropdown ? "navbar-login-form login-form-identifier" :"navbar-login-form hidden login-form-identifier"} ${props.nightMode && 'navbar-login-form-night-mode'}`}>

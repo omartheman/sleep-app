@@ -13,6 +13,7 @@ nav {
 }
 .navbar-night-mode {
   background-color: rgb(28, 30, 133);
+  color: white;
   .nav-link {
     color: white !important; 
   }
@@ -39,6 +40,11 @@ nav {
     border: 1px solid rgb(187, 187, 187) !important;
     background: rgb(160, 160, 160);
     background: #7a7dff;
+  }
+}
+.navbar-night-mode-switch-container {
+  @media(max-width: 991px){
+    padding-left: 15px;
   }
 }
 #basic-nav-dropdown {

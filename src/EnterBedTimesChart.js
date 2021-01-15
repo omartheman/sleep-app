@@ -14,18 +14,34 @@ class EnterBedTimesChart extends React.Component {
     chartInfo: []
   }
   componentDidMount(){
-    axios.post(urlGetData, {user: this.props.loggedInUser})
-    .then(res => {
-      let newChartInfo = [];
-      res.data.map(x => {
-        newChartInfo = [...newChartInfo, {
-          date: x.date,
-          enterBedTime: x.enterBedTime
-        }];
-        return null;
+    c('user', this.props.user)
+    if (this.props.loggedInUser) {
+      axios.post(urlGetData, {user: this.props.loggedInUser})
+      .then(res => {
+        let newChartInfo = [];
+        res.data.map(x => {
+          newChartInfo = [...newChartInfo, {
+            date: x.date,
+            enterBedTime: x.enterBedTime
+          }];
+          return null;
+        })
+        this.setState({chartInfo: newChartInfo});
       })
-      this.setState({chartInfo: newChartInfo});
-    })
+    } else {
+      axios.post(urlGetData, {user: 'sample'})
+      .then(res => {
+        let newChartInfo = [];
+        res.data.map(x => {
+          newChartInfo = [...newChartInfo, {
+            date: x.date,
+            enterBedTime: x.enterBedTime
+          }];
+          return null;
+        })
+        this.setState({chartInfo: newChartInfo});
+      })
+    }
   }
   componentDidUpdate(prevProps){
     if (prevProps.loggedInUser !== this.props.loggedInUser){
