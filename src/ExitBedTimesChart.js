@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle, victoryLineStyle, createData1, createXAxisTickValues, createDateLabels} from './global_items';
+import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle, victoryLineStyle, createData1, createXAxisTickValues, createDateLabels, createChartInfo} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -12,33 +12,21 @@ class LightsOffTimesChart extends React.Component {
     chartInfo: []
   }
   componentDidMount(){
-    axios.post(urlGetData, {user: this.props.loggedInUser})
-    .then(res => {
-      let newChartInfo = [];
-      res.data.map(x => {
-        newChartInfo = [...newChartInfo, {
-          date: x.date,
-          exitBedTime: x.exitBedTime
-        }];
-        return null;
-      })
-      this.setState({chartInfo: newChartInfo});
-    })
+    if (this.props.loggedInUser && this.props.loggedInUser !== '') {
+      createChartInfo(urlGetData, this.props.loggedInUser, 'exitBedTime', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
+    } else { 
+      createChartInfo(urlGetData, 'sample', 'exitBedTime', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
+    }
   }
   componentDidUpdate(prevProps){
-    if (prevProps.loggedInUser !== this.props.loggedInUser){
-      axios.post(urlGetData, {user: this.props.loggedInUser})
-      .then(res => {
-        let newChartInfo = [];
-        res.data.map(x => {
-          newChartInfo = [...newChartInfo, {
-            date: x.date,
-            exitBedTime: x.exitBedTime
-          }];
-          return null;
-        })
-        this.setState({chartInfo: newChartInfo});
-      })
+    if (prevProps.loggedInUser !== this.props.loggedInUser && this.props.loggedInUser !== ''){
+      createChartInfo(urlGetData, this.props.loggedInUser, 'exitBedTime', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
     }
   }
   render() {

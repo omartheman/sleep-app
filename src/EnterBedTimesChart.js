@@ -4,7 +4,7 @@ import './EnterBedTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel, VictoryTooltip, VictoryScatter } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, nightModeTransitionTime, victoryAxisStyle, getLongDate,  VictoryScatterLineComplement, victoryLineStyle, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createXAxisTickValues, createDateLabels} from './global_items';
+import {url, c, nightModeTransitionTime, victoryAxisStyle, getLongDate,  VictoryScatterLineComplement, victoryLineStyle, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createXAxisTickValues, createDateLabels, createChartInfo} from './global_items';
 
 const urlGetData = `${url}get-data`;
 //make it so graph updates when component loads
@@ -14,49 +14,21 @@ class EnterBedTimesChart extends React.Component {
     chartInfo: []
   }
   componentDidMount(){
-    c('user', this.props.user)
-    if (this.props.loggedInUser) {
-      axios.post(urlGetData, {user: this.props.loggedInUser})
-      .then(res => {
-        let newChartInfo = [];
-        res.data.map(x => {
-          newChartInfo = [...newChartInfo, {
-            date: x.date,
-            enterBedTime: x.enterBedTime
-          }];
-          return null;
-        })
-        this.setState({chartInfo: newChartInfo});
-      })
-    } else {
-      axios.post(urlGetData, {user: 'sample'})
-      .then(res => {
-        let newChartInfo = [];
-        res.data.map(x => {
-          newChartInfo = [...newChartInfo, {
-            date: x.date,
-            enterBedTime: x.enterBedTime
-          }];
-          return null;
-        })
-        this.setState({chartInfo: newChartInfo});
-      })
+    if (this.props.loggedInUser && this.props.loggedInUser !== '') {
+      createChartInfo(urlGetData, this.props.loggedInUser, 'enterBedTime', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
+    } else { 
+      createChartInfo(urlGetData, 'sample', 'enterBedTime', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
     }
   }
   componentDidUpdate(prevProps){
-    if (prevProps.loggedInUser !== this.props.loggedInUser){
-      axios.post(urlGetData, {user: this.props.loggedInUser})
-      .then(res => {
-        let newChartInfo = [];
-        res.data.map(x => {
-          newChartInfo = [...newChartInfo, {
-            date: x.date,
-            enterBedTime: x.enterBedTime
-          }];
-          return null;
-        })
-        this.setState({chartInfo: newChartInfo});
-      })
+    if (prevProps.loggedInUser !== this.props.loggedInUser && this.props.loggedInUser !== ''){
+      createChartInfo(urlGetData, this.props.loggedInUser, 'enterBedTime', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
     }
   }
   render() {

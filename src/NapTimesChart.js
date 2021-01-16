@@ -4,7 +4,7 @@ import './NapTimesChart.scss';
 import { VictoryTooltip, VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createXAxisTickValues, createDateLabels} from './global_items';
+import {url, c, victoryAxisStyle, nightModeTransitionTime, flyoutStyleNight, getLongDate, yesterdaysDate, yesterdaysDateLabelPrimer, createData1, createXAxisTickValues, createDateLabels, createChartInfo} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -13,35 +13,21 @@ class NapTimesChart extends React.Component {
     chartInfo: []
   };
   componentDidMount(){
-    axios.post(urlGetData, {user: this.props.loggedInUser})
-    .then(res => {
-        let newNapInfo = [];
-        res.data.map(x => {
-          newNapInfo = [...newNapInfo, {
-            date: x.date, 
-            napStartTime: x.napStartTime,
-            napEndTime: x.napEndTime
-          }]
-          return null;
-        })
-        this.setState({chartInfo: newNapInfo});
-    })
+    if (this.props.loggedInUser && this.props.loggedInUser !== '') {
+      createChartInfo(urlGetData, this.props.loggedInUser, 'napTimes', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
+    } else { 
+      createChartInfo(urlGetData, 'sample', 'napTimes', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
+    }
   }
   componentDidUpdate(prevProps){
-    if (prevProps.loggedInUser !== this.props.loggedInUser){
-      axios.post(urlGetData, {user: this.props.loggedInUser})
-      .then(res => {
-          let newNapInfo = [];
-          res.data.map(x => {
-            newNapInfo = [...newNapInfo, {
-              date: x.date, 
-              napStartTime: x.napStartTime,
-              napEndTime: x.napEndTime
-            }]
-            return null;
-          })
-          this.setState({chartInfo: newNapInfo});
-      })
+    if (prevProps.loggedInUser !== this.props.loggedInUser && this.props.loggedInUser !== ''){
+      createChartInfo(urlGetData, this.props.loggedInUser, 'napTimes', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
     }
   }
   render() {

@@ -4,7 +4,7 @@ import './MorningWakeTimesChart.scss';
 import { VictoryChart, VictoryAxis, VictoryTheme, VictoryLine, VictoryLabel } from 'victory';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle, victoryLineStyle, createData1, createXAxisTickValues, createDateLabels} from './global_items';
+import {url, c, getLongDate, VictoryScatterLineComplement, victoryAxisStyle, victoryLineStyle, createData1, createXAxisTickValues, createDateLabels, createChartInfo} from './global_items';
 
 const urlGetData = `${url}get-data`;
 
@@ -13,33 +13,21 @@ class MorningWakeTimesChart extends React.Component {
     chartInfo: []
   }
   componentDidMount(){
-    axios.post(urlGetData, {user: this.props.loggedInUser})
-    .then(res => {
-      let newChartInfo = [];
-      res.data.map(x => {
-        newChartInfo = [...newChartInfo, {
-          date: x.date,
-          morningWakeTime: x.morningWakeTime
-        }];
-        return null;
-      })
-      this.setState({chartInfo: newChartInfo});
-    })
+    if (this.props.loggedInUser && this.props.loggedInUser !== '') {
+      createChartInfo(urlGetData, this.props.loggedInUser, 'morningWakeTime', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
+    } else { 
+      createChartInfo(urlGetData, 'sample', 'morningWakeTime', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
+    }
   }
   componentDidUpdate(prevProps){
-    if (prevProps.loggedInUser !== this.props.loggedInUser){
-      axios.post(urlGetData, {user: this.props.loggedInUser})
-      .then(res => {
-        let newChartInfo = [];
-        res.data.map(x => {
-          newChartInfo = [...newChartInfo, {
-            date: x.date,
-            morningWakeTime: x.morningWakeTime
-          }];
-          return null;
-        })
-        this.setState({chartInfo: newChartInfo});
-      })
+    if (prevProps.loggedInUser !== this.props.loggedInUser && this.props.loggedInUser !== ''){
+      createChartInfo(urlGetData, this.props.loggedInUser, 'morningWakeTime', function(response){
+        this.setState({chartInfo: response});
+      }.bind(this))
     }
   }
   render() {

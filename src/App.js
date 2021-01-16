@@ -13,7 +13,7 @@ import EnterBedTimesChart from './EnterBedTimesChart';
 import MorningWakeTimesChart from './MorningWakeTimesChart';
 import LightsOffTimesChart from './LightsOffTimesChart';
 import ExitBedTimesChart from './ExitBedTimesChart';
-import { Button, Container, Col, Row } from 'react-bootstrap';
+import { Alert, Button, Container, Col, Row } from 'react-bootstrap';
 import TimeToFallAsleepChart from './TimeToFallAsleepChart';
 import HomeLoggedOut from './HomeLoggedOut';
 import CreateAccount from './CreateAccount';
@@ -171,6 +171,9 @@ function App() {
               <Button className="button-inline" onClick={() => {setRange(180)}}>180</Button>
             </div>
           </div>
+          <div className={nightMode && "container-night-mode"}>
+            <Alert variant="warning" className="mt-5 ml-3 mr-3">Sample Data Shown. Log In to View Your Own Data</Alert>
+          </div>
           <Container fluid className="app-charts-container">
             <div className="ct1">
               <EnterBedTimesChart 
@@ -178,6 +181,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
             <div className="ct2">
               <LightsOffTimesChart 
@@ -185,6 +193,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
             <div className="ct3">
               <TimeToFallAsleepChart 
@@ -192,6 +205,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
             <div className="ct9">
               <MorningWakeTimesChart 
@@ -199,6 +217,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
             <div className="ct8">
               <ExitBedTimesChart 
@@ -206,6 +229,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
             <div className="ct7">
               <MinutesEarlyWokeChart 
@@ -213,6 +241,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
 
             <div className="ct4">
@@ -221,6 +254,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
             <div className="ct6">
               <ArousalDurationChart 
@@ -228,6 +266,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
             <div className="ct5">
               <QualityRatingChart 
@@ -235,6 +278,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
 
             <div className="ct10">
@@ -243,6 +291,11 @@ function App() {
                 loggedInUser={loggedInUser}
                 range={range}
               />
+              {(!loggedInUser || loggedInUser === '') && 
+                <div className={nightMode && 'container-night-mode'}>
+                  <h3 className="text-center">(Sample Data)</h3>
+                </div>
+              }
             </div>
           </Container>
         </div>

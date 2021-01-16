@@ -1,8 +1,37 @@
 import {VictoryScatter, VictoryTooltip} from 'victory';
+import axios from 'axios';
 const url = 'http://localhost:4000/sleep/api/';
 /*
 const url = 'https://omarshishani.com/sleep/api/';
 */
+
+export function createChartInfo(urlGetData, loggedInUser, chart, callback, napEndTime) {
+  let newChartInfo = [];
+  axios.post(urlGetData, {user: loggedInUser})
+  .then(res => {
+    if (chart === 'napTimes'){
+      res.data.map(x => {
+        newChartInfo = [...newChartInfo, {
+          date: x.date, 
+          napStartTime: x.napStartTime,
+          napEndTime: x.napEndTime
+        }];
+        return null;
+      })
+    } else {
+      res.data.map(x => {
+        newChartInfo = [...newChartInfo, {
+          date: x.date,
+          [chart]: x[chart]
+        }];
+        return null;
+      })
+    }
+    callback(newChartInfo);
+    return newChartInfo;
+  })
+  .catch(err => console.log(err))
+};
 
 function formatAMPM(date) {
   var hours = date.getHours();
@@ -13,7 +42,7 @@ function formatAMPM(date) {
   minutes = minutes < 10 ? '0'+ minutes : minutes;
   var strTime = hours + ':' + minutes + ' ' + ampm;
   return strTime;
-}
+};
 
 const createData1 = (chartInfo, range, chart, showYesterdaysDate, barGraph) => {
   return(
