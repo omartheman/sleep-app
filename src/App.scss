@@ -2,6 +2,13 @@ $nightModeTransitionTime: 0.5s;
 
 body, html {
   height: 100%;
+  font-family: 'Open Sans' !important;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Open Sans'), url(./fonts/Open_Sans/OpenSans-Regular.ttf) format('truetype');
 }
 h2 {
   text-align: center;

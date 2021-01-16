@@ -94,13 +94,13 @@ const NavbarContainer = (props) => {
             </svg>
           </div>
           <Nav.Link  className="navbar-create-acc-button" as={Link} to="/sleep/create-account">Create Account</Nav.Link>
-          <span>Night Mode: &nbsp;</span>
-          <div className="ml-auto">
-            <NightModeSwitch
-              setNightMode={props.setNightMode}
-              nightMode={props.nightMode}
-            />
-          </div>
+        </div>
+        <span className="navbar-container-night-mode-switch-label">Night Mode: &nbsp;</span>
+        <div className="navbar-container-night-mode-switch-container">
+          <NightModeSwitch
+            setNightMode={props.setNightMode}
+            nightMode={props.nightMode}
+          />
         </div>
       </Navbar.Collapse>
     </Navbar>

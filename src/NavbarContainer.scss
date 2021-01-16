@@ -5,6 +5,8 @@ $nightModeTransitionTime: 0.5s;
 nav {
   background-color: rgb(172, 198, 255);
   background-color: #d1dfff;
+  // background-color: #e9e9e9;
+  
   
   // height: 60px;
   // height: var(--navHeight);
@@ -42,17 +44,24 @@ nav {
     background: #7a7dff;
   }
 }
-.navbar-night-mode-switch-container {
-  @media(max-width: 991px){
-    padding-left: 15px;
-  }
-}
 #basic-nav-dropdown {
   font-weight: 600;
 }
+
 .dropdown:hover .dropdown-menu {
   /* Display navbar on hover, except it doesn't work because click activation interferes */
   display: block;
+}
+.navbar-container-night-mode-switch-container {
+  @media (max-width: 991px){
+    margin-top: 3px;
+    margin-left: 15px; 
+  }
+}
+.navbar-container-night-mode-switch-label {
+  @media (max-width: 991px){
+    margin-left: 15px; 
+  }
 }
 .navbar-log-in-dropdown {
   align-items: center;

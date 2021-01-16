@@ -14,7 +14,6 @@ $homeSectionHeight: 120vh;
   text-shadow: 2px 2px 2px #000, -2px -2px 2px #000, 2px -2px 2px #000, -2px 2px 2px #000;
   div {
     font-size: 30px;
-    font-weight: 600;
     text-align: center;
   }
   div:first-of-type {
@@ -90,8 +89,17 @@ $homeSectionHeight: 120vh;
   justify-content: space-evenly;
   width: 80%;
   img {
+    max-width: 40%;
     padding: 20px;
-    height: 300px; 
+    height: auto; 
+  }
+  @media (max-width: 991px){
+    img {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+    }
+    flex-direction: column;
   }
 }
 @keyframes shooting_star {
