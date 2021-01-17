@@ -69,7 +69,6 @@ const NavbarContainer = (props) => {
         <Nav.Link as={Link} to="/sleep/home-logged-out">Home</Nav.Link>
         <Nav.Link as={Link} to="/sleep/">Overview</Nav.Link>
         <Nav.Link as={Link} to="/sleep/add-data/">Add Data</Nav.Link>
-        <Nav.Link className={loggedInUser === null || loggedInUser === '' ? "hidden" : null} as={Link} to="/recipeapp/myrecipes">Conditional Link</Nav.Link>
         <NavDropdown 
           title={`Hello, ${loggedInUser}!`} 
           id="basic-nav-dropdown" 
