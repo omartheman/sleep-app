@@ -26,12 +26,19 @@ $homeSectionHeight: 120vh;
 .home-logged-out-section-1 {
   height: 100vh;
   margin-bottom: 300px;
+  @media(max-width: 991px){
+    height: 120vh;
+    margin-bottom: 0;
+  }
 }
 .home-logged-out-section-2 {
   height: $homeSectionHeight;
 }
 .home-logged-out-section-3 {
   flex-direction: row;
+  @media (max-width: 991px){
+    flex-direction: column;
+  }
 }
 .home-logged-out-section-background {
   background-position: center;
@@ -89,17 +96,19 @@ $homeSectionHeight: 120vh;
   justify-content: space-evenly;
   width: 80%;
   img {
-    max-width: 40%;
+    max-width: 100%;
     padding: 20px;
     height: auto; 
   }
   @media (max-width: 991px){
     img {
       width: auto;
-      max-width: 100%;
       height: auto;
+      max-width: 100%;
     }
-    flex-direction: column;
+    .home-logged-out-section-2-image-2 {
+      display: none;
+    }
   }
 }
 @keyframes shooting_star {

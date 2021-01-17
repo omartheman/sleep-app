@@ -22,7 +22,7 @@ function HomeLoggedOut() {
         <div className="home-logged-out-section home-logged-out-section-1">
           <h1>Welcome to Sleep App</h1>
           <div>Improve your sleep.</div>
-          <div>Change your life.</div>
+          <div>Create helpful graphs with simple inputs, for free.</div>
         </div>
 
         <div className="home-logged-out-section home-logged-out-section-2">
@@ -33,7 +33,7 @@ function HomeLoggedOut() {
           </div>
           <div className="home-logged-out-section-2-graphs">
             <img src={graphScreenshot1} />
-            <img src={graphScreenshot2} />
+            <img className="home-logged-out-section-2-image-2" src={graphScreenshot2} />
           </div>
         </div>
 
