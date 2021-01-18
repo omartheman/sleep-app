@@ -147,7 +147,7 @@ function AddData (props) {
           `add-data add-data-container ${props.nightMode && 'add-data-container-night'}`
         }
       >
-        <h1>Add Data</h1>
+        <h1 className="pt-2">Add Data</h1>
         <h2>Pick a Date to Add Data</h2> 
         <div className="add-data-calendar-container">
           <Calendar
