@@ -108,6 +108,8 @@ app.post(`/sleep/api/auth`, function(req, res) {
   console.log('req.body in post: ', req.body)
   const username = req.body.username;
   const password = req.body.password;
+  c('username', username)
+  c('password', password)
   if (username && password) {
     connection.query(`SELECT * FROM accounts WHERE username = ? AND password = ?;`, [username, password], function(error, results, fields) {
       if (results.length > 0) {

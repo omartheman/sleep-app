@@ -140,7 +140,7 @@ const NavbarContainer = (props) => {
           onClick={(e) => {
             onLoginFormChange(usernameInput, 'username');
             onLoginFormChange(passwordInput, 'password');
-            loginSubmit(e);
+            loginSubmit(e, usernameInput, passwordInput);
           }}
         >
           Submit

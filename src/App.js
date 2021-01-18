@@ -66,7 +66,7 @@ function App() {
   const handleNewLoggedInUser = (newLoggedInUser) => {
     setLoggedInUser(newLoggedInUser);
   }
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = (e, username, password) => {
     c('handling login submit')
     e.preventDefault();
     axios.post(urlAuth,     
@@ -76,6 +76,7 @@ function App() {
       }
     )
     .then(response => {
+      c('axios response to post user info', response)
     }).catch(error => {console.log(error)})
     .then( 
       axios.get(urlAuth) 
