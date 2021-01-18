@@ -149,7 +149,9 @@ function App() {
           </div>
         </>
       </Route>
-      <Route path="/sleep">
+
+      
+      <Route path="/sleep/overview">
         <div className={`app-charts-container-wrapper ${nightMode && 'app-charts-container-wrapper-night'}`}>
           {navbar}
           {/* {!loggedInUser && <Redirect to="/sleep/home-logged-out" />} */}

@@ -67,7 +67,7 @@ const NavbarContainer = (props) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav.Link as={Link} to="/sleep/home-logged-out">Home</Nav.Link>
-        <Nav.Link as={Link} to="/sleep/">Overview</Nav.Link>
+        <Nav.Link as={Link} to="/sleep/overview">Overview</Nav.Link>
         <Nav.Link as={Link} to="/sleep/add-data/">Add Data</Nav.Link>
         <NavDropdown 
           title={`Hello, ${loggedInUser}!`} 

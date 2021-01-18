@@ -1,4 +1,6 @@
 
+18 jan Monday
+  - find out why you need to click log in twice
 
 14 jan thu
   -fix login form so doesn't lag because all graph components are updating
