@@ -13,6 +13,9 @@ nav {
   // padding: 0 20px !important;
   transition: background-color $nightModeTransitionTime; 
 }
+.navbar-container-user-hello-dropdown {
+  padding-bottom: 8px;
+}
 .navbar-night-mode {
   background-color: rgb(28, 30, 133);
   color: white;
@@ -92,9 +95,8 @@ nav {
 }
 .navbar-create-acc-button {
   padding: 0 15px;
-  
   padding-top: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 12px !important;
 }
 .navbar-login-button-link:hover {
   color: #0056b3;
