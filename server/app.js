@@ -118,6 +118,7 @@ app.post(`/sleep/api/auth`, function(req, res) {
         req.session.username = username; 
         req.session.page_views++;
         console.log('Logged in user from app.post: ', username);
+        res.send({username: username, password: password})
       } else {
         res.send('Incorrect Username and/or Password!');
         req.session.page_views = 1; 

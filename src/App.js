@@ -75,16 +75,19 @@ function App() {
         password: password 
       }
     )
-    .then(response => {
-      c('axios response to post user info', response)
+    .then(res => {
+      c('axios response to post user info', res)
+      if (res.data.username && res.data.username !== ''){
+        setLoggedInUser(res.data.username);
+      }
     }).catch(error => {console.log(error)})
-    .then( 
-      axios.get(urlAuth) 
-      .then(res => { 
-        c('logged in user submission data', res.data);
-        setLoggedInUser(res.data);
-      }).catch(error => {console.log('Axios error from urlAuth: ', error)})
-    )
+    // .then( 
+    //   axios.get(urlAuth) 
+    //   .then(res => { 
+    //     c('logged in user submission data', res.data);
+    //     setLoggedInUser(res.data);
+    //   }).catch(error => {console.log('Axios error from urlAuth: ', error)})
+    // )
   }
   const handleLoginFormChange = (eTargetAttrVal, item) => {
     console.log('loginformchage')
