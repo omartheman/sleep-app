@@ -127,15 +127,6 @@ function App() {
           />
         </div>
       )} />
-      <Route path="/sleep/home-logged-out" render={() => (
-        <>
-          <div className="home-logged-out-section-1-background"
-          style={{backgroundImage: `url(${backgroundTop})`}}
-          ></div>
-          {navbar}
-          <HomeLoggedOut />
-        </>
-      )} />
       <Route path="/sleep/add-data">
         <>
           {navbar}
@@ -302,6 +293,24 @@ function App() {
           </Container>
         </div>
       </Route>
+      <Route path="/sleep">
+        <>
+          <div className="home-logged-out-section-1-background"
+          style={{backgroundImage: `url(${backgroundTop})`}}
+          ></div>
+          {navbar}
+          <HomeLoggedOut />
+        </>
+      </Route>
+      <Route path="/sleep/home-logged-out" render={() => (
+        <>
+          <div className="home-logged-out-section-1-background"
+          style={{backgroundImage: `url(${backgroundTop})`}}
+          ></div>
+          {navbar}
+          <HomeLoggedOut />
+        </>
+      )} />
     </Switch>
   )
 }
