@@ -72,9 +72,9 @@ const NavbarContainer = (props) => {
         <NavDropdown 
           title={`Hello, ${loggedInUser}!`} 
           id="basic-nav-dropdown" 
-          className={`navbar-container-user-hello-dropdown ${loggedInUser === null || loggedInUser === '' ? "hidden" : null} ml-auto`} 
+          className={`navbar-container-user-hello-dropdown ${loggedInUser === null || loggedInUser === '' ? "hidden" : null} ${props.nightMode && 'navbar-container-user-hello-dropdown-night-mode'} ml-auto`} 
         >
-          <NavDropdown.Item onClick={handleClickLogout} href="#">Log Out</NavDropdown.Item>
+          <NavDropdown.Item id="navbar-container-log-out-dropdown" className="navbar-container-log-out-dropdown" onClick={handleClickLogout} href="#">Log Out</NavDropdown.Item>
         </NavDropdown> 
         <div className={`${loggedInUser ? "hidden": null} ml-auto navbar-log-in-dropdown`}>
           <div 
