@@ -121,7 +121,13 @@ const NavbarContainer = (props) => {
       <Form.Group 
         className="login-form-identifier"
         controlId="formBasicPassword" 
-        onKeyDown={(e) => {if (e.keyCode === 13) {loginSubmit(e)}}}
+        onKeyDown={(e) => {
+          if (e.keyCode === 13) {
+            onLoginFormChange(usernameInput, 'username');
+            onLoginFormChange(passwordInput, 'password');
+            loginSubmit(e, usernameInput, passwordInput);
+          }
+        }}
       >
         <Form.Label className="login-form-identifier">Password</Form.Label>
         <Form.Control 
