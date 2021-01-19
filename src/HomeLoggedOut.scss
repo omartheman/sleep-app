@@ -23,6 +23,16 @@ $homeSectionHeight: 120vh;
     font-size: 2.5rem;
   }
 }
+.home-logged-out-moon {
+  position: absolute;
+  top: 80px;
+  right: 30px;
+  @media(max-width: 991px){
+    top: 60px;
+    right: 20px;
+    height: 100px;
+  }
+}
 .home-logged-out-section-1 {
   height: 100vh;
   margin-bottom: 300px;

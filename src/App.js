@@ -23,6 +23,7 @@ import MinutesEarlyWokeChart from './MinutesEarlyWokeChart';
 import ArousalDurationChart from './ArousalDurationChart';
 import QualityRatingChart from './QualityRatingChart';
 import SleepAidItemChart from './SleepAidItemChart';
+import moon_svg from './images/moon.svg';
 import {Redirect} from 'react-router-dom';
 
 const urlAuth = `${url}auth`;
@@ -301,6 +302,9 @@ function App() {
       </Route>
       <Route path="/sleep">
         <>
+          <div>
+            <img className="home-logged-out-moon" src={moon_svg} />
+          </div>
           <div className="home-logged-out-section-1-background-color">
           </div>
           <div className="home-logged-out-section-1-background-mountains">
