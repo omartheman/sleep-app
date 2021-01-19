@@ -301,9 +301,10 @@ function App() {
       </Route>
       <Route path="/sleep">
         <>
-          <div className="home-logged-out-section-1-background"
-          style={{backgroundImage: `url(${backgroundTop})`}}
-          ></div>
+          <div className="home-logged-out-section-1-background-color">
+          </div>
+          <div className="home-logged-out-section-1-background-mountains">
+          </div>
           {navbar}
           <HomeLoggedOut />
         </>

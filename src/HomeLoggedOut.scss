@@ -27,7 +27,6 @@ $homeSectionHeight: 120vh;
   height: 100vh;
   margin-bottom: 300px;
   @media(max-width: 991px){
-    height: 120vh;
     margin-bottom: 0;
   }
 }
@@ -51,7 +50,7 @@ $homeSectionHeight: 120vh;
 }
 .home-logged-out-section-1-background {
   background: #242554;
-  background-image: url(./landing-background-opt.svg);
+  // background-image: url(./landing-background-opt.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; 
@@ -60,13 +59,35 @@ $homeSectionHeight: 120vh;
   width: 100vw;
   z-index: -1;
 }
+.home-logged-out-section-1-background-color {
+  background: #242554;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: -3;
+}
+.home-logged-out-section-1-background-mountains {
+  background-image: url(./images/landing-background-mountains.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+}
 .home-logged-out-section-1-shooting-star {
   animation: shooting_star 8s forwards infinite;
   animation-delay: 1s;
   position: fixed;
   top: -300px;
-  left: 800px;
-  z-index: -1;
+  left: 1000px;
+  @media(max-width: 767px){
+    top: -300px;
+    left: 600px;
+  }
+  z-index: -2;
   stroke-dasharray: 900;
 }
 .home-logged-out-section-text {
