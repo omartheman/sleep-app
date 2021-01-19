@@ -1,7 +1,8 @@
 import { Button, Container } from 'react-bootstrap';
 import './HomeLoggedOut.scss';
-import graphScreenshot1 from './images/time-out-of-bed-screenshot-square.png';
-import graphScreenshot2 from './images/time-to-fall-asleep-screenshot-square.png';
+import graphScreenshot1 from './images/graph-screenshot-enter-bed-time.png';
+import graphScreenshot2 from './images/graph-screenshot-arousal-durations.png';
+import graphScreenshot3 from './images/graph-screenshot-nap-times.png';
 import { Link } from 'react-router-dom';
 
 function HomeLoggedOut() {
@@ -44,7 +45,7 @@ function HomeLoggedOut() {
             <div>Having a visual record of your sleep habits allows you to compare which factors are affecting your sleep wellness.</div>
           </div>
           <div className="home-logged-out-section-2-graphs">
-            <img src={graphScreenshot2} />
+            <img src={graphScreenshot3} />
           </div>
         </div>
 
