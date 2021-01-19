@@ -21,7 +21,7 @@ function HomeLoggedOut() {
       
       <Container className="home-logged-out-container">
         <div className="home-logged-out-section home-logged-out-section-1">
-          <h1>Welcome to Sleep App</h1>
+          <h1>Welcome to Sleep Tight</h1>
           <div>Improve your sleep.</div>
           <div>Create helpful graphs with simple inputs, for free.</div>
         </div>

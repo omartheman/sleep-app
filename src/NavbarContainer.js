@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import url from './global_items';
 import NightModeSwitch from './NightModeSwitch';
+import moonTabIcon from './images/moon-icon.png';
 
 axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 axios.defaults.withCredentials = true;
@@ -61,8 +62,9 @@ const NavbarContainer = (props) => {
     <Navbar expand="lg" id="navbar" className={props.nightMode && "navbar-night-mode"}>
       <Navbar.Brand as={Link} to="/sleep/" className="navbar-site-name">
         <span>
-          Sleep App 
+          Sleep Tight 
         </span>
+        <img src={moonTabIcon} alt="Moon icon"/>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
