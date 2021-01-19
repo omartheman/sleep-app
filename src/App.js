@@ -171,8 +171,8 @@ function App() {
               <Button className="button-inline" onClick={() => {setRange(180)}}>180</Button>
             </div>
           </div>
-          <div className={nightMode && "container-night-mode"}>
-            <Alert variant="warning" className="mt-5 ml-3 mr-3">Sample Data Shown. Log In to View Your Own Data</Alert>
+          <div className={nightMode && "container-night-mode"} style={{backgroundColor:'transparent'}}>
+            <Alert variant="warning" className="mt-5 ml-3 mr-3 app-sample-data-warning">Sample Data Shown. Log In to View Your Own Data</Alert>
           </div>
           <Container fluid className="app-charts-container">
             <div className="ct1">
@@ -182,7 +182,8 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }
@@ -194,7 +195,7 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }
@@ -206,7 +207,7 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }
@@ -218,7 +219,8 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }
@@ -230,7 +232,8 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }
@@ -242,7 +245,8 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }
@@ -255,7 +259,8 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }
@@ -267,7 +272,8 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }
@@ -279,7 +285,8 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }
@@ -292,7 +299,7 @@ function App() {
                 range={range}
               />
               {(!loggedInUser || loggedInUser === '') && 
-                <div className={nightMode && 'container-night-mode'}>
+                <div className={`app-sample-data-title-container ${nightMode && 'container-night-mode'}`}>
                   <h3 className="text-center">(Sample Data)</h3>
                 </div>
               }

@@ -13,6 +13,9 @@ body, html {
 h2 {
   text-align: center;
 }
+.app-sample-data-warning {
+  transition: background-color $nightModeTransitionTime;
+}
 .alert-bootstrap {
   margin: 20px 0;
 }
@@ -134,6 +137,15 @@ $charts: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
   input:focus {
     color: rgb(255, 255, 255);
     background: #131313;
+  }
+}
+.app-sample-data-title-container {
+  background-color: transparent !important;
+  h3 {
+    background-color: transparent;
+  }
+  &:last-of-type {
+    margin-bottom: 100px;
   }
 }
 .button-inline {
