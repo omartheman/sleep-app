@@ -15,7 +15,7 @@ function HomeLoggedOut() {
             </filter>
           </defs>
           <path transform="matrix(.9426 0 0 .94833 1.2795 2.1897)" d="m-0.75595 60.665 62.555-62.177" fill="none" filter="url(#filter6059)" stroke="#fff" stroke-linecap="round" stroke-width="1.3992"/>
-          </svg>
+        </svg>
       </div>
       
       <Container className="home-logged-out-container">
