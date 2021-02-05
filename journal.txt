@@ -1,3 +1,19 @@
+//Patriks bedömning!
+
+jäkligt coolt! :)
+Tips. Lägg gärna till start i din package.json för din server. Så man enkelt kan starta den med "npm run start". Tyvärr crashar din lokala server localhost:4000 när jag försöker logga in.
+server/app.js:113
+      if (results.length > 0) {
+                  ^
+
+TypeError: Cannot read property 'length' of undefined
+
+Ett tips till. Städa lite bland filerna. Lägg de hela sidorna i en mapp typ "pages". Sedan komponenterna i "components". Samt delsidor, exempelvis NavBar i "partials". Det gör det lättare att hitta de olika delarna när man letar efter något.
+Du har en mängd vars som du importerar men inte använder i dina olika filer. Om du tar bort dessa importer kan det snabba upp appen lite.
+Har testat att logga in via https://omarshishani.com/sleep/ och användarid/lösen i pdf-filern. Samt testat att lägga till en datapunkt den 20/1.
+Ett sista tips är att använda enviroment variables istället för en egen fil för globals. Där kan du exempelvis styra vilken url som ska använda i development eller production.
+Bra analys. Även om jag gärna hade sett lite fler referenser.
+
 
 18 jan Monday
   - find out why you need to click log in twice
