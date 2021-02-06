@@ -171,6 +171,12 @@ function App() {
               <Button className="button-inline" onClick={() => {setRange(180)}}>180</Button>
             </div>
           </div>
+
+          <div>
+            <h2>Sleep Time: ____</h2>
+            <h2>Wake Time: ____</h2>
+          </div>
+
           <div className={nightMode && "container-night-mode"} style={{backgroundColor:'transparent'}}>
             <Alert variant="warning" className="mt-5 ml-3 mr-3 app-sample-data-warning">Sample Data Shown. Log In to View Your Own Data</Alert>
           </div>
