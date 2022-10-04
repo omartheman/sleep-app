@@ -1,8 +1,8 @@
 import {VictoryScatter, VictoryTooltip} from 'victory';
 import axios from 'axios';
-const url = 'https://omarshishani.com/sleep/api/';
-/*
 const url = 'http://localhost:4000/sleep/api/';
+/*
+const url = 'https://omarshishani.com/sleep/api/';
 */
 
 export function createChartInfo(urlGetData, loggedInUser, chart, callback, napEndTime) {

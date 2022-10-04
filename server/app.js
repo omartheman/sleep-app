@@ -40,8 +40,8 @@ if (mode === 'productionNatalie') {
     password: '3yeDroplets!',
     database: 'sleep_app'
   });
-  corsOrigin = 'http://localhost:3000';
-  netServForMobileReactDev = 'http://192.168.1.88:3000';
+  corsOrigin = 'http://localhost:4000';
+  netServForMobileReactDev = 'http://192.168.1.88:4000';
 }
 
 app.use(express.static(__dirname + '../..'));
@@ -49,7 +49,7 @@ app.use(cors({
   origin:[
     corsOrigin,
     netServForMobileReactDev,
-    'http://192.168.1.87:3000',
+    'http://192.168.1.87:4000',
     'http://192.168.1.254'
   ],
   methods:['GET','POST', 'DELETE'],
