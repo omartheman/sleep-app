@@ -21,6 +21,7 @@ app.use(session({
     secure: false
   }
 }));
+app.use(cors); 
 
 let corsOrigin;
 let connection;
